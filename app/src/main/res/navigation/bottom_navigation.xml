@@ -3,22 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@id/homeFragment">
-
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.kms.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/operationsFragment"
-        android:name="com.example.kms.fragments.OperationsFragment"
-        android:label="fragment_issue_key"
-        tools:layout="@layout/fragment_issue_key" />
+    app:startDestination="@id/registerFragment">
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.kms.fragments.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
-
+    <fragment
+        android:id="@+id/operationsFragment"
+        android:name="com.example.kms.fragments.OperationsFragment"
+        android:label="fragment_operations"
+        tools:layout="@layout/fragment_operations" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.kms.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -14,7 +14,7 @@ object RetrofitFactory {
 
     val INSTANCE: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080")
+            .baseUrl("https://muddled-event-production.up.railway.app")
             .client(OkHttpFactory.INSTANCE)
             .addConverterFactory(JSON.asConverterFactory(JSON_TYPE))
             .build()

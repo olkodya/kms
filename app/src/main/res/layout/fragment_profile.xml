@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ProfileFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profileToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Профиль"
+        app:layout_constraintBottom_toTopOf="@id/spacer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/profile_menu"
+        />
+
+    <Space
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toBottomOf="@id/profileToolBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:srcCompat="@drawable/avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toBottomOf="@id/spacer"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Аватар вахтера" />
+
+    <Space
+        android:id="@+id/spacer2"
+        android:layout_width="16dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/spacer"
+        />
+
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/name"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text = "Иванов Иван Иванович"
+        app:layout_constraintStart_toEndOf="@id/spacer2"
+        app:layout_constraintTop_toBottomOf="@id/spacer"
+        app:layout_constraintBottom_toTopOf="@id/login"
+        />
+    <TextView
+        android:id="@+id/login"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Логин: "
+        app:layout_constraintStart_toEndOf="@id/spacer2"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        />
+
+    <TextView
+        android:id="@+id/login_name"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text = "ivanov"
+        app:layout_constraintStart_toEndOf="@id/login"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        />
+    <TextView
+        android:id="@+id/watch"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вахта: "
+        app:layout_constraintStart_toEndOf="@id/spacer2"
+        app:layout_constraintEnd_toStartOf="@+id/watch_number"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        />
+    <TextView
+        android:id="@+id/watch_number"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text = "7"
+        app:layout_constraintStart_toEndOf="@id/watch"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        />
+
+    <TextView
+        android:id="@+id/shift"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Смена: "
+        app:layout_constraintStart_toEndOf="@id/spacer2"
+        app:layout_constraintTop_toBottomOf="@id/watch"
+        />
+
+    <TextView
+        android:id="@+id/shift_date"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text = "20.09.2023"
+        app:layout_constraintStart_toEndOf="@id/shift"
+        app:layout_constraintTop_toBottomOf="@id/watch"
+        />
+
+    <Button
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:text="Начать смену"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/shift_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="64dp"
+/>
+
+<!--    <Button-->
+<!--        style="@style/Widget.Material3.Button.TonalButton"-->
+<!--        android:text="Начать смену"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="52dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/shift"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_margin="32dp"-->
+<!--        />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

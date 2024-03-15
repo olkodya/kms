@@ -1,11 +1,9 @@
 package com.example.kms.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,8 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentAuthorizationBinding
 import com.example.kms.network.api.UserApi
-import com.example.kms.presentation.authorization.AuthUiState
-import com.example.kms.presentation.authorization.AuthorizationViewModel
+import com.example.kms.viewmodels.AuthorizationViewModel
 import com.example.kms.repository.NetworkUserRepository
 import kotlinx.coroutines.launch
 
@@ -36,6 +33,8 @@ class AuthorizationFragment : Fragment() {
                 }
             }
         }
+
+
         val login = binding.login.text
         val password = binding.password.text
 
@@ -48,15 +47,10 @@ class AuthorizationFragment : Fragment() {
                 if(state.isSuccess) {
                     findNavController().navigate(R.id.action_authorizationFragment_to_bottomNavigationFragment)
                 } else {
-
                 }
             }
         }
 
-
-        if(viewModel.state.value.isSuccess) {
-            Log.d("LOGIN", "sds")
-        }
 
         return binding.root
     }

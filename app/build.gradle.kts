@@ -41,6 +41,8 @@ android {
     }
 }
 
+
+
 dependencies {
 
     implementation ("androidx.fragment:fragment-ktx:1.6.2")
@@ -72,6 +74,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
 
+    implementation ("com.github.yuriy-budiyev:code-scanner:2.3.0")
 
 
 }

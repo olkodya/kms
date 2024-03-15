@@ -1,4 +1,4 @@
-package com.example.kms.presentation.authorization
+package com.example.kms.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

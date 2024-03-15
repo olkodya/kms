@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.RegisterFragment"
+    tools:context=".fragments.OperationsFragment"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/profileToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Журнал"
+        app:title="Операции"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,12 +19,12 @@
         />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
+        android:layout_margin="16dp"
         android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
         app:singleSelection="true"
         app:selectionRequired="true"
-        android:layout_margin="16dp"
         app:checkedButton="@id/button1"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             style="?attr/materialButtonOutlinedStyle"
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Журнал смен"
+            android:text="Выдать ключ"
             />
         <Button
             style="?attr/materialButtonOutlinedStyle"
@@ -40,18 +40,16 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Сигнализация"
+            android:text="Вернуть ключ"
             />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:name="com.example.kms.fragments.QRScanFragment"
+        android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.material.search.SearchBar
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="hi" />
-    </com.google.android.material.appbar.AppBarLayout>
+        android:layout_weight="1"/>
+
 </LinearLayout>

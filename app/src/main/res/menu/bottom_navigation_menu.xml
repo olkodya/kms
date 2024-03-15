@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/homeFragment"
-        android:title="@string/home_btn_title"
-        android:icon="@drawable/baseline_home_24"/>
+        android:id="@+id/registerFragment"
+        android:title="Журнал"
+        android:icon="@drawable/baseline_list_alt_24"/>
     <item
         android:id="@+id/operationsFragment"
-        android:title="@string/home_bottom"
-        android:icon="@drawable/baseline_home_24"/>
+        android:title="Операции"
+        android:icon="@drawable/baseline_qr_code_scanner_24"/>
     <item
-        android:id="@+id/registerFragment"
-        android:title="@string/register_bottom"
-        android:icon="@drawable/baseline_list_alt_24"/>
+        android:id="@+id/profileFragment"
+        android:title="Профиль"
+        android:icon="@drawable/baseline_person_24"/>
 </menu>
