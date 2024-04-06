@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="true"
+        app:autoFocusButtonVisible="false"
         app:flashButtonColor="@android:color/white"
-        app:flashButtonVisible="true"
+        app:flashButtonVisible="false"
         app:frameColor="@android:color/white"
         app:frameCornersSize="50dp"
         app:frameCornersRadius="0dp"
@@ -23,5 +23,21 @@
         app:frameThickness="2dp"
         app:frameVerticalBias="0.5"
         app:maskColor="#77000000"
-        tools:ignore="MissingClass" />
+        tools:ignore="MissingClass" >
+
+        <TextView
+            android:id="@+id/scanner_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="5"
+            android:paddingStart="16dp"
+            android:paddingTop="32dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:text="@string/qr_code_hint"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"/>
+    </com.budiyev.android.codescanner.CodeScannerView>
 </FrameLayout>

@@ -1,12 +1,39 @@
 <resources>
     <string name="app_name">KMS</string>
-    <string name="AuthLogin">Login</string>
-    <string name="AuthPassword">Password</string>
-    <string name="SignIn">Войти</string>
+    <string name="auth_title">Авторизация</string>
+    <string name="login_hint">Логин</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_btn">Войти</string>
+    <string name="operations_title">Операции</string>
+    <string name="give_key_btn">Выдать ключ</string>
+    <string name="take_key_btn">Вернуть ключ</string>
+    <string name="profile_title">Профиль</string>
+    <string name="avatar_watchman_description">Аватар вахтера</string>
+    <string name="profile_login">Логин:</string>
+    <string name="profile_watch">Вахта:</string>
+    <string name="profile_shift">Смена:</string>
+    <string name="start_shift_btn">Начать смену</string>
+    <string name="finish_shift_btn">Завершить смену</string>
+    <string name="register_title">Журнал</string>
+    <string name="shift_register_btn">Журнал смен</string>
+    <string name="signalization_btn">Сигнализация</string>
+    <string name="search_hint">Поиск</string>
+    <string name="logout_title">Выйти</string>
+    <string name="register_bottom">Журнал</string>
+    <string name="operations_bottom">Операции</string>
+    <string name="profile_bottom">Профиль</string>
+    <string name="qr_code_hint">Отсканируйте qr-код удостоверения преподавателя</string>
+    <string name="qr_code_hint2">Отсканируйте qr-код ключа</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="toolbar_string">Авторизация</string>
-    <string name="home_bottom">Home</string>
-    <string name="home_btn_title">Главная</string>
-    <string name="register_bottom">Журнал</string>
+    <string name="employeeavatarContentDescription">employeeAvatar</string>
+    <string name="employee_name_title">ФИО:</string>
+    <string name="certificate_title">Удостоверение:</string>
+    <string name="position_title">Должность:</string>
+    <string name="division_title">Подразделения: </string>
+    <string name="permissions_title">Разрешения:</string>
+    <string name="keys_title">Ключи:</string>
+    <string name="continue_button">Продолжить</string>
+    <string name="signatureToolbarTitle">Подпись сотрудника</string>
+
 </resources>

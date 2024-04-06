@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_logout"
-        android:title="Выйти"
+        android:title="@string/logout_title"
         android:icon="@drawable/baseline_logout_24"
         android:visible="true"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"
         />
 </menu>

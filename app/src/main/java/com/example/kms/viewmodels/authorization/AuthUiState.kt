@@ -1,4 +1,4 @@
-package com.example.kms.viewmodels
+package com.example.kms.viewmodels.authorization
 
 import com.example.kms.model.TokenDto
 import com.example.kms.repository.Status

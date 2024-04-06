@@ -10,13 +10,13 @@
         android:id="@+id/profileToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Профиль"
+        app:title="@string/profile_title"
+        app:menu="@menu/profile_menu"
         app:layout_constraintBottom_toTopOf="@id/spacer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/profile_menu"
         />
 
     <Space
@@ -36,7 +36,7 @@
         android:layout_height="80dp"
         app:layout_constraintTop_toBottomOf="@id/spacer"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="Аватар вахтера" />
+        android:contentDescription="@string/avatar_watchman_description" />
 
     <Space
         android:id="@+id/spacer2"
@@ -64,7 +64,7 @@
         android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Логин: "
+        android:text="@string/profile_login"
         app:layout_constraintStart_toEndOf="@id/spacer2"
         app:layout_constraintTop_toBottomOf="@id/name"
         />
@@ -79,12 +79,13 @@
         app:layout_constraintTop_toBottomOf="@id/name"
         />
     <TextView
+        android:visibility="gone"
         android:id="@+id/watch"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Вахта: "
+        android:text="@string/profile_watch"
         app:layout_constraintStart_toEndOf="@id/spacer2"
         app:layout_constraintEnd_toStartOf="@+id/watch_number"
         app:layout_constraintTop_toBottomOf="@id/login"
@@ -105,7 +106,8 @@
         android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Смена: "
+        android:text = "@string/profile_shift"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/spacer2"
         app:layout_constraintTop_toBottomOf="@id/watch"
         />
@@ -121,8 +123,9 @@
         />
 
     <Button
+        android:id="@+id/start_shift"
         style="@style/Widget.Material3.Button.TonalButton"
-        android:text="Начать смену"
+        android:text="@string/start_shift_btn"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         app:layout_constraintTop_toBottomOf="@id/shift_date"
@@ -130,6 +133,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="64dp"
 />
+
+    <Button
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:id="@+id/finish_shift"
+        android:text="@string/finish_shift_btn"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        app:layout_constraintTop_toBottomOf="@id/shift_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="64dp"
+        />
 
 <!--    <Button-->
 <!--        style="@style/Widget.Material3.Button.TonalButton"-->

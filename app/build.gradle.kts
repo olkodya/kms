@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.kms"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -76,5 +76,6 @@ dependencies {
 
     implementation ("com.github.yuriy-budiyev:code-scanner:2.3.0")
 
+    implementation("com.github.gcacace:signature-pad:1.3.1")
 
 }

@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/registerFragment"
-        android:title="Журнал"
+        android:title="@string/register_bottom"
         android:icon="@drawable/baseline_list_alt_24"/>
     <item
         android:id="@+id/operationsFragment"
-        android:title="Операции"
+        android:title="@string/operations_bottom"
         android:icon="@drawable/baseline_qr_code_scanner_24"/>
     <item
         android:id="@+id/profileFragment"
-        android:title="Профиль"
+        android:title="@string/profile_bottom"
         android:icon="@drawable/baseline_person_24"/>
 </menu>

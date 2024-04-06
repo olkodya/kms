@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
@@ -13,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentAuthorizationBinding
 import com.example.kms.network.api.UserApi
-import com.example.kms.viewmodels.AuthorizationViewModel
+import com.example.kms.viewmodels.authorization.AuthorizationViewModel
 import com.example.kms.repository.NetworkUserRepository
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,7 @@ class AuthorizationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentAuthorizationBinding.inflate(inflater, container, false)
-        val viewModel by viewModels<AuthorizationViewModel> {
+        val viewModel by activityViewModels<AuthorizationViewModel> {
             viewModelFactory {
                 initializer {
                     AuthorizationViewModel(

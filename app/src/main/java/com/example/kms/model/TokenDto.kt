@@ -6,4 +6,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TokenDto(
     @SerialName("token")
-    val token: String)
+    val token: String,
+    @SerialName("username")
+    val username: String = "USER",
+    @SerialName("user_id")
+    val user_id: Int,
+    @SerialName("employee")
+    val employee: Employee,
+)

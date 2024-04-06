@@ -16,14 +16,27 @@
         android:id="@+id/bottomNavigationFragment"
         android:name="com.example.kms.fragments.BottomNavigationFragment"
         android:label="fragment_bottom_navigation"
-        tools:layout="@layout/fragment_bottom_navigation" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.kms.fragments.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_bottom_navigation" >
         <action
-            android:id="@+id/action_profileFragment_to_authorizationFragment"
-            app:destination="@id/authorizationFragment" />
+            android:id="@+id/action_bottomNavigationFragment_to_employeeInfoFragment2"
+            app:destination="@id/employeeInfoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/employeeInfoFragment2"
+        android:name="com.example.kms.fragments.EmployeeInfoFragment"
+        android:label="fragment_employee_info"
+        tools:layout="@layout/fragment_employee_info" >
+        <action
+            android:id="@+id/action_employeeInfoFragment2_to_signaturePadFragment"
+            app:destination="@id/signaturePadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signaturePadFragment"
+        android:name="com.example.kms.fragments.SignaturePadFragment"
+        android:label="fragment_signature_pad"
+        tools:layout="@layout/fragment_signature_pad" >
+        <action
+            android:id="@+id/action_signaturePadFragment_to_bottomNavigationFragment2"
+            app:destination="@id/bottomNavigationFragment" />
     </fragment>
 </navigation>

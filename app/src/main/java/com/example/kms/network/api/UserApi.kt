@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface UserApi {
-    @POST("/api/login")
+    @POST("/api/users/auth")
     suspend fun getLogin(@Body loginDto: LoginDto) : TokenDto
     companion object {
         val INSTANCE: UserApi by lazy {

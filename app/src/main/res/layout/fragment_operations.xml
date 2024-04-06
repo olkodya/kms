@@ -11,7 +11,7 @@
         android:id="@+id/profileToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Операции"
+        app:title="@string/operations_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Выдать ключ"
+            android:text="@string/give_key_btn"
             />
         <Button
             style="?attr/materialButtonOutlinedStyle"
@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Вернуть ключ"
+            android:text="@string/take_key_btn"
             />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>

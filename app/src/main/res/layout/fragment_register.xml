@@ -11,7 +11,7 @@
         android:id="@+id/profileToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Журнал"
+        app:title="@string/register_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Журнал смен"
+            android:text="@string/shift_register_btn"
             />
         <Button
             style="?attr/materialButtonOutlinedStyle"
@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Сигнализация"
+            android:text="@string/signalization_btn"
             />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -52,6 +52,6 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hi" />
+            android:hint="@string/search_hint" />
     </com.google.android.material.appbar.AppBarLayout>
 </LinearLayout>
