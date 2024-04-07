@@ -8,5 +8,5 @@ data class Watch (
     @SerialName("watch_id")
     val watch_id: Int,
     @SerialName("building_number")
-    val building_number: Int,
+    val building_number: Int?,
 )
