@@ -1,18 +1,15 @@
 package com.example.kms.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.kms.R
 import com.example.kms.databinding.FragmentProfileBinding
-import com.example.kms.model.Watch
 import com.example.kms.network.api.ShiftApi
 import com.example.kms.network.api.WatchApi
 import com.example.kms.repository.ShiftRepositoryImpl
@@ -24,7 +21,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class ProfileFragment : Fragment() {
-    val viewModel by activityViewModels<AuthorizationViewModel> ()
+    val viewModel by activityViewModels<AuthorizationViewModel>()
     val profileViewModel by activityViewModels<ProfileViewModel> {
         viewModelFactory {
             initializer {
@@ -37,10 +34,9 @@ class ProfileFragment : Fragment() {
     }
 
 
-
     override fun onStart() {
         super.onStart()
-        profileViewModel.getShift(viewModel.state.value.token?.user_id?:0)
+        profileViewModel.getShift(viewModel.state.value.token?.user_id ?: 0)
 
     }
 
@@ -50,23 +46,24 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-       val binding = FragmentProfileBinding.inflate(inflater, container, false)
-       val employee = viewModel.state.value.token?.employee
+        val binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val employee = viewModel.state.value.token?.employee
 
 
 
         binding.loginName.text = viewModel.state.value.token?.username
-        binding.name.text = "${employee?.first_name} ${employee?.second_name} ${employee?.middle_name}"
+        binding.name.text =
+            "${employee?.first_name} ${employee?.second_name} ${employee?.middle_name}"
 
         val checkedItem = 0
+        var id = 0
         var singleItems = arrayOf("jhshdsj")
 
-        profileViewModel.state.onEach { state->
-                if(state.watches.isNotEmpty()) {
-//                    singleItems = arrayOf(it.watches[0].building_number.toString())
-                        singleItems = state.watches.map { it.building_number.toString()}.toTypedArray()
-                }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
+        profileViewModel.state.onEach { state ->
+            if (state.watches.isNotEmpty()) {
+                singleItems = state.watches.map { it.building_number.toString() }.toTypedArray()
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
 
 
@@ -78,13 +75,17 @@ class ProfileFragment : Fragment() {
                     // Respond to negative button press
                 }
                 .setPositiveButton("Начать смену") { dialog, which ->
-                    viewModel.state.value.token?.user_id?.let { it1 -> profileViewModel.startShift(it1, singleItems[checkedItem].toInt()) }
+                    viewModel.state.value.token?.user_id?.let { it1 ->
+                        profileViewModel.startShift(
+                            it1,
+                            profileViewModel.state.value.watches[id].watch_id
+                        )
+                    }
                 }
                 .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
-                    // Respond to item chosen
+                    id = which
                 }
                 .show()
-
         }
 
         binding.finishShift.setOnClickListener {
@@ -107,7 +108,8 @@ class ProfileFragment : Fragment() {
                 binding.shift.visibility = View.VISIBLE
                 binding.shiftDate.visibility = View.VISIBLE
                 binding.watchNumber.visibility = View.VISIBLE
-                binding.watchNumber.text = profileViewModel.state.value.shift?.watch?.building_number.toString()
+                binding.watchNumber.text =
+                    profileViewModel.state.value.shift?.watch?.building_number.toString()
                 binding.shiftDate.text = profileViewModel.state.value.shift?.start_date_time
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
