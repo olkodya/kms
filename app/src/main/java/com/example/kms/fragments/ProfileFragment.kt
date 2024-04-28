@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.kms.R
 import com.example.kms.databinding.FragmentProfileBinding
-import com.example.kms.network.api.ShiftApi
-import com.example.kms.network.api.WatchApi
-import com.example.kms.repository.ShiftRepositoryImpl
-import com.example.kms.repository.WatchRepositoryImpl
 import com.example.kms.viewmodels.authorization.AuthorizationViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -22,17 +18,8 @@ import kotlinx.coroutines.flow.onEach
 
 class ProfileFragment : Fragment() {
     val viewModel by activityViewModels<AuthorizationViewModel>()
-    val profileViewModel by activityViewModels<ProfileViewModel> {
-        viewModelFactory {
-            initializer {
-                ProfileViewModel(
-                    ShiftRepositoryImpl(ShiftApi.INSTANCE),
-                    WatchRepositoryImpl(WatchApi.INSTANCE),
-                )
-            }
-        }
-    }
-
+    val profileViewModel by activityViewModels<ProfileViewModel>()
+    val authorizationViewModel by activityViewModels<AuthorizationViewModel>()
 
     override fun onStart() {
         super.onStart()
@@ -89,7 +76,29 @@ class ProfileFragment : Fragment() {
         }
 
         binding.finishShift.setOnClickListener {
-            viewModel.state.value.token?.user_id?.let { it1 -> profileViewModel.finishShift() }
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Вы уверены, что хотите завершить смену?")
+                .setNegativeButton("Отмена") { dialog, which ->
+                    // Respond to negative button press
+                }
+                .setPositiveButton("Завершить") { dialog, which ->
+                    viewModel.state.value.token?.user_id?.let { it1 -> profileViewModel.finishShift()
+1
+                    }
+            }.show()
+        }
+
+
+
+        binding.profileToolBar.setOnMenuItemClickListener {
+            when(it.itemId) {
+                R.id.action_logout -> {
+                profileViewModel.logout()
+                authorizationViewModel.logout()
+                Toast.makeText(requireContext(), "hi", Toast.LENGTH_LONG).show()
+                true}
+                else -> true
+            }
         }
 
 

@@ -28,4 +28,10 @@ class AuthorizationViewModel(private val repository: UserRepository) : ViewModel
             }
         }
     }
+
+    fun logout() {
+        _state.update {
+            it.copy(status = Status.Idle, token = null)
+        }
+    }
 }

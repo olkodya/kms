@@ -18,6 +18,8 @@ class ProfileViewModel(
     val shiftStarted = _shiftStarted.asStateFlow()
     private val _state = MutableStateFlow(ProfileUiState())
     val state = _state.asStateFlow()
+    private val _logout = MutableStateFlow(false)
+    val logout = _logout.asStateFlow()
 
     init {
         getWatches()
@@ -100,4 +102,12 @@ class ProfileViewModel(
             }
         }
     }
+
+    fun logout() {
+        _logout.value = true
+    }
+    fun login() {
+        _logout.value = false
+    }
+
 }

@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_bottomNavigationFragment_to_employeeInfoFragment2"
             app:destination="@id/employeeInfoFragment2" />
+        <action
+            android:id="@+id/action_bottomNavigationFragment_to_authorizationFragment4"
+            app:destination="@id/authorizationFragment" />
     </fragment>
     <fragment
         android:id="@+id/employeeInfoFragment2"
