@@ -11,7 +11,7 @@ object OkHttpFactory {
         OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .let {
-                if(BuildConfig.DEBUG) {
+                if (BuildConfig.DEBUG) {
                     it.addInterceptor(
                         HttpLoggingInterceptor().apply {
                             level = HttpLoggingInterceptor.Level.BODY

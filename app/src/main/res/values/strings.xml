@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">KMS</string>
     <string name="auth_title">Авторизация</string>
-    <string name="login_hint">Логин</string>
+    <string name="login_hint">"Логин "</string>
     <string name="password_hint">Пароль</string>
     <string name="login_btn">Войти</string>
     <string name="operations_title">Операции</string>
@@ -9,9 +9,9 @@
     <string name="take_key_btn">Вернуть ключ</string>
     <string name="profile_title">Профиль</string>
     <string name="avatar_watchman_description">Аватар вахтера</string>
-    <string name="profile_login">Логин:</string>
-    <string name="profile_watch">Вахта:</string>
-    <string name="profile_shift">Смена:</string>
+    <string name="profile_login">Логин:  </string>
+    <string name="profile_watch">Вахта:  </string>
+    <string name="profile_shift">Смена: </string>
     <string name="start_shift_btn">Начать смену</string>
     <string name="finish_shift_btn">Завершить смену</string>
     <string name="register_title">Журнал</string>

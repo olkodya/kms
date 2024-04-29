@@ -1,17 +1,16 @@
 package com.example.kms.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentSignaturePadBinding
 import com.example.kms.viewmodels.operations.OperationsViewModel
-import com.github.gcacace.signaturepad.utils.SignaturePadBindingAdapter
 import com.github.gcacace.signaturepad.views.SignaturePad
 
 
@@ -25,20 +24,27 @@ class SignaturePadFragment : Fragment() {
     ): View {
         val binding = FragmentSignaturePadBinding.inflate(inflater, container, false)
         signaturePad = binding.signaturePad
-        binding.clearBtn.setOnClickListener { 
-            if(!signaturePad.isEmpty){
+        binding.clearBtn.setOnClickListener {
+            if (!signaturePad.isEmpty) {
                 signaturePad.clear()
-            }else {
-                Toast.makeText(requireContext(), "Signature pad is already empty", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Signature pad is already empty",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
         binding.submitBtn.setOnClickListener {
-            if(!signaturePad.isEmpty){
+            if (!signaturePad.isEmpty) {
                 binding.image.setImageBitmap(signaturePad.signatureBitmap)
             } else {
-                Toast.makeText(requireContext(), "Signature pad is already empty", Toast.LENGTH_LONG).show()
-
+                Toast.makeText(
+                    requireContext(),
+                    "Signature pad is already empty",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 

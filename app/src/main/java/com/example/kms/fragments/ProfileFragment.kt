@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,11 +14,18 @@ import com.example.kms.viewmodels.profile.ProfileViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.text.SimpleDateFormat
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+
 
 class ProfileFragment : Fragment() {
     val viewModel by activityViewModels<AuthorizationViewModel>()
     val profileViewModel by activityViewModels<ProfileViewModel>()
     val authorizationViewModel by activityViewModels<AuthorizationViewModel>()
+    var formatter: SimpleDateFormat =
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+
 
     override fun onStart() {
         super.onStart()
@@ -82,25 +88,34 @@ class ProfileFragment : Fragment() {
                     // Respond to negative button press
                 }
                 .setPositiveButton("Завершить") { dialog, which ->
-                    viewModel.state.value.token?.user_id?.let { it1 -> profileViewModel.finishShift()
-1
+                    viewModel.state.value.token?.user_id?.let { it1 ->
+                        profileViewModel.finishShift()
+                        1
                     }
-            }.show()
+                }.show()
         }
 
 
 
         binding.profileToolBar.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.action_logout -> {
-                profileViewModel.logout()
-                authorizationViewModel.logout()
-                Toast.makeText(requireContext(), "hi", Toast.LENGTH_LONG).show()
-                true}
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Вы уверены, что хотите выйти?")
+                        .setNegativeButton("Отмена") { dialog, which ->
+                            // Respond to negative button press
+                        }
+                        .setPositiveButton("Выйти") { dialog, which ->
+                            profileViewModel.logout()
+                            authorizationViewModel.logout()
+                        }.show()
+
+                    true
+                }
+
                 else -> true
             }
         }
-
 
         profileViewModel.shiftStarted.onEach {
             if (!it) {
@@ -119,9 +134,15 @@ class ProfileFragment : Fragment() {
                 binding.watchNumber.visibility = View.VISIBLE
                 binding.watchNumber.text =
                     profileViewModel.state.value.shift?.watch?.building_number.toString()
-                binding.shiftDate.text = profileViewModel.state.value.shift?.start_date_time
+
+                val time = profileViewModel.state.value.shift?.start_date_time
+                val localDateTime = formatter.parse(time)
+                val formatter2 = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")
+                    .withZone(ZoneId.systemDefault());
+                binding.shiftDate.text = formatter2.format(localDateTime.toInstant())
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+
         return binding.root
     }
 }
