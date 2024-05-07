@@ -9,7 +9,7 @@ import com.example.kms.model.Operation
 
 class RegisterViewHolder(private val binding: ShiftRegisterItemBinding): RecyclerView.ViewHolder(binding.root) {
     fun bind(operation: Operation) = with(binding) {
-        //audienceNumber.text = operation.key?.audience?.number.toString()
+        audienceNumber.text = operation.operation_id.toString()
         binding.giveDate.text = operation.give_date_time
         //binding.employeeNumber = operation.employee.
     }

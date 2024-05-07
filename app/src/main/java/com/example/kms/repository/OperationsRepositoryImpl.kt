@@ -18,4 +18,8 @@ class OperationsRepositoryImpl(
     override suspend fun getAll(): List<Operation> {
         return api.getOperations()
     }
+
+    override suspend fun getById(id: Int): Operation {
+        return api.getOperation(id)
+    }
 }

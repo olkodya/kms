@@ -42,8 +42,6 @@ class ProfileFragment : Fragment() {
         val binding = FragmentProfileBinding.inflate(inflater, container, false)
         val employee = viewModel.state.value.token?.employee
 
-
-
         binding.loginName.text = viewModel.state.value.token?.username
         binding.name.text =
             "${employee?.first_name} ${employee?.second_name} ${employee?.middle_name}"

@@ -16,9 +16,6 @@ class RegisterAdapter : ListAdapter<Operation, RegisterViewHolder>(ItemComporato
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegisterViewHolder {
-
-
-
         val inflater = LayoutInflater.from(parent.context)
         val binding = ShiftRegisterItemBinding.inflate(inflater, parent, false)
         val viewHolder = RegisterViewHolder(binding)
@@ -26,7 +23,7 @@ class RegisterAdapter : ListAdapter<Operation, RegisterViewHolder>(ItemComporato
     }
 
     override fun onBindViewHolder(holder: RegisterViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(holder.adapterPosition  ))
     }
 
 }

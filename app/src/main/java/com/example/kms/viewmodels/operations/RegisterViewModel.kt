@@ -1,14 +1,8 @@
 package com.example.kms.viewmodels.operations
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.model.Employee
-import com.example.kms.model.Key
-import com.example.kms.model.LoginDto
 import com.example.kms.model.Operation
-import com.example.kms.model.Shift
-import com.example.kms.model.Watch
 import com.example.kms.repository.OperationRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,6 +31,19 @@ class RegisterViewModel(
 
             }
         }
+    }
 
+
+    fun getById(id: Int) {
+        viewModelScope.launch {
+            try {
+                val operations: List<Operation> = listOf(repository.getById(1))
+                _uiState.update {
+                    it.copy(operations = operations)
+                }
+            } catch (e: Exception) {
+
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ interface OperationRepository {
     suspend fun createOperation(keyId: Int, employeeId: Int, shiftId: Int): Operation
     suspend fun finishOperation(operationId: Int): Operation
     suspend fun getAll(): List<Operation>
+    suspend fun getById(id: Int): Operation
 
 
 }

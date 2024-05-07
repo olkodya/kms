@@ -41,30 +41,6 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
-
-        val operation = Operation(1, Key(
-            1,
-       ), Employee(1, "fsff", "sdsf", "dss", "daa"),
-            Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
-        , "dad", "dada")
-
-        val list = (1..10).map {
-            Operation(1, Key(
-                1,
-                  ), Employee(1, "fsff", "sdsf", "dss", "daa"),
-                Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
-                , "dad", "dada")
-        }
-        val binding = FragmentRegisterBinding.inflate(inflater,container, false)
-
-        initRcView(binding)
-
-//        adapter.submitList(list)
-
-
-
-
         val viewModel by activityViewModels<RegisterViewModel> {
             viewModelFactory {
                 initializer {
@@ -75,9 +51,33 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        viewModel.uiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+//        val operation = Operation(1, Key(
+//            1,
+//       ), Employee(1, "fsff", "sdsf", "dss", "daa"),
+//            Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
+//        , "dad", "dada")
+//
+//        val list = (1..10).map {
+//            Operation(1, Key(
+//                1,
+//                  ), Employee(1, "fsff", "sdsf", "dss", "daa"),
+//                Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
+//                , "dad", "dada")
+//        }
+        val binding = FragmentRegisterBinding.inflate(inflater,container, false)
+
+        initRcView(binding)
+
+//        adapter.submitList(list)
+
+
+
+
+
+        viewModel.uiState
             .onEach {
-                adapter.submitList(it.operations)
+                state ->
+                    adapter.submitList(state.operations)
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
 
