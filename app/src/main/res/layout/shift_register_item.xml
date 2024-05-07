@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="8dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="8dp"
+        tools:context=".activity.MainActivity">
+        <TextView
+            android:id="@+id/audience"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Аудитория: "
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            android:id="@+id/audienceNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "7-210"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/audience"
+            />
+        <TextView
+            android:id="@+id/employee"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Удостоверение сотрудника: "
+            app:layout_constraintTop_toBottomOf="@id/audience"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            android:id="@+id/employeeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "980801830723"
+            app:layout_constraintTop_toBottomOf="@id/audience"
+            app:layout_constraintStart_toEndOf="@id/employee"
+            />
+        <TextView
+            android:id="@+id/give"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Дата выдачи:"
+            app:layout_constraintTop_toBottomOf="@id/employee"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            android:id="@+id/giveDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "08.03.2024 08:00"
+            app:layout_constraintTop_toBottomOf="@id/employee"
+            app:layout_constraintStart_toEndOf="@id/give"
+            />
+
+        <TextView
+            android:id="@+id/take"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Дата возврата:"
+            app:layout_constraintTop_toBottomOf="@id/give"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <TextView
+            android:id="@+id/takeDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text = "08.03.2024 12:00"
+            app:layout_constraintTop_toBottomOf="@id/give"
+            app:layout_constraintStart_toEndOf="@id/take"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

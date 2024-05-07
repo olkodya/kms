@@ -44,6 +44,7 @@ class QRScanFragment : Fragment() {
 //
         operationsViewModel.giveKey.onEach {
             if (it) {
+
                 binding.scannerHint.text = getString(R.string.qr_code_hint)
             } else {
                 binding.scannerHint.text = getString(R.string.qr_code_hint2)

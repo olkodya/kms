@@ -45,13 +45,11 @@ class BottomNavigationFragment : Fragment() {
         val navController =
             requireNotNull(childFragmentManager.findFragmentById(R.id.container)).findNavController()
         binding.bottomNavigation.setupWithNavController(navController)
-        operationsViewModel.giveKey.onEach {
-            if (!it) {
+        operationsViewModel.scanned.onEach {
+            if (it) {
                 findNavController().navigate(R.id.action_bottomNavigationFragment_to_employeeInfoFragment2)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-        //profileViewModel
 
         profileViewModel.logout.onEach {
             if (it) {

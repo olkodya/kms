@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.update
 class OperationsViewModel(): ViewModel() {
     private val _giveKey = MutableStateFlow(true)
     val giveKey = _giveKey.asStateFlow()
-
+    private val _scanned = MutableStateFlow(false)
+    val scanned = _scanned.asStateFlow()
 
 
     fun checkGive() {
@@ -18,5 +19,13 @@ class OperationsViewModel(): ViewModel() {
 
     fun checkTake() {
         _giveKey.value = false
+    }
+
+    fun setScanned() {
+        _scanned.value = true
+    }
+
+    fun unsetScanned() {
+        _scanned.value = false
     }
 }

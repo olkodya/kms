@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.kms.R
 import com.example.kms.databinding.FragmentOperationsBinding
 import com.example.kms.viewmodels.operations.OperationsViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class OperationsFragment : Fragment() {
 
@@ -28,9 +31,20 @@ class OperationsFragment : Fragment() {
                     R.id.button2 -> viewModel.checkTake()
                 }
             }
-
         }
+        viewModel.giveKey.onEach {
+            if (it) {
+                binding.toggleButton.check(R.id.button1)
+            } else {
+                binding.toggleButton.check(R.id.button2)
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
+        binding.continueBtn.setOnClickListener {
+            viewModel.setScanned()
+        }
         return binding.root
     }
+
+
 }

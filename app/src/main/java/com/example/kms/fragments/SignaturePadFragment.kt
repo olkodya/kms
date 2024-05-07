@@ -49,9 +49,8 @@ class SignaturePadFragment : Fragment() {
         }
 
         binding.finish.setOnClickListener {
-            operationsViewModel.checkGive()
+            operationsViewModel.unsetScanned()
             findNavController().navigate(R.id.action_signaturePadFragment_to_bottomNavigationFragment2)
-
         }
         return binding.root
     }
