@@ -13,11 +13,9 @@ import kotlinx.coroutines.launch
 
 class QRScanViewModel(
     ) : ViewModel() {
-    private val _first = MutableStateFlow(true)
-    val first = _first.asStateFlow()
-    fun set() {
-        _first.update {
-            false
-        }
-    }
+    private val _employee = MutableStateFlow(true)
+    val employee = _employee.asStateFlow()
+
+
+
 }

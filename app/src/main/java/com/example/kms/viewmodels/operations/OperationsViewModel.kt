@@ -1,24 +1,28 @@
 package com.example.kms.viewmodels.operations
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.kms.model.Employee
+import com.example.kms.repository.EmployeeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class OperationsViewModel(): ViewModel() {
-    private val _giveKey = MutableStateFlow(true)
-    val giveKey = _giveKey.asStateFlow()
+class OperationsViewModel(private val repository: EmployeeRepository): ViewModel() {
+    private val _employee = MutableStateFlow(true)
+    val employee = _employee.asStateFlow()
     private val _scanned = MutableStateFlow(false)
     val scanned = _scanned.asStateFlow()
-
-
-    fun checkGive() {
-        _giveKey.value = true
+    private val _uiState = MutableStateFlow(OperationsUIState())
+    val uiState = _uiState.asStateFlow()
+    fun checkEmployee() {
+        _employee.value = true
     }
 
 
-    fun checkTake() {
-        _giveKey.value = false
+    fun checkKey() {
+        _employee.value = false
     }
 
     fun setScanned() {
@@ -28,4 +32,18 @@ class OperationsViewModel(): ViewModel() {
     fun unsetScanned() {
         _scanned.value = false
     }
+
+    fun giveKey(QR: String) {
+        viewModelScope.launch {
+            try {
+                val employee: Employee = repository.getByQR(QR)
+                _uiState.update {
+                    it.copy(employee = employee)
+                }
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
 }

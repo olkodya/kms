@@ -42,14 +42,14 @@ class QRScanFragment : Fragment() {
         val binding = FragmentQRScanBinding.inflate(layoutInflater, container, false)
         val scannerView = binding.scannerView
 //
-        operationsViewModel.giveKey.onEach {
+        operationsViewModel.employee.onEach {
             if (it) {
-
                 binding.scannerHint.text = getString(R.string.qr_code_hint)
             } else {
                 binding.scannerHint.text = getString(R.string.qr_code_hint2)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+
 
         val activity = requireActivity()
         codeScanner = CodeScanner(activity, scannerView)
@@ -105,16 +105,25 @@ class QRScanFragment : Fragment() {
         val activity = requireActivity()
         codeScanner.apply {
             camera = CodeScanner.CAMERA_BACK
-            decodeCallback = DecodeCallback {
+            decodeCallback = DecodeCallback {result ->
                 releaseResources()
                 activity.runOnUiThread {
-                    Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
+                    if(operationsViewModel.employee.value)
+                        operationsViewModel.giveKey(result.text)
+
+
+                    if(operationsViewModel.uiState.value.isSuccess)
+                        operationsViewModel.setScanned()
+                    else
+                        Toast.makeText(activity, "Неккоректный QR-код", Toast.LENGTH_LONG).show()
 
                 }
             }
             errorCallback = ErrorCallback {
+                releaseResources()
                 activity.runOnUiThread {
-                    Toast.makeText(activity, it.message + "aaaaaaaaa", Toast.LENGTH_LONG).show()
+                  //  Toast.makeText(activity, it.message , Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -126,7 +135,16 @@ class QRScanFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //   codeScanner.startPreview()
+//        profileViewModel.shiftStarted.onEach {
+//            if (it) {
+//                codeScanner.startPreview()
+//
+//            } else {
+//            }
+//        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+
+            // codeScanner.startPreview()
     }
 
 }

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentSignaturePadBinding
 import com.example.kms.viewmodels.operations.OperationsViewModel
@@ -24,6 +25,9 @@ class SignaturePadFragment : Fragment() {
     ): View {
         val binding = FragmentSignaturePadBinding.inflate(inflater, container, false)
         signaturePad = binding.signaturePad
+        val navController = findNavController()
+        binding.toolbar.setupWithNavController(navController)
+
         binding.clearBtn.setOnClickListener {
             if (!signaturePad.isEmpty) {
                 signaturePad.clear()

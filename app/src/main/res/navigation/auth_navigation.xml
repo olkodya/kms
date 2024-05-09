@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/bottomNavigationFragment"
         android:name="com.example.kms.fragments.BottomNavigationFragment"
-        android:label="fragment_bottom_navigation"
+        android:label="Операции"
         tools:layout="@layout/fragment_bottom_navigation" >
         <action
             android:id="@+id/action_bottomNavigationFragment_to_employeeInfoFragment2"
@@ -27,19 +27,27 @@
     <fragment
         android:id="@+id/employeeInfoFragment2"
         android:name="com.example.kms.fragments.EmployeeInfoFragment"
-        android:label="fragment_employee_info"
+        android:label="Сотрудник"
         tools:layout="@layout/fragment_employee_info" >
         <action
-            android:id="@+id/action_employeeInfoFragment2_to_signaturePadFragment"
-            app:destination="@id/signaturePadFragment" />
+            android:id="@+id/action_employeeInfoFragment2_to_scanKeyFragment2"
+            app:destination="@id/scanKeyFragment2" />
     </fragment>
     <fragment
         android:id="@+id/signaturePadFragment"
         android:name="com.example.kms.fragments.SignaturePadFragment"
-        android:label="fragment_signature_pad"
+        android:label="Подпись сотрудника"
         tools:layout="@layout/fragment_signature_pad" >
         <action
             android:id="@+id/action_signaturePadFragment_to_bottomNavigationFragment2"
             app:destination="@id/bottomNavigationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanKeyFragment2"
+        android:name="com.example.kms.fragments.ScanKeyFragment"
+        android:label="QR-код ключа" >
+        <action
+            android:id="@+id/action_scanKeyFragment2_to_signaturePadFragment"
+            app:destination="@id/signaturePadFragment" />
     </fragment>
 </navigation>

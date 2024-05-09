@@ -8,6 +8,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/employeeToolbar"
+
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

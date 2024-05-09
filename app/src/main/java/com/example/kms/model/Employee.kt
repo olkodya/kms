@@ -13,8 +13,8 @@ data class Employee (
     val second_name: String,
     @SerialName("middle_name")
     val middle_name: String,
-    @SerialName("photo_url")
-    val photo_url: String,
+//    @SerialName("photo_url")
+//    val photo_url: String,
 //    @SerialName("employeeType")
 //    val employeeType: ,
 )

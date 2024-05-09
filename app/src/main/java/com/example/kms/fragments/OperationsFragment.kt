@@ -27,12 +27,12 @@ class OperationsFragment : Fragment() {
         binding.toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
-                    R.id.button1 -> viewModel.checkGive()
-                    R.id.button2 -> viewModel.checkTake()
+                    R.id.button1 -> viewModel.checkEmployee()
+                    R.id.button2 -> viewModel.checkKey()
                 }
             }
         }
-        viewModel.giveKey.onEach {
+        viewModel.employee.onEach {
             if (it) {
                 binding.toggleButton.check(R.id.button1)
             } else {
@@ -40,9 +40,9 @@ class OperationsFragment : Fragment() {
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        binding.continueBtn.setOnClickListener {
-            viewModel.setScanned()
-        }
+//        binding.continueBtn.setOnClickListener {
+//            viewModel.setScanned()
+//        }
         return binding.root
     }
 

@@ -8,7 +8,7 @@ data class TokenDto(
     @SerialName("token")
     val token: String,
     @SerialName("username")
-    val username: String = "USER",
+    val username: String,
     @SerialName("user_id")
     val user_id: Int,
     @SerialName("employee")
