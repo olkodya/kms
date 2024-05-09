@@ -27,7 +27,7 @@ class SignaturePadFragment : Fragment() {
         signaturePad = binding.signaturePad
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
-
+        operationsViewModel.unsetScanned()
         binding.clearBtn.setOnClickListener {
             if (!signaturePad.isEmpty) {
                 signaturePad.clear()

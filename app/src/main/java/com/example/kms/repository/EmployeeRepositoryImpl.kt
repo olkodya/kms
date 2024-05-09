@@ -7,7 +7,6 @@ class EmployeeRepositoryImpl(
     private val api: EmployeeApi
 ) : EmployeeRepository {
     override suspend fun getByQR(QR: String): Employee {
-        return api.getOperation(QR)
+        return api.getEmployeeByQR(QR)
     }
-
 }

@@ -110,8 +110,9 @@ class QRScanFragment : Fragment() {
                 activity.runOnUiThread {
                     //Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
                     if(operationsViewModel.employee.value)
-                        operationsViewModel.giveKey(result.text)
-
+                        operationsViewModel.getEmployee(result.text)
+                    else
+                        operationsViewModel.getKey(result.text)
 
                     if(operationsViewModel.uiState.value.isSuccess)
                         operationsViewModel.setScanned()
