@@ -57,17 +57,17 @@ class SignaturePadFragment : Fragment() {
             }
         }
 
-        binding.submitBtn.setOnClickListener {
-            if (!signaturePad.isEmpty) {
-                binding.image.setImageBitmap(signaturePad.signatureBitmap)
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Signature pad is already empty",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
+//        binding.submitBtn.setOnClickListener {
+//            if (!signaturePad.isEmpty) {
+//                binding.image.setImageBitmap(signaturePad.signatureBitmap)
+//            } else {
+//                Toast.makeText(
+//                    requireContext(),
+//                    "Signature pad is already empty",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//            }
+//        }
         Toast.makeText(
             requireContext(),
             operationsViewModel.uiState.value.key?.qr ?: "haha",
