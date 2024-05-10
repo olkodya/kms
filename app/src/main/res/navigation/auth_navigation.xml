@@ -56,5 +56,17 @@
     <fragment
         android:id="@+id/registerItemFragment"
         android:name="com.example.kms.fragments.RegisterItemFragment"
-        android:label="Операция" />
+        android:label="Операция">
+        <action
+            android:id="@+id/action_registerItemFragment_to_employeeInfoFragment2"
+            app:destination="@id/employeeInfoFragment2" />
+        <action
+            android:id="@+id/action_registerItemFragment_to_audienceInfoFragment"
+            app:destination="@id/audienceInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/audienceInfoFragment"
+        android:name="com.example.kms.fragments.AudienceInfoFragment"
+        android:label="Аудитория"
+        tools:layout="@layout/fragment_audience_info" />
 </navigation>

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.kms.R
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.example.kms.databinding.FragmentAudienceInfoBinding
 
 class AudienceInfoFragment : Fragment() {
 
@@ -14,8 +16,12 @@ class AudienceInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val binding = FragmentAudienceInfoBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_audience_info, container, false)
+        val navController = findNavController()
+        binding.audienceToolbar.setupWithNavController(navController)
+        return binding.root
     }
 
 }
