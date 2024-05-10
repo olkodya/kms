@@ -12,7 +12,7 @@ class RegisterViewHolder(private val binding: ShiftRegisterItemBinding): Recycle
         audienceNumber.text = operation.key.key_id.toString()
         binding.giveDate.text = operation.give_date_time
         binding.takeDate.text = operation.return_date_time ?: "Ключ не был возвращен"
-        binding.employeeNumber.text = operation.shift.watchman.username
+        binding.employeeNumber.text = operation.shift?.watchman?.username
     }
 
 

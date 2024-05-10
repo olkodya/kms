@@ -10,7 +10,7 @@ data class Key (
     @SerialName("key_id")
     val key_id: Int?,
 //    @SerialName("audience")
-//    val audience: Audience?,
+//    val audience: Audience,
     @SerialName("keyState")
     val keyState: KeyState?,
     @SerialName("main")

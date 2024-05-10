@@ -12,7 +12,7 @@ data class Operation (
 //    @SerialName("employee")
 //    val employee: Employee?,
     @SerialName("shift")
-    val shift: Shift,
+    val shift: Shift?,
     @SerialName("give_date_time")
     val give_date_time: String?,
     @SerialName("return_date_time")

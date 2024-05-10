@@ -18,7 +18,8 @@ data class Audience (
     val capacity: Int?,
     @SerialName("signalisation")
     val signalisation: SignalisationType?,
-    val permissions: List<Permission?>?,
+//    @SerialName("permissions")
+//    val permissions: List<Permission?>?,
     @SerialName("audienceType")
     val audienceType: AudienceType?,
 )
