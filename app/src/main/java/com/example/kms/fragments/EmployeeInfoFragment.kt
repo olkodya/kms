@@ -29,7 +29,8 @@ class EmployeeInfoFragment : Fragment() {
             findNavController().navigate(R.id.action_employeeInfoFragment2_to_scanKeyFragment2)
         }
 
-        binding.employeeName.text = viewModel.uiState.value.employee?.first_name + " " + viewModel.uiState.value.employee?.second_name + " " + viewModel.uiState.value.employee?.middle_name
+        binding.employeeName.text =
+            viewModel.uiState.value.employee?.first_name + " " + viewModel.uiState.value.employee?.second_name + " " + viewModel.uiState.value.employee?.middle_name
         val toolbar = binding.employeeToolbar
         // Inflate the layout for this fragment
         return binding.root

@@ -16,13 +16,16 @@ import com.example.kms.databinding.FragmentBottomNavigationBinding
 import com.example.kms.mapper.ShiftUiModelMapper
 import com.example.kms.network.api.EmployeeApi
 import com.example.kms.network.api.KeyApi
+import com.example.kms.network.api.OperationApi
 import com.example.kms.network.api.ShiftApi
 import com.example.kms.network.api.WatchApi
 import com.example.kms.repository.EmployeeRepositoryImpl
 import com.example.kms.repository.KeyRepositoryImpl
+import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.repository.ShiftRepositoryImpl
 import com.example.kms.repository.WatchRepositoryImpl
 import com.example.kms.viewmodels.operations.OperationsViewModel
+import com.example.kms.viewmodels.operations.RegisterViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -50,6 +53,26 @@ class BottomNavigationFragment : Fragment() {
         }
     }
 
+    private val registerViewModel by activityViewModels<RegisterViewModel> {
+        viewModelFactory {
+            initializer {
+                RegisterViewModel(
+                    OperationsRepositoryImpl(OperationApi.INSTANCE)
+                )
+            }
+        }
+    }
+//    private val viewModel by activityViewModels<RegisterViewModel> {
+//        viewModelFactory {
+//            initializer {
+//                RegisterViewModel(
+//                    OperationsRepositoryImpl(OperationApi.INSTANCE)
+//                )
+//            }
+//        }
+//    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,6 +92,14 @@ class BottomNavigationFragment : Fragment() {
                 findNavController().navigate(R.id.action_bottomNavigationFragment_to_authorizationFragment4)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        registerViewModel.uiState.onEach {
+
+        }
+
+
+
+
         return binding.root
 
     }

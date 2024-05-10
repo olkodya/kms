@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.kms.databinding.ShiftRegisterItemBinding
 import com.example.kms.model.Operation
 
-class RegisterAdapter : ListAdapter<Operation, RegisterViewHolder>(ItemComporator()) {
+class RegisterAdapter(private val onClick: (Int) -> Unit) :
+    ListAdapter<Operation, RegisterViewHolder>(ItemComporator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegisterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ShiftRegisterItemBinding.inflate(inflater, parent, false)
-        val viewHolder = RegisterViewHolder(binding)
+        val viewHolder = RegisterViewHolder(binding, onClick)
         return viewHolder
     }
 

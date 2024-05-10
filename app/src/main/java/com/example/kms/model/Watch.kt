@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Watch (
+data class Watch(
     @SerialName("watch_id")
     val watch_id: Int,
     @SerialName("building_number")

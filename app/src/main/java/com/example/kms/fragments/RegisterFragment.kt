@@ -1,15 +1,18 @@
 package com.example.kms.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import com.example.kms.R
 import com.example.kms.adapter.RegisterAdapter
 import com.example.kms.databinding.FragmentRegisterBinding
 import com.example.kms.network.api.OperationApi
@@ -21,21 +24,21 @@ import kotlinx.coroutines.flow.onEach
 class RegisterFragment : Fragment() {
 
     lateinit var adapter: RegisterAdapter
+    private val viewModel by activityViewModels<RegisterViewModel> {
+        viewModelFactory {
+            initializer {
+                RegisterViewModel(
+                    OperationsRepositoryImpl(OperationApi.INSTANCE)
+                )
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        val viewModel by activityViewModels<RegisterViewModel> {
-            viewModelFactory {
-                initializer {
-                    RegisterViewModel(
-                        OperationsRepositoryImpl(OperationApi.INSTANCE)
-                    )
-                }
-            }
-        }
 
 //        val operation = Operation(1, Key(
 //            1,
@@ -50,7 +53,7 @@ class RegisterFragment : Fragment() {
 //                Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
 //                , "dad", "dada")
 //        }
-        val binding = FragmentRegisterBinding.inflate(inflater,container, false)
+        val binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         initRcView(binding)
 
@@ -79,8 +82,17 @@ class RegisterFragment : Fragment() {
 
 
     private fun initRcView(binding: FragmentRegisterBinding) {
-        adapter = RegisterAdapter()
-        binding.list.layoutManager = LinearLayoutManager(requireContext())
+
+
+        Log.d("SIZE", childFragmentManager.fragments.toString())
+
+        adapter = RegisterAdapter { operationId ->
+            requireParentFragment().requireParentFragment().findNavController()
+                .navigate(
+                    R.id.action_bottomNavigationFragment_to_registerItemFragment,
+                    bundleOf(RegisterItemFragment.OPERATION_ID_KEY to operationId)
+                )
+        }
         binding.list.adapter = adapter
     }
 }

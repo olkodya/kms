@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/bottomNavigationFragment"
         android:name="com.example.kms.fragments.BottomNavigationFragment"
-        android:label="Операции"
+        android:label=""
         tools:layout="@layout/fragment_bottom_navigation" >
         <action
             android:id="@+id/action_bottomNavigationFragment_to_employeeInfoFragment2"
@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_bottomNavigationFragment_to_authorizationFragment4"
             app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_bottomNavigationFragment_to_registerItemFragment"
+            app:destination="@id/registerItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/employeeInfoFragment2"
@@ -50,4 +53,8 @@
             android:id="@+id/action_scanKeyFragment2_to_signaturePadFragment"
             app:destination="@id/signaturePadFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/registerItemFragment"
+        android:name="com.example.kms.fragments.RegisterItemFragment"
+        android:label="Операция" />
 </navigation>

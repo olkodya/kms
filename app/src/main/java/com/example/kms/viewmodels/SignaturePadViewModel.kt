@@ -14,7 +14,6 @@ class SignaturePadViewModel(
         viewModelScope.launch {
             try {
                 val operation: Operation = repository.createOperation(operationForm)
-
             } catch (e: Exception) {
 
             }

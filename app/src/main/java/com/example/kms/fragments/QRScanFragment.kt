@@ -103,16 +103,16 @@ class QRScanFragment : Fragment() {
         val activity = requireActivity()
         codeScanner.apply {
             camera = CodeScanner.CAMERA_BACK
-            decodeCallback = DecodeCallback {result ->
+            decodeCallback = DecodeCallback { result ->
                 releaseResources()
                 activity.runOnUiThread {
                     //Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
-                    if(operationsViewModel.employee.value)
+                    if (operationsViewModel.employee.value)
                         operationsViewModel.getEmployee(result.text)
                     else {
                         operationsViewModel.getKey(result.text)
                     }
-                    if(operationsViewModel.uiState.value.isSuccess)
+                    if (operationsViewModel.uiState.value.isSuccess)
                         operationsViewModel.setScanned()
                     else
                         Toast.makeText(activity, "Неккоректный QR-код", Toast.LENGTH_LONG).show()
@@ -122,7 +122,7 @@ class QRScanFragment : Fragment() {
             errorCallback = ErrorCallback {
                 releaseResources()
                 activity.runOnUiThread {
-                  //  Toast.makeText(activity, it.message , Toast.LENGTH_LONG).show()
+                    //  Toast.makeText(activity, it.message , Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -143,7 +143,7 @@ class QRScanFragment : Fragment() {
 //        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
 
-            // codeScanner.startPreview()
+        // codeScanner.startPreview()
     }
 
 }

@@ -46,4 +46,18 @@ class RegisterViewModel(
             }
         }
     }
+
+
+    fun clickItem() {
+        _uiState.update {
+            it.copy(itemClicked = true)
+        }
+    }
+
+
+    fun unClickItem() {
+        _uiState.update {
+            it.copy(itemClicked = false)
+        }
+    }
 }

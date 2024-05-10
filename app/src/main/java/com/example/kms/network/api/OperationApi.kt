@@ -17,6 +17,7 @@ interface OperationApi {
 
     @GET("/api/operations/{id}")
     suspend fun getOperation(@Path("id") id: Int): Operation
+
     companion object {
         val INSTANCE: OperationApi by lazy {
             RetrofitFactory.INSTANCE.create()

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Operation (
+data class Operation(
     @SerialName("operation_id")
     val operation_id: Int,
     @SerialName("key")

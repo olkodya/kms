@@ -6,13 +6,14 @@ import com.example.kms.network.api.OperationApi
 
 class OperationsRepositoryImpl(
     private val api: OperationApi
-): OperationRepository {
+) : OperationRepository {
     override suspend fun createOperation(keyId: Int, employeeId: Int, shiftId: Int): Operation {
         TODO("Not yet implemented")
     }
 
     override suspend fun createOperation(operationForm: OperationForm): Operation =
         api.createOperation(operationForm)
+
     override suspend fun finishOperation(operationId: Int): Operation {
         TODO("Not yet implemented")
     }
