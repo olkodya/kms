@@ -20,7 +20,7 @@ class RegisterViewModel(
         load()
     }
 
-    private fun load() {
+    fun load() {
         viewModelScope.launch {
             try {
                 val operations: List<Operation> = repository.getAll()

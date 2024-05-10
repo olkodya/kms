@@ -16,6 +16,7 @@ object RetrofitFactory {
         Retrofit.Builder()
             .baseUrl("https://kms2-production.up.railway.app/")
             .client(OkHttpFactory.INSTANCE)
+
             .addConverterFactory(JSON.asConverterFactory(JSON_TYPE))
             .build()
     }

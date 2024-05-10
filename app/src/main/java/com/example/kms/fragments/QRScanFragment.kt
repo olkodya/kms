@@ -41,7 +41,6 @@ class QRScanFragment : Fragment() {
         profileViewModel.getShift(authorizationViewModel.state.value.token?.user_id ?: 0)
         val binding = FragmentQRScanBinding.inflate(layoutInflater, container, false)
         val scannerView = binding.scannerView
-//
         operationsViewModel.employee.onEach {
             if (it) {
                 binding.scannerHint.text = getString(R.string.qr_code_hint)
@@ -49,7 +48,6 @@ class QRScanFragment : Fragment() {
                 binding.scannerHint.text = getString(R.string.qr_code_hint2)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
-
 
         val activity = requireActivity()
         codeScanner = CodeScanner(activity, scannerView)
@@ -64,8 +62,8 @@ class QRScanFragment : Fragment() {
             delay(500)
             if (profileViewModel.shiftStarted.value) {
                 checkCameraPermission()
-                startScanning(binding)
                 codeScanner.startPreview()
+                startScanning(binding)
             } else {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Ошибка. Начните смену.")
@@ -111,9 +109,9 @@ class QRScanFragment : Fragment() {
                     //Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
                     if(operationsViewModel.employee.value)
                         operationsViewModel.getEmployee(result.text)
-                    else
+                    else {
                         operationsViewModel.getKey(result.text)
-
+                    }
                     if(operationsViewModel.uiState.value.isSuccess)
                         operationsViewModel.setScanned()
                     else

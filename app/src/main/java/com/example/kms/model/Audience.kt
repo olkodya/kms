@@ -1,5 +1,8 @@
 package com.example.kms.model
 
+
+import com.example.kms.model.enums.AudienceType
+import com.example.kms.model.enums.SignalisationType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,15 +10,15 @@ import kotlinx.serialization.Serializable
 data class Audience (
     @SerialName("audience_id")
     val audience_id: Int?,
+    @SerialName("is_exists")
+    val is_exists: Boolean?,
     @SerialName("number")
     val number: Int?,
-//    @SerialName("floor")
-//    val floor: Int?,
-//    @SerialName("capacity")
-//    val capacity: Int?,
-//    @SerialName("signalisation")
-//    val signalisation: String?,//TODO enum
-    //val permissions: TODO
-//    @SerialName("audienceType")
-//    val audienceType: String?,//TODO enum
+    @SerialName("capacity")
+    val capacity: Int?,
+    @SerialName("signalisation")
+    val signalisation: SignalisationType?,
+    val permissions: List<Permission?>?,
+    @SerialName("audienceType")
+    val audienceType: AudienceType?,
 )
