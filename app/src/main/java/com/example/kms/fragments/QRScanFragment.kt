@@ -134,15 +134,6 @@ class QRScanFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-//        profileViewModel.shiftStarted.onEach {
-//            if (it) {
-//                codeScanner.startPreview()
-//
-//            } else {
-//            }
-//        }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-
         // codeScanner.startPreview()
     }
 

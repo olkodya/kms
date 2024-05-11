@@ -12,6 +12,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.kms.R
 import com.example.kms.databinding.FragmentSignaturePadBinding
 import com.example.kms.model.OperationForm
 import com.example.kms.network.api.OperationApi
@@ -82,7 +83,7 @@ class SignaturePadFragment : Fragment() {
                 shift_id = profileViewModel.state.value.shift?.shift_id ?: 0
             )
             signaturePadViewModel.createOperation(operationForm)
-            // findNavController().navigate(R.id.action_signaturePadFragment_to_bottomNavigationFragment2)
+            findNavController().navigate(R.id.action_signaturePadFragment_to_bottomNavigationFragment2)
         }
         return binding.root
     }
