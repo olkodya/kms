@@ -8,6 +8,6 @@ data class Division(
     @SerialName("division_id")
     val division_id: Int,
     val name: String?,
-    val employees: List<Employee?>?,
+    val employees: List<Int>?,
     val permissions: List<Permission?>?,
 )

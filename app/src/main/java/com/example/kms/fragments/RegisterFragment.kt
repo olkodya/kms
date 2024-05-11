@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -15,14 +16,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.kms.R
 import com.example.kms.adapter.RegisterAdapter
 import com.example.kms.databinding.FragmentRegisterBinding
+import com.example.kms.model.Operation
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.viewmodels.operations.RegisterViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.util.Locale
 
 class RegisterFragment : Fragment() {
-
+    lateinit var searchView: SearchView
     lateinit var adapter: RegisterAdapter
     private val viewModel by activityViewModels<RegisterViewModel> {
         viewModelFactory {
@@ -59,7 +62,7 @@ class RegisterFragment : Fragment() {
 
 //        adapter.submitList(list)
 
-
+        searchView = binding.searchView
         viewModel.load()
         binding.emptyList.text = viewModel.uiState.value.operations.toString()
         viewModel.uiState
@@ -72,12 +75,44 @@ class RegisterFragment : Fragment() {
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
 
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+        })
+
 
 
 
 
         return binding.root
 
+    }
+
+
+    private fun filterList(query: String?) {
+        val filteredList = emptyList<Operation>().toMutableList()
+        if (query != null) {
+            for (i in viewModel.uiState.value.operations) {
+                if (i.give_date_time.toString().lowercase(Locale.ROOT)
+                        .contains(query.toString())
+                ) {
+                    println("dsdsd1")
+                    filteredList += i
+                }
+            }
+            println(filteredList)
+            adapter.submitList(filteredList)
+        } else {
+            adapter.submitList(filteredList)
+            //adapter.submitList(viewModel.uiState.value.operations)
+        }
     }
 
 
