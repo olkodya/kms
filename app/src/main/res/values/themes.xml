@@ -9,5 +9,8 @@
 
     </style>
 
+    <style name="Widget.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface">
+        <item name="elevation">4dp</item>
+    </style>
     <style name="Theme.KMS" parent="Base.Theme.KMS" />
 </resources>

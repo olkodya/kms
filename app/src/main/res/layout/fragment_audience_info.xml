@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.AudienceInfoFragment">
-    <androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".fragments.AudienceInfoFragment"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.appcompat.widget.Toolbar
         android:id="@+id/audienceToolbar"
         android:layout_width="match_parent"
+            android:elevation="4dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,12 +26,12 @@
         android:layout_width="match_parent"
         android:adjustViewBounds="true"
         android:layout_margin="16dp"
+        app:srcCompat="@drawable/avatar_default_symbolic_svgrepo_com"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/audienceToolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/employeeavatarContentDescription"
-        tools:srcCompat="@tools:sample/avatars[]"/>
+        android:contentDescription="@string/employeeavatarContentDescription" />
     <Space    android:id="@+id/spacer"
         android:layout_width="match_parent"
         android:layout_height="16dp"
@@ -129,3 +138,5 @@
         app:layout_constraintStart_toEndOf="@id/audience_state_title"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+

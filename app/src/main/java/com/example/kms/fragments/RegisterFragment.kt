@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -19,7 +20,9 @@ import com.example.kms.databinding.FragmentRegisterBinding
 import com.example.kms.model.Operation
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
+import com.example.kms.utils.Date
 import com.example.kms.viewmodels.operations.RegisterViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.util.Locale
@@ -27,6 +30,8 @@ import java.util.Locale
 class RegisterFragment : Fragment() {
     lateinit var searchView: SearchView
     lateinit var adapter: RegisterAdapter
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by activityViewModels<RegisterViewModel> {
         viewModelFactory {
             initializer {
@@ -42,6 +47,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
 //        val operation = Operation(1, Key(
 //            1,
@@ -56,7 +62,6 @@ class RegisterFragment : Fragment() {
 //                Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
 //                , "dad", "dada")
 //        }
-        val binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         initRcView(binding)
 
@@ -65,6 +70,13 @@ class RegisterFragment : Fragment() {
         searchView = binding.searchView
         viewModel.load()
         binding.emptyList.text = viewModel.uiState.value.operations.toString()
+        binding.chipDate.setOnClickListener {
+            setDatePicker()
+        }
+
+        binding.chipDate.setOnCloseIconClickListener {
+            Toast.makeText(requireContext(), "ppp", Toast.LENGTH_LONG).show()
+        }
         viewModel.uiState
             .onEach { state ->
                 adapter.submitList(state.operations)
@@ -130,4 +142,30 @@ class RegisterFragment : Fragment() {
         }
         binding.list.adapter = adapter
     }
+
+
+    private fun setDatePicker() {
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build()
+        datePicker.show(childFragmentManager, "DatePicker")
+        datePicker.addOnPositiveButtonClickListener {
+            val date = Date.convertTimeToDate(it)
+            binding.chipDate.text = date
+            val filteredList = emptyList<Operation>().toMutableList()
+            for (i in viewModel.uiState.value.operations) {
+                if (i.give_date_time.toString().lowercase(Locale.ROOT)
+                        .contains(date)
+                ) {
+                    println("dsdsd1")
+                    filteredList += i
+                }
+            }
+            println(filteredList)
+            adapter.submitList(filteredList)
+        }
+
+    }
+
 }
