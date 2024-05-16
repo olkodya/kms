@@ -3,5 +3,6 @@ package com.example.kms.viewmodels.profile
 import com.example.kms.model.Operation
 
 data class RegisterItemUiState(
-    val operation: Operation? = null
+    val operation: Operation? = null,
+    val employeePhoto: ByteArray? = null
 )

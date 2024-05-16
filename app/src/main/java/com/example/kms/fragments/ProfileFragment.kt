@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.onEach
 import java.text.SimpleDateFormat
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Base64
 
 
 class ProfileFragment : Fragment() {
@@ -58,17 +57,11 @@ class ProfileFragment : Fragment() {
             if (state.watches.isNotEmpty()) {
                 singleItems = state.watches.map { it.building_number.toString() }.toTypedArray()
             }
-            //val image = state.image
-            val image =
-                "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
-            if (image.isNotEmpty()) {
-                println(state.image)
-                // val image = state.image
-                val pureBase64 = image.substring(image.indexOf(",") + 1)
-                println()
-                val decodedBytes: ByteArray = Base64.getDecoder().decode(pureBase64)
+            val image = state.image
+            if (image != null) {
+                val decodedBytes: ByteArray = image
                 val decodedBitmap: Bitmap =
-                    BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+                    BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size ?: 1)
                 binding.avatar.setImageBitmap(decodedBitmap)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
