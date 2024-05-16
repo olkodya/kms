@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_navigation"
+    app:startDestination="@id/shiftRegisterFragment">
+
+    <fragment
+        android:id="@+id/shiftRegisterFragment"
+        android:name="com.example.kms.fragments.ShiftRegisterFragment"
+        android:label="fragment_shift_register"
+        tools:layout="@layout/fragment_shift_register">
+        <action
+            android:id="@+id/action_shiftRegisterFragment_to_signalisationRegisterFragment"
+            app:destination="@id/signalisationRegisterFragment" />
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/signalisationRegisterFragment"
+        android:name="com.example.kms.fragments.SignalisationRegisterFragment"
+        android:label="fragment_signalisation_register"
+        tools:layout="@layout/fragment_signalisation_register">
+        <action
+            android:id="@+id/action_signalisationRegisterFragment_to_shiftRegisterFragment"
+            app:destination="@id/shiftRegisterFragment" />
+    </fragment>
+</navigation>

@@ -25,7 +25,7 @@ import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.repository.ShiftRepositoryImpl
 import com.example.kms.repository.WatchRepositoryImpl
 import com.example.kms.viewmodels.operations.OperationsViewModel
-import com.example.kms.viewmodels.operations.RegisterViewModel
+import com.example.kms.viewmodels.operations.ShiftRegisterViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -53,10 +53,10 @@ class BottomNavigationFragment : Fragment() {
         }
     }
 
-    private val registerViewModel by activityViewModels<RegisterViewModel> {
+    private val registerViewModel by activityViewModels<ShiftRegisterViewModel> {
         viewModelFactory {
             initializer {
-                RegisterViewModel(
+                ShiftRegisterViewModel(
                     OperationsRepositoryImpl(OperationApi.INSTANCE)
                 )
             }
