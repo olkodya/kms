@@ -1,4 +1,4 @@
-package com.example.kms.adapter
+package com.example.kms.lists.shifts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

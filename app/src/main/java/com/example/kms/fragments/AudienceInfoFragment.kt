@@ -11,7 +11,9 @@ import com.example.kms.databinding.FragmentAudienceInfoBinding
 
 class AudienceInfoFragment : Fragment() {
 
-
+    companion object {
+        const val AUDIENCE_ID = "AUDIENCE_ID"
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

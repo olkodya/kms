@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Audience (
     @SerialName("audience_id")
-    val audience_id: Int?,
+    val audience_id: Int,
     @SerialName("exist")
     val exists: Boolean?,
     @SerialName("number")

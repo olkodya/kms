@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="8dp"
+    app:cardElevation="2dp"
+    android:backgroundTint="?colorOnPrimary"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="8dp"
+        tools:context=".activity.MainActivity">
+
+        <TextView
+            android:id="@+id/audience"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Аудитория: "
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/audienceNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="7-210"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/audience" />
+
+        <TextView
+            android:id="@+id/type"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Тип: "
+            app:layout_constraintTop_toBottomOf="@id/audience"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/typeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="учебная"
+            app:layout_constraintTop_toBottomOf="@id/audience"
+            app:layout_constraintStart_toEndOf="@id/type" />
+
+        <TextView
+            android:id="@+id/signalisationState"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сигнализация: "
+            app:layout_constraintTop_toBottomOf="@id/type"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/signalisationStateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Включена: "
+            app:layout_constraintTop_toBottomOf="@id/typeName"
+            app:layout_constraintStart_toEndOf="@id/signalisationState" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

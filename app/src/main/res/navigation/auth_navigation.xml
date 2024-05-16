@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_bottomNavigationFragment_to_registerItemFragment"
             app:destination="@id/registerItemFragment" />
+        <action
+            android:id="@+id/action_bottomNavigationFragment_to_audienceInfoFragment"
+            app:destination="@id/audienceInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/employeeInfoFragment2"

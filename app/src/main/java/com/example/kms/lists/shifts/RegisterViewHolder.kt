@@ -1,4 +1,4 @@
-package com.example.kms.adapter
+package com.example.kms.lists.shifts
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kms.databinding.ShiftRegisterItemBinding

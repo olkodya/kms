@@ -15,8 +15,8 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import com.example.kms.R
-import com.example.kms.adapter.RegisterAdapter
 import com.example.kms.databinding.FragmentShiftRegisterBinding
+import com.example.kms.lists.shifts.RegisterAdapter
 import com.example.kms.model.Operation
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
