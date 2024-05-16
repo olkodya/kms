@@ -1,225 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".fragments.AudienceInfoFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:layout_width="match_parent">
+    tools:context=".fragments.AudienceInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Операция" />
-
-    <TextView
-        android:layout_marginTop="16dp"
-        android:id="@+id/give_date_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="18sp"
-        android:text="Дата выдачи: "
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="475dp" />
-
-    <TextView
-        android:layout_marginTop="16dp"
-        android:id="@+id/give_date"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toEndOf="@id/give_date_title"
-        tools:layout_editor_absoluteY="475dp"
-        tools:text="20.09.2023 08:25" />
-
-    <TextView
-        android:layout_marginTop="16dp"
-        android:id="@+id/return_date_title"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Дата возврата"
-        app:layout_constraintTop_toBottomOf="@id/give_date_title"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textStyle="bold"
-        android:layout_marginStart="16dp" />
-
-    <TextView
-        android:layout_marginTop="16dp"
-        android:id="@+id/return_date"
-        android:layout_width="wrap_content"
-        android:textSize="18sp"
-        android:layout_height="wrap_content"
-        tools:text="20.09.2023 08:25"
-        app:layout_constraintTop_toBottomOf="@id/give_date"
-        app:layout_constraintStart_toEndOf="@id/return_date_title"
-        android:layout_marginStart="16dp" />
-
-    <TextView
-        android:id="@+id/employee_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Сотрудник"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/employeeCard"
-        app:layout_constraintTop_toBottomOf="@id/return_date"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_marginStart="16dp"
-        app:cardElevation="2dp"
-        android:backgroundTint="?colorOnPrimary"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/audience_title"
-        android:id="@+id/employeeCard"
-        app:layout_constraintTop_toBottomOf="@id/employee_title"
-        android:layout_height="wrap_content">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingTop="32dp"
-            android:paddingEnd="0dp"
-            android:paddingBottom="32dp"
-            tools:context=".activity.MainActivity">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Операция" />
 
-            <ImageView
-                android:id="@+id/avatar"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                app:srcCompat="@drawable/user_images"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="@string/avatar_watchman_description" />
+        <TextView
+            android:id="@+id/give_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Дата выдачи: "
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:layout_editor_absoluteY="475dp" />
 
-            <Space
-                android:id="@+id/spacer"
-                android:layout_width="16dp"
-                android:layout_height="80dp"
-                app:layout_constraintStart_toEndOf="@id/avatar"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/employee_name"
-                tools:text="Иванов Иван Иванович"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/spacer"
-                app:layout_constraintTop_toTopOf="@id/avatar"
-                android:layout_marginTop="8dp" />
+        <TextView
+            android:id="@+id/give_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/give_date_title"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:layout_editor_absoluteY="475dp"
+            tools:text="20.09.2023 08:25" />
 
-            <TextView
-                android:id="@+id/certificate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@id/spacer"
-                app:layout_constraintBottom_toBottomOf="@id/avatar"
-                app:layout_constraintTop_toBottomOf="@id/employee_name"
-                tools:text="4342424223312" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-    <TextView
-        android:id="@+id/audience_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Аудитория"
-        android:layout_marginTop="32dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/audienceCard"
-        app:layout_constraintTop_toBottomOf="@id/employeeCard"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp" />
+        <TextView
+            android:id="@+id/return_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Дата возврата"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/give_date_title" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        app:cardElevation="2dp"
-        android:layout_marginTop="12dp"
-        android:id="@+id/audienceCard"
-        android:backgroundTint="?colorOnPrimary"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/audience_title"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/return_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/return_date_title"
+            app:layout_constraintTop_toBottomOf="@id/give_date"
+            tools:text="20.09.2023 08:25" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/employee_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Сотрудник"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/employeeCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/return_date" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/employeeCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingTop="32dp"
-            android:paddingEnd="0dp"
-            android:paddingBottom="32dp"
-            tools:context=".activity.MainActivity">
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="?colorOnPrimary"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toTopOf="@id/audience_title"
+            app:layout_constraintTop_toBottomOf="@id/employee_title">
 
-            <ImageView
-                android:id="@+id/avatarAudience"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:contentDescription="@string/avatar_watchman_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/style_monogram" />
-
-            <Space
-                android:id="@+id/spacer2"
-                android:layout_width="16dp"
-                android:layout_height="80dp"
-                app:layout_constraintStart_toEndOf="@id/avatarAudience"
-                app:layout_constraintTop_toTopOf="parent" />
-            <TextView
-                android:id="@+id/audience_number"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/spacer2"
-                app:layout_constraintTop_toTopOf="@id/avatarAudience"
-                tools:text="7-302" />
+                android:paddingStart="8dp"
+                android:paddingTop="32dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="32dp"
+                tools:context=".activity.MainActivity">
 
-            <TextView
-                android:id="@+id/audience_type"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="16dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spacer"
+                    android:contentDescription="@string/avatar_watchman_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/user_images" />
+
+                <Space
+                    android:id="@+id/spacer"
+                    android:layout_width="16dp"
+                    android:layout_height="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/employee_name"
+                    app:layout_constraintStart_toEndOf="@id/avatar"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/employee_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:singleLine="false"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="16dp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toTopOf="@id/certificate"
+                    app:layout_constraintStart_toEndOf="@id/spacer"
+                    app:layout_constraintTop_toTopOf="@id/avatar"
+                    tools:text="Куприяновczcz Ильяczcz \n Иванович" />
+
+                <TextView
+                    android:id="@+id/certificate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/avatar"
+                    app:layout_constraintStart_toStartOf="@id/employee_name"
+                    app:layout_constraintTop_toBottomOf="@id/employee_name"
+                    tools:text="43424223312" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/audience_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Аудитория"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/audienceCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/employeeCard" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/audienceCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="?colorOnPrimary"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/audience_title">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@id/spacer2"
-                app:layout_constraintBottom_toBottomOf="@id/avatarAudience"
-                app:layout_constraintTop_toBottomOf="@id/audience_number"
-                tools:text="лаборатория" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+                android:paddingStart="8dp"
+                android:paddingTop="32dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="32dp"
+                tools:context=".activity.MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/avatarAudience"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="@string/avatar_watchman_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/style_monogram" />
+
+                <Space
+                    android:id="@+id/spacer2"
+                    android:layout_width="16dp"
+                    android:layout_height="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/audience_number"
+                    app:layout_constraintStart_toEndOf="@id/avatarAudience"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/audience_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/spacer2"
+                    app:layout_constraintTop_toTopOf="@id/avatarAudience"
+                    tools:text="7-302" />
+
+                <TextView
+                    android:id="@+id/audience_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/avatarAudience"
+                    app:layout_constraintStart_toEndOf="@id/spacer2"
+                    app:layout_constraintTop_toBottomOf="@id/audience_number"
+                    tools:text="лаборатория" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

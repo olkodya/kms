@@ -7,5 +7,6 @@ import com.example.kms.repository.Status
 data class ProfileUiState (
     val shift: ShiftUIModel? = null,
     val status: Status = Status.Idle,
+    val image: String? = null,
     val watches: List<Watch> = emptyList(),
     )

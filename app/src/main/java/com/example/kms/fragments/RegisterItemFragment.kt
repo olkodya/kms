@@ -62,12 +62,17 @@ class RegisterItemFragment : Fragment() {
         viewModel.uiState.onEach {
             if (it.operation != null) {
                 binding.giveDate.text = it.operation?.give_date_time
-                binding.returnDate.text = it.operation?.return_date_time
+                if (it.operation.return_date_time != null)
+                    binding.returnDate.text = it.operation.return_date_time
+                else {
+                    binding.returnDate.text = "Ключ не был возвращен"
+                }
                 binding.audienceNumber.text =
                     it.operation?.shift?.watch?.building_number.toString() + "-" + it.operation?.key?.audience?.number.toString()
                 binding.audienceType.text = it.operation?.key?.audience?.audienceType.toString()
+                binding.certificate.text = "sasasasasasasa"
                 binding.employeeName.text =
-                    it.operation?.employee?.second_name + " " + it.operation?.employee?.first_name + it.operation?.employee?.middle_name
+                    it.operation?.employee?.second_name + "\n" + it.operation?.employee?.first_name + "\n" + it.operation?.employee?.middle_name
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 //        binding.giveDate.text = viewModel.uiState.value.operation?.give_date_time
@@ -80,7 +85,10 @@ class RegisterItemFragment : Fragment() {
         }
 
         binding.audienceCard.setOnClickListener {
-            findNavController().navigate(R.id.action_registerItemFragment_to_audienceInfoFragment)
+            findNavController().navigate(
+                R.id.action_registerItemFragment_to_audienceInfoFragment,
+                bundleOf(AudienceInfoFragment.AUDIENCE_ID to viewModel.uiState.value.operation?.key?.audience?.audience_id)
+            )
         }
         return binding.root
     }

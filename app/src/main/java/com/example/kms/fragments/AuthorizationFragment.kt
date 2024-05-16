@@ -15,9 +15,11 @@ import com.example.kms.R
 import com.example.kms.databinding.FragmentAuthorizationBinding
 import com.example.kms.mapper.ShiftUiModelMapper
 import com.example.kms.model.Operation
+import com.example.kms.network.api.ImageApi
 import com.example.kms.network.api.ShiftApi
 import com.example.kms.network.api.UserApi
 import com.example.kms.network.api.WatchApi
+import com.example.kms.repository.ImageRepositoryImpl
 import com.example.kms.repository.NetworkUserRepository
 import com.example.kms.repository.ShiftRepositoryImpl
 import com.example.kms.repository.WatchRepositoryImpl
@@ -159,7 +161,8 @@ class AuthorizationFragment : Fragment() {
                     ProfileViewModel(
                         ShiftRepositoryImpl(ShiftApi.INSTANCE),
                         WatchRepositoryImpl(WatchApi.INSTANCE),
-                        ShiftUiModelMapper()
+                        ShiftUiModelMapper(),
+                        ImageRepositoryImpl(ImageApi.INSTANCE),
                     )
                 }
             }

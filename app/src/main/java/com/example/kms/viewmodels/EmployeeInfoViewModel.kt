@@ -28,4 +28,18 @@ class EmployeeInfoViewModel(
         }
     }
 
+    fun getEmployeeIDById(id: Int) {
+        viewModelScope.launch {
+            try {
+                val employeeId = repository.getEmployeeIdByEmployeeId(id)
+                _employee.update {
+                    it.copy(employeeId = employeeId)
+                }
+            } catch (ex: Exception) {
+
+
+            }
+        }
+    }
+
 }

@@ -15,7 +15,8 @@ class RegisterViewHolder(
             operation.shift?.watch?.building_number.toString() + "-" + operation.key.audience.number.toString()
         binding.giveDate.text = operation.give_date_time
         binding.takeDate.text = operation.return_date_time ?: "Ключ не был возвращен"
-        // binding.employeeNumber.text = operation.shift?.watchman?.username
+        binding.employeeNumber.text =
+            operation.employee?.second_name + " " + operation.employee?.first_name + " " + operation.employee?.middle_name
         itemView.setOnClickListener {
             onClick.invoke(operation.operation_id)
         }

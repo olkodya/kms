@@ -64,7 +64,7 @@ class SignalisationRegisterFragment : Fragment() {
                 .requireParentFragment().findNavController()
                 .navigate(
                     R.id.action_bottomNavigationFragment_to_audienceInfoFragment,
-                    bundleOf(RegisterItemFragment.OPERATION_ID_KEY to audienceId)
+                    bundleOf(AudienceInfoFragment.AUDIENCE_ID to audienceId)
                 )
         }
         binding.list.adapter = adapter

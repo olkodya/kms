@@ -15,11 +15,13 @@ import com.example.kms.R
 import com.example.kms.databinding.FragmentBottomNavigationBinding
 import com.example.kms.mapper.ShiftUiModelMapper
 import com.example.kms.network.api.EmployeeApi
+import com.example.kms.network.api.ImageApi
 import com.example.kms.network.api.KeyApi
 import com.example.kms.network.api.OperationApi
 import com.example.kms.network.api.ShiftApi
 import com.example.kms.network.api.WatchApi
 import com.example.kms.repository.EmployeeRepositoryImpl
+import com.example.kms.repository.ImageRepositoryImpl
 import com.example.kms.repository.KeyRepositoryImpl
 import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.repository.ShiftRepositoryImpl
@@ -47,7 +49,8 @@ class BottomNavigationFragment : Fragment() {
                 ProfileViewModel(
                     ShiftRepositoryImpl(ShiftApi.INSTANCE),
                     WatchRepositoryImpl(WatchApi.INSTANCE),
-                    ShiftUiModelMapper()
+                    ShiftUiModelMapper(),
+                    ImageRepositoryImpl(ImageApi.INSTANCE),
                 )
             }
         }

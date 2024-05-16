@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kms.mapper.ShiftUiModelMapper
+import com.example.kms.repository.ImageRepository
 import com.example.kms.repository.ShiftRepository
 import com.example.kms.repository.Status
 import com.example.kms.repository.WatchRepository
@@ -11,12 +12,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.math.truncate
 
 class ProfileViewModel(
     private val repository: ShiftRepository,
     private val watchRepository: WatchRepository,
     private val mapper: ShiftUiModelMapper,
+    private val imageRepository: ImageRepository,
 ) : ViewModel() {
     private val _shiftStarted = MutableStateFlow(false)
     val shiftStarted = _shiftStarted.asStateFlow()
@@ -115,6 +116,22 @@ class ProfileViewModel(
     }
     fun login() {
         _logout.value = false
+    }
+
+    fun getImage(id: Int) {
+        viewModelScope.launch {
+            try {
+                val image = imageRepository.getById(id)
+                _state.update {
+                    it.copy(image = image)
+                }
+            } catch (e: Exception) {
+                _state.update {
+                    it.copy(status = Status.Error(e))
+                }
+
+            }
+        }
     }
 
 }

@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentEmployeeInfoBinding
+import com.example.kms.model.Division
+import com.example.kms.model.Permission
 import com.example.kms.network.api.EmployeeApi
 import com.example.kms.repository.EmployeeRepositoryImpl
 import com.example.kms.viewmodels.EmployeeInfoViewModel
@@ -61,15 +63,17 @@ class EmployeeInfoFragment : Fragment() {
         if (arguments?.containsKey(EMPLOYEE_ID) == true) {
             val employeeId: Int = requireArguments().getInt(EMPLOYEE_ID)
             viewModel.getByID(employeeId)
+            viewModel.getEmployeeIDById(employeeId)
             Log.d("ID", employeeId.toString())
         }
 
         viewModel.employee.onEach {
-
             binding.employeeName.text =
                 it.employee?.second_name + " " + it.employee?.first_name + " " + it.employee?.middle_name
-
-            binding.division.text = it.employee?.employee_type
+            binding.certificate.text = it.employeeId?.number.toString()
+            binding.division.text = getStringDivisions(it.employee?.divisions)
+            binding.position.text = it.employee?.employee_type
+            binding.permissions.text = getStringPermissions(it.employee?.permissions)
 
         }.launchIn(viewLifecycleOwner.lifecycleScope)
         // binding.employeeName.text =
@@ -78,4 +82,25 @@ class EmployeeInfoFragment : Fragment() {
         // Inflate the layout for this fragment
         return binding.root
     }
+
+    private fun getStringDivisions(divisions: List<Division?>?): String {
+        var string = ""
+        if (divisions != null) {
+            for (division in divisions) {
+                string += division?.name + " "
+            }
+        }
+        return string
+    }
+
+    private fun getStringPermissions(permissions: List<Permission?>?): String {
+        var string = ""
+        if (permissions != null) {
+            for (permission in permissions) {
+                string += permission?.name + " "
+            }
+        }
+        return string
+    }
+
 }
