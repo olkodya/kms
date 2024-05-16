@@ -1,4 +1,4 @@
-package com.example.kms.viewmodels.operations
+package com.example.kms.viewmodels.register
 
 import com.example.kms.model.Operation
 

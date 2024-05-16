@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.kms.R
 import com.example.kms.databinding.FragmentRegisterBinding
 
 class RegisterFragment : Fragment() {
@@ -28,9 +30,18 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding =
-            com.example.kms.databinding.FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        binding.toggleButton.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.button2 -> requireNotNull(childFragmentManager.findFragmentById(R.id.container)).findNavController()
+                        .navigate(R.id.action_shiftRegisterFragment_to_signalisationRegisterFragment)
 
+                    R.id.button1 -> requireNotNull(childFragmentManager.findFragmentById(R.id.container)).findNavController()
+                        .navigate(R.id.action_signalisationRegisterFragment_to_shiftRegisterFragment)
+                }
+            }
+        }
 //        val operation = Operation(1, Key(
 //            1,
 //       ), Employee(1, "fsff", "sdsf", "dss", "daa"),

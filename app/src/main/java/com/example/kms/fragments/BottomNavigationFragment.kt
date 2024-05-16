@@ -25,8 +25,8 @@ import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.repository.ShiftRepositoryImpl
 import com.example.kms.repository.WatchRepositoryImpl
 import com.example.kms.viewmodels.operations.OperationsViewModel
-import com.example.kms.viewmodels.operations.ShiftRegisterViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
+import com.example.kms.viewmodels.register.ShiftRegisterViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

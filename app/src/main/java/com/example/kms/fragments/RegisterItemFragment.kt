@@ -18,7 +18,7 @@ import com.example.kms.databinding.FragmentRegisterItemBinding
 import com.example.kms.fragments.EmployeeInfoFragment.Companion.EMPLOYEE_ID
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
-import com.example.kms.viewmodels.RegisterItemViewModel
+import com.example.kms.viewmodels.register.RegisterItemViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

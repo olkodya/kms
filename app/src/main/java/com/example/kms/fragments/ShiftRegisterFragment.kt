@@ -21,7 +21,7 @@ import com.example.kms.model.Operation
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.utils.Date
-import com.example.kms.viewmodels.operations.ShiftRegisterViewModel
+import com.example.kms.viewmodels.register.ShiftRegisterViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
