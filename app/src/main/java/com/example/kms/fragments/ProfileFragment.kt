@@ -62,6 +62,7 @@ class ProfileFragment : Fragment() {
                 val decodedBytes: ByteArray = image
                 val decodedBitmap: Bitmap =
                     BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size ?: 1)
+
                 binding.avatar.setImageBitmap(decodedBitmap)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

@@ -24,6 +24,7 @@ class RegisterItemViewModel(
                 _uiState.update {
                     it.copy(operation = operation)
                 }
+                getEmployeePhoto(operation.employee?.image?.image_id ?: 0)
             } catch (ex: Exception) {
 
 

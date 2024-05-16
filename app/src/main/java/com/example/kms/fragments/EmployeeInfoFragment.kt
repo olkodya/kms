@@ -13,12 +13,15 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.example.kms.R
 import com.example.kms.databinding.FragmentEmployeeInfoBinding
 import com.example.kms.model.Division
 import com.example.kms.model.Permission
 import com.example.kms.network.api.EmployeeApi
+import com.example.kms.network.api.ImageApi
 import com.example.kms.repository.EmployeeRepositoryImpl
+import com.example.kms.repository.ImageRepositoryImpl
 import com.example.kms.viewmodels.EmployeeInfoViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -29,13 +32,16 @@ class EmployeeInfoFragment : Fragment() {
 
     companion object {
         const val EMPLOYEE_ID = "EMPLOYEE_ID"
+        const val EMPLOYEE_IMAGE_ID = "EMPLOYEE_IMAGE_ID"
     }
 
     private val viewModel by viewModels<EmployeeInfoViewModel> {
         viewModelFactory {
             initializer {
                 EmployeeInfoViewModel(
-                    EmployeeRepositoryImpl(EmployeeApi.INSTANCE)
+                    EmployeeRepositoryImpl(EmployeeApi.INSTANCE),
+
+                    ImageRepositoryImpl(ImageApi.INSTANCE)
                 )
             }
         }
@@ -67,14 +73,23 @@ class EmployeeInfoFragment : Fragment() {
             Log.d("ID", employeeId.toString())
         }
 
-        viewModel.employee.onEach {
-            binding.employeeName.text =
-                it.employee?.second_name + " " + it.employee?.first_name + " " + it.employee?.middle_name
-            binding.certificate.text = it.employeeId?.number.toString()
-            binding.division.text = getStringDivisions(it.employee?.divisions)
-            binding.position.text = it.employee?.employee_type
-            binding.permissions.text = getStringPermissions(it.employee?.permissions)
+        if (arguments?.containsKey(EMPLOYEE_IMAGE_ID) == true) {
+            val imageId: Int = requireArguments().getInt(EMPLOYEE_IMAGE_ID)
+            viewModel.getEmployeePhoto(imageId)
+        }
 
+        viewModel.employee.onEach {
+            if (it.employee != null) {
+                binding.employeeName.text =
+                    it.employee?.second_name + " " + it.employee?.first_name + " " + it.employee?.middle_name
+                binding.certificate.text = it.employeeId?.number.toString()
+                binding.division.text = getStringDivisions(it.employee?.divisions)
+                binding.position.text = it.employee?.employee_type
+                binding.permissions.text = getStringPermissions(it.employee?.permissions)
+                if (it.employeePhoto != null)
+                    Glide.with(requireContext()).load(it.employeePhoto).fitCenter()
+                        .into(binding.employeePhoto)
+            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
         // binding.employeeName.text =
         //   operationViewModel.uiState.value.employee?.first_name + " " + operationViewModel.uiState.value.employee?.second_name + " " + operationViewModel.uiState.value.employee?.middle_name
