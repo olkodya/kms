@@ -44,48 +44,12 @@
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/register_navigation"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:backgroundTint="?colorOnPrimary"
-        app:cardCornerRadius="32dp">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:queryBackground="@android:color/transparent"
-            app:iconifiedByDefault="false"
-            app:queryHint="Поиск"
-            app:showAsAction="always" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipDate"
-        style="@style/Widget.Material3.Chip.Assist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:checkable="true"
-        android:text="Смена"
-        app:chipIcon="@drawable/baseline_calendar_month_24"
-        app:closeIconVisible="true" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/shift_register_item" />
-
-    <TextView
-        android:id="@+id/emptyList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="List is empty"
-        android:visibility="gone" />
+        android:layout_weight="1" />
 </LinearLayout>

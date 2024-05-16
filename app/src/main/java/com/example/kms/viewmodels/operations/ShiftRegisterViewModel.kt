@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(
+class ShiftRegisterViewModel(
     private val repository: OperationRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(RegisterUIState())
-    val uiState: StateFlow<RegisterUIState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(ShiftRegisterUIState())
+    val uiState: StateFlow<ShiftRegisterUIState> = _uiState.asStateFlow()
 
     init {
         load()
