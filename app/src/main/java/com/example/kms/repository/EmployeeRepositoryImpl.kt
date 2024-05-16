@@ -9,4 +9,8 @@ class EmployeeRepositoryImpl(
     override suspend fun getByQR(QR: String): Employee {
         return api.getEmployeeByQR(QR)
     }
+
+    override suspend fun getById(id: Int): Employee {
+        return api.getEmployeeById(id)
+    }
 }

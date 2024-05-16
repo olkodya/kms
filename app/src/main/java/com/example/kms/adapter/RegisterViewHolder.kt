@@ -11,10 +11,11 @@ class RegisterViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(operation: Operation) = with(binding) {
-        audienceNumber.text = operation.key.key_id.toString()
+        audienceNumber.text =
+            operation.shift?.watch?.building_number.toString() + "-" + operation.key.audience.number.toString()
         binding.giveDate.text = operation.give_date_time
         binding.takeDate.text = operation.return_date_time ?: "Ключ не был возвращен"
-        binding.employeeNumber.text = operation.shift?.watchman?.username
+        // binding.employeeNumber.text = operation.shift?.watchman?.username
         itemView.setOnClickListener {
             onClick.invoke(operation.operation_id)
         }

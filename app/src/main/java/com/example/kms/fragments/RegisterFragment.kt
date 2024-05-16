@@ -76,6 +76,8 @@ class RegisterFragment : Fragment() {
 
         binding.chipDate.setOnCloseIconClickListener {
             Toast.makeText(requireContext(), "ppp", Toast.LENGTH_LONG).show()
+            adapter.submitList(viewModel.uiState.value.operations)
+            binding.chipDate.text = "Смена"
         }
         viewModel.uiState
             .onEach { state ->
@@ -146,7 +148,7 @@ class RegisterFragment : Fragment() {
 
     private fun setDatePicker() {
         val datePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select date")
+            .setTitleText("Выберите дату смены")
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
             .build()
         datePicker.show(childFragmentManager, "DatePicker")

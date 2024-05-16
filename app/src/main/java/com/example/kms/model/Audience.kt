@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
 data class Audience (
     @SerialName("audience_id")
     val audience_id: Int?,
-    @SerialName("is_exists")
-    val is_exists: Boolean?,
+    @SerialName("exist")
+    val exists: Boolean?,
     @SerialName("number")
     val number: Int?,
     @SerialName("capacity")
@@ -20,6 +20,6 @@ data class Audience (
     val signalisation: SignalisationType?,
 //    @SerialName("permissions")
 //    val permissions: List<Permission?>?,
-    @SerialName("audienceType")
+    @SerialName("audience_type")
     val audienceType: AudienceType?,
 )

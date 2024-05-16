@@ -9,6 +9,9 @@ interface EmployeeApi {
     @GET("api/QRs/{QR}/employees")
     suspend fun getEmployeeByQR(@Path("QR") QR: String): Employee
 
+    @GET("api/employees/{id}")
+    suspend fun getEmployeeById(@Path("id") QR: Int): Employee
+
     companion object {
         val INSTANCE: EmployeeApi by lazy {
             RetrofitFactory.INSTANCE.create()

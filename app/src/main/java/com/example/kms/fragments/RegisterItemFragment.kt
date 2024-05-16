@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentRegisterItemBinding
+import com.example.kms.fragments.EmployeeInfoFragment.Companion.EMPLOYEE_ID
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.viewmodels.RegisterItemViewModel
@@ -58,13 +60,23 @@ class RegisterItemFragment : Fragment() {
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
         viewModel.uiState.onEach {
-            binding.giveDate.text = it.operation?.give_date_time
-            binding.returnDate.text = it.operation?.return_date_time
+            if (it.operation != null) {
+                binding.giveDate.text = it.operation?.give_date_time
+                binding.returnDate.text = it.operation?.return_date_time
+                binding.audienceNumber.text =
+                    it.operation?.shift?.watch?.building_number.toString() + "-" + it.operation?.key?.audience?.number.toString()
+                binding.audienceType.text = it.operation?.key?.audience?.audienceType.toString()
+                binding.employeeName.text =
+                    it.operation?.employee?.second_name + " " + it.operation?.employee?.first_name + it.operation?.employee?.middle_name
+            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 //        binding.giveDate.text = viewModel.uiState.value.operation?.give_date_time
 //        binding.returnDate.text = viewModel.uiState.value.operation?.return_date_time
         binding.employeeCard.setOnClickListener {
-            findNavController().navigate(R.id.action_registerItemFragment_to_employeeInfoFragment2)
+            findNavController().navigate(
+                R.id.action_registerItemFragment_to_employeeInfoFragment2,
+                bundleOf(EMPLOYEE_ID to viewModel.uiState.value.operation?.employee?.employee_id)
+            )
         }
 
         binding.audienceCard.setOnClickListener {

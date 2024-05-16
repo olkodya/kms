@@ -19,10 +19,10 @@ data class Employee(
     val employee_type: String?,
     @SerialName("employee_status")
     val employee_status: String?,
-    @SerialName("divisions")
-    val divisions: List<Division?>?,
-    @SerialName("permissions")
-    val permissions: List<Permission?>?,
+//    @SerialName("divisions")
+//    val divisions: List<Division?>?,
+//    @SerialName("permissions")
+//    val permissions: List<Permission?>?,
     @SerialName("qr")
     val qr: String?
 )

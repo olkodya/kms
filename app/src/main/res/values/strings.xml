@@ -22,7 +22,7 @@
     <string name="register_bottom">Журнал</string>
     <string name="operations_bottom">Операции</string>
     <string name="profile_bottom">Профиль</string>
-    <string name="qr_code_hint">Отсканируйте qr-код удостоверения преподавателя</string>
+    <string name="qr_code_hint">Отсканируйте qr-код удостоверения сотрудника</string>
     <string name="qr_code_hint2">Отсканируйте qr-код ключа</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -5,5 +5,5 @@ data class ShiftUIModel(
     val start_date_time: String?,
     val end_date_time: String?,
     val watch: Watch,
-    val watchman: LoginDto,
+    // val watchman: LoginDto,
 )

@@ -9,8 +9,8 @@ data class Operation(
     val operation_id: Int,
     @SerialName("key")
     val key: Key,
-//    @SerialName("employee")
-//    val employee: Employee?,
+    @SerialName("employee")
+    val employee: Employee?,
     @SerialName("shift")
     val shift: Shift?,
     @SerialName("give_date_time")
