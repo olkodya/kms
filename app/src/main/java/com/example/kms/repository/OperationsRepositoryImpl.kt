@@ -25,4 +25,6 @@ class OperationsRepositoryImpl(
     override suspend fun getById(id: Int): Operation {
         return api.getOperation(id)
     }
+
+    override suspend fun getLastOperation(id: Int): Operation = api.getLastOperation(id)
 }

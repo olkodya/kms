@@ -39,6 +39,7 @@ class BottomNavigationFragment : Fragment() {
                 OperationsViewModel(
                     EmployeeRepositoryImpl(EmployeeApi.INSTANCE),
                     KeyRepositoryImpl(KeyApi.INSTANCE),
+                    OperationsRepositoryImpl(OperationApi.INSTANCE)
                 )
             }
         }
@@ -85,9 +86,9 @@ class BottomNavigationFragment : Fragment() {
             requireNotNull(childFragmentManager.findFragmentById(R.id.container)).findNavController()
         binding.bottomNavigation.setupWithNavController(navController)
         operationsViewModel.scanned.onEach {
-            if (it) {
-                findNavController().navigate(R.id.action_bottomNavigationFragment_to_employeeInfoFragment2)
-            }
+//            if (it) {
+//                findNavController().navigate(R.id.action_bottomNavigationFragment_to_employeeInfoFragment2)
+//            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         profileViewModel.logout.onEach {

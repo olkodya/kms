@@ -8,14 +8,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.example.kms.R
 import com.example.kms.databinding.FragmentQRScanBinding
+import com.example.kms.model.enums.KeyState
 import com.example.kms.viewmodels.authorization.AuthorizationViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
@@ -106,17 +109,40 @@ class QRScanFragment : Fragment() {
             decodeCallback = DecodeCallback { result ->
                 releaseResources()
                 activity.runOnUiThread {
-                    //Toast.makeText(activity, it.text, Toast.LENGTH_LONG).show()
                     if (operationsViewModel.employee.value)
                         operationsViewModel.getEmployee(result.text)
                     else {
                         operationsViewModel.getKey(result.text)
                     }
-                    if (operationsViewModel.uiState.value.isSuccess)
-                        operationsViewModel.setScanned()
-                    else
-                        Toast.makeText(activity, "Неккоректный QR-код", Toast.LENGTH_LONG).show()
-
+                    operationsViewModel.uiState.onEach {
+                        if (operationsViewModel.uiState.value.isSuccess) {
+                            // operationsViewModel.setScanned()
+                            if (operationsViewModel.employee.value)
+                                requireParentFragment()
+                                    .requireParentFragment()
+                                    .requireParentFragment().findNavController().navigate(
+                                        R.id.action_bottomNavigationFragment_to_employeeInfoFragment2,
+                                        bundleOf(
+                                            EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employee_id,
+                                            EmployeeInfoFragment.EMPLOYEE_IMAGE_ID to operationsViewModel.uiState.value.employee?.image?.image_id,
+                                            EmployeeInfoFragment.OPERATION to true
+                                        )
+                                    )
+                            else {
+                                if (operationsViewModel.uiState.value.key != null && operationsViewModel.uiState.value.key?.key_state != KeyState.GIVEN_AWAY)
+                                    requireParentFragment().requireParentFragment()
+                                        .findNavController()
+                                        .navigate(R.id.action_scanKeyFragment2_to_signaturePadFragment)
+                                else if (operationsViewModel.uiState.value.key?.key_state == KeyState.GIVEN_AWAY) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ключ уже был выдан",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                    }.launchIn(viewLifecycleOwner.lifecycleScope)
                 }
             }
             errorCallback = ErrorCallback {

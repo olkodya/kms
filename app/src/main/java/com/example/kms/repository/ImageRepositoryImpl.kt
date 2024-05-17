@@ -1,6 +1,8 @@
 package com.example.kms.repository
 
 import com.example.kms.network.api.ImageApi
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.ByteArrayOutputStream
 
 class ImageRepositoryImpl(
@@ -18,5 +20,9 @@ class ImageRepositoryImpl(
             }
         }
         return outputStream.toByteArray()
+    }
+
+    override suspend fun upload(imageForm: RequestBody, file: MultipartBody.Part) {
+        api.uploadImage(imageForm, file)
     }
 }

@@ -33,6 +33,7 @@ class EmployeeInfoFragment : Fragment() {
     companion object {
         const val EMPLOYEE_ID = "EMPLOYEE_ID"
         const val EMPLOYEE_IMAGE_ID = "EMPLOYEE_IMAGE_ID"
+        const val OPERATION = "OPERATION"
     }
 
     private val viewModel by viewModels<EmployeeInfoViewModel> {
@@ -78,6 +79,11 @@ class EmployeeInfoFragment : Fragment() {
             viewModel.getEmployeePhoto(imageId)
         }
 
+        if (arguments?.containsKey(OPERATION) == true) {
+            binding.continueBtn.visibility = View.VISIBLE
+        }
+
+        // operationViewModel.reset()
         viewModel.employee.onEach {
             if (it.employee != null) {
                 binding.employeeName.text =
