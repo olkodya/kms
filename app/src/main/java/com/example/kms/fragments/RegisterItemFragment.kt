@@ -14,6 +14,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.kms.R
 import com.example.kms.databinding.FragmentRegisterItemBinding
 import com.example.kms.fragments.EmployeeInfoFragment.Companion.EMPLOYEE_ID
@@ -99,7 +100,15 @@ class RegisterItemFragment : Fragment() {
 
                 if (it.employeePhoto != null) {
                     Glide.with(requireContext()).load(it.employeePhoto).fitCenter().circleCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.avatar)
+                }
+
+                if (it.audiencePhoto != null) {
+                    Glide.with(requireContext()).load(it.audiencePhoto).transition(
+                        DrawableTransitionOptions.withCrossFade()
+                    ).fitCenter().circleCrop()
+                        .into(binding.avatarAudience)
                 }
             }
 
@@ -119,7 +128,10 @@ class RegisterItemFragment : Fragment() {
         binding.audienceCard.setOnClickListener {
             findNavController().navigate(
                 R.id.action_registerItemFragment_to_audienceInfoFragment,
-                bundleOf(AudienceInfoFragment.AUDIENCE_ID to viewModel.uiState.value.operation?.key?.audience?.audience_id)
+                bundleOf(
+                    AudienceInfoFragment.AUDIENCE_ID to viewModel.uiState.value.operation?.key?.audience?.audience_id,
+                    AudienceInfoFragment.AUDIENCE_IMAGE_ID to viewModel.uiState.value.operation?.key?.audience?.image?.image_id
+                )
             )
         }
         return binding.root

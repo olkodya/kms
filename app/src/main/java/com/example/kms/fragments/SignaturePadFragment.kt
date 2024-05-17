@@ -26,7 +26,8 @@ import com.example.kms.viewmodels.SignaturePadViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
 import com.github.gcacace.signaturepad.views.SignaturePad
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -73,18 +74,6 @@ class SignaturePadFragment : Fragment() {
                 ).show()
             }
         }
-
-//        binding.submitBtn.setOnClickListener {
-//            if (!signaturePad.isEmpty) {
-//                binding.image.setImageBitmap(signaturePad.signatureBitmap)
-//            } else {
-//                Toast.makeText(
-//                    requireContext(),
-//                    "Signature pad is already empty",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            }
-//        }
         Toast.makeText(
             requireContext(),
             operationsViewModel.uiState.value.key?.qr ?: "haha",
@@ -102,41 +91,20 @@ class SignaturePadFragment : Fragment() {
                 employee_id = operationsViewModel.uiState.value.employee?.employee_id ?: 0,
                 shift_id = profileViewModel.state.value.shift?.shift_id ?: 0
             )
-//            signaturePadViewModel.createOperation(operationForm)
+            signaturePadViewModel.createOperation(operationForm)
+            signaturePadViewModel.uiState.onEach {
+                if (it.operation != null) {
+                    val filename = "signature_give_" + it.operation.operation_id
+                    val f = bitmapToFile(signaturePad.signatureBitmap, filename)
+                    val reqFile: RequestBody = f.asRequestBody("image/*".toMediaTypeOrNull())
+                    val body: MultipartBody.Part =
+                        MultipartBody.Part.createFormData("image", f.name, reqFile)
+                    val fullName: RequestBody =
+                        "Your Name".toRequestBody("multipart/form-data".toMediaTypeOrNull())
 
-            //operationsViewModel.reset()
-
-            viewLifecycleOwner.lifecycleScope.launch {
-                val filename = "haha.png"
-                val f = bitmapToFile(signaturePad.signatureBitmap, filename)
-//                val f = File(context?.cacheDir, filename)
-//                f.createNewFile()
-//
-//                // Convert bitmap to byte array
-//                val bitmap: Bitmap = signaturePad.signatureBitmap
-//                val bos = ByteArrayOutputStream()
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* ignored for PNG */, bos)
-//                val bitmapData: ByteArray = bos.toByteArray()
-//                // Write the bytes in file
-//                val fos: FileOutputStream?
-//                try {
-//                    fos = FileOutputStream(f)
-//                    fos.write(bitmapData)
-//                    fos.flush()
-//                    fos.close()
-//                } catch (e: FileNotFoundException) {
-//                    e.printStackTrace()
-//                } catch (e: IOException) {
-//                    e.printStackTrace()
-//                }
-                val reqFile: RequestBody = f.asRequestBody("image/*".toMediaTypeOrNull())
-                val body: MultipartBody.Part =
-                    MultipartBody.Part.createFormData("image", f.name, reqFile)
-                val fullName: RequestBody =
-                    "Your Name".toRequestBody("multipart/form-data".toMediaTypeOrNull())
-
-                signaturePadViewModel.uploadSignature(fullName, body)
-            }
+                    signaturePadViewModel.uploadSignature(fullName, body, it.operation.operation_id)
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
             //findNavController().navigate(R.id.action_signaturePadFragment_to_bottomNavigationFragment2)
         }
         return binding.root
@@ -144,9 +112,6 @@ class SignaturePadFragment : Fragment() {
 
 
     fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File { // File name like "image.png"
-        //create a file to write bitmap data
-        // var file: File
-        // file = File(Environment.getExternalStorageDirectory().toString() + File.separator + fileNameToSave)
         val file = File(context?.cacheDir, fileNameToSave)
         return try {
             file.createNewFile()

@@ -22,4 +22,6 @@ data class Audience (
     val permissions: List<Permission?>?,
     @SerialName("audience_type")
     val audienceType: AudienceType?,
+    @SerialName("image")
+    val image: Image?
 )

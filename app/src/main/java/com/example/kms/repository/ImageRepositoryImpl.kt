@@ -1,5 +1,8 @@
 package com.example.kms.repository
 
+import com.example.kms.model.Image
+import com.example.kms.model.Signature
+import com.example.kms.model.SignatureForm
 import com.example.kms.network.api.ImageApi
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -22,7 +25,11 @@ class ImageRepositoryImpl(
         return outputStream.toByteArray()
     }
 
-    override suspend fun upload(imageForm: RequestBody, file: MultipartBody.Part) {
-        api.uploadImage(imageForm, file)
+    override suspend fun upload(imageForm: RequestBody, file: MultipartBody.Part): Image {
+        return api.uploadImage(imageForm, file)
+    }
+
+    override suspend fun createSignature(signatureForm: SignatureForm): Signature {
+        return api.createSignature(signatureForm)
     }
 }

@@ -14,6 +14,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.kms.R
 import com.example.kms.databinding.FragmentEmployeeInfoBinding
 import com.example.kms.model.Division
@@ -93,7 +94,9 @@ class EmployeeInfoFragment : Fragment() {
                 binding.position.text = it.employee?.employee_type
                 binding.permissions.text = getStringPermissions(it.employee?.permissions)
                 if (it.employeePhoto != null)
-                    Glide.with(requireContext()).load(it.employeePhoto).fitCenter()
+                    Glide.with(requireContext()).load(it.employeePhoto).fitCenter().transition(
+                        DrawableTransitionOptions.withCrossFade()
+                    )
                         .into(binding.employeePhoto)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.kms.R
 import com.example.kms.databinding.FragmentProfileBinding
 import com.example.kms.viewmodels.authorization.AuthorizationViewModel
@@ -63,11 +66,18 @@ class ProfileFragment : Fragment() {
                 val decodedBitmap: Bitmap =
                     BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size ?: 1)
 
-                binding.avatar.setImageBitmap(decodedBitmap)
+                // binding.avatar.setImageBitmap(decodedBitmap)
+                Glide.with(requireContext()).load(state.image).fitCenter().circleCrop().transition(
+                    DrawableTransitionOptions.withCrossFade()
+                ).into(binding.avatar)
+
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
 
+        binding.avatar.setOnClickListener {
+            Toast.makeText(requireContext(), "I'm Jungkook!", Toast.LENGTH_LONG).show()
+        }
 
 
         binding.startShift.setOnClickListener {

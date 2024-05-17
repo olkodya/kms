@@ -1,10 +1,13 @@
 package com.example.kms.network.api
 
 import com.example.kms.model.Image
+import com.example.kms.model.Signature
+import com.example.kms.model.SignatureForm
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.create
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -21,6 +24,9 @@ interface ImageApi {
         @Part("image") image: RequestBody,
         @Part file: MultipartBody.Part
     ): Image
+
+    @POST("api/signatures")
+    suspend fun createSignature(@Body signatureForm: SignatureForm): Signature
 
     companion object {
         val INSTANCE: ImageApi by lazy {

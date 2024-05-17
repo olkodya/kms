@@ -25,6 +25,7 @@ class RegisterItemViewModel(
                     it.copy(operation = operation)
                 }
                 getEmployeePhoto(operation.employee?.image?.image_id ?: 0)
+                getAudiencePhoto(operation.key.audience.image?.image_id ?: 0)
             } catch (ex: Exception) {
 
 
@@ -45,5 +46,21 @@ class RegisterItemViewModel(
             }
         }
     }
+
+    fun getAudiencePhoto(id: Int) {
+        viewModelScope.launch {
+            try {
+                val audiencePhoto = imageRepository.getById(id)
+                _uiState.update {
+                    it.copy(audiencePhoto = audiencePhoto)
+                }
+            } catch (ex: Exception) {
+
+
+            }
+        }
+    }
+
+
 
 }
