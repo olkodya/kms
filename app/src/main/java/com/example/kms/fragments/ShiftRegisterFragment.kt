@@ -50,23 +50,7 @@ class ShiftRegisterFragment : Fragment() {
     ): View {
         _binding = FragmentShiftRegisterBinding.inflate(inflater, container, false)
 
-//        val operation = Operation(1, Key(
-//            1,
-//       ), Employee(1, "fsff", "sdsf", "dss", "daa"),
-//            Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
-//        , "dad", "dada")
-//
-//        val list = (1..10).map {
-//            Operation(1, Key(
-//                1,
-//                  ), Employee(1, "fsff", "sdsf", "dss", "daa"),
-//                Shift(1, "sdsd", "dsd", Watch(1, 1), LoginDto("dad", "dadad"))
-//                , "dad", "dada")
-//        }
-
         initRcView(binding)
-
-//        adapter.submitList(list)
 
         searchView = binding.searchView
         viewModel.load()

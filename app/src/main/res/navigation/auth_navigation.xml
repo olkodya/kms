@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_employeeInfoFragment2_to_scanKeyFragment2"
             app:destination="@id/scanKeyFragment2" />
+        <action
+            android:id="@+id/action_employeeInfoFragment2_to_signaturePadFragment"
+            app:destination="@id/signaturePadFragment" />
     </fragment>
     <fragment
         android:id="@+id/signaturePadFragment"

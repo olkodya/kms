@@ -2,6 +2,7 @@ package com.example.kms.fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.kms.R
 import com.example.kms.databinding.FragmentSignaturePadBinding
 import com.example.kms.model.OperationForm
 import com.example.kms.network.api.ImageApi
@@ -26,6 +28,7 @@ import com.example.kms.viewmodels.SignaturePadViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
 import com.github.gcacace.signaturepad.views.SignaturePad
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -39,6 +42,17 @@ import java.io.FileOutputStream
 
 
 class SignaturePadFragment : Fragment() {
+    companion object {
+        const val EMPLOYEE_ID = "EMPLOYEE_ID"
+        const val KEY_ID = "KEY_ID"
+        const val OPERATION = "OPERATION"
+        const val OPERATION_ID = "OPERATION_ID"
+    }
+
+    var employeeId: Int = 0
+    var keyId: Int = 0
+    var operationId: Int = 0
+
     private lateinit var signaturePad: SignaturePad
     private val operationsViewModel by activityViewModels<OperationsViewModel>()
     private val profileViewModel by activityViewModels<ProfileViewModel>()
@@ -52,6 +66,29 @@ class SignaturePadFragment : Fragment() {
                 )
             }
         }
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments?.containsKey(EMPLOYEE_ID) == true) {
+            val employee: Int = requireArguments().getInt(EMPLOYEE_ID)
+            employeeId = employee
+            Log.d("scan", employeeId.toString())
+        }
+
+        if (arguments?.containsKey(KEY_ID) == true) {
+            keyId = requireArguments().getInt(KEY_ID)
+            Log.d("key", keyId.toString())
+        }
+
+        if (arguments?.containsKey(EmployeeInfoFragment.OPERATION_ID) == true) {
+            val operation: Int = requireArguments().getInt(EmployeeInfoFragment.OPERATION_ID)
+            operationId = operation
+            Log.d("scan", operationId.toString())
+        }
+
+        Log.d("ID", employeeId.toString())
     }
 
     override fun onCreateView(
@@ -80,47 +117,72 @@ class SignaturePadFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
 
-
-
-
-
-
         binding.finish.setOnClickListener {
-            val operationForm: OperationForm = OperationForm(
-                key_id = operationsViewModel.uiState.value.key?.key_id ?: 0,
-                employee_id = operationsViewModel.uiState.value.employee?.employee_id ?: 0,
-                shift_id = profileViewModel.state.value.shift?.shift_id ?: 0
-            )
-            signaturePadViewModel.createOperation(operationForm)
-            signaturePadViewModel.uiState.onEach {
-                if (it.operation != null) {
-                    val filename = "signature_give_" + it.operation.operation_id
-                    val f = bitmapToFile(signaturePad.signatureBitmap, filename)
-                    val reqFile: RequestBody = f.asRequestBody("image/*".toMediaTypeOrNull())
-                    val body: MultipartBody.Part =
-                        MultipartBody.Part.createFormData("image", f.name, reqFile)
-                    val fullName: RequestBody =
-                        "Your Name".toRequestBody("multipart/form-data".toMediaTypeOrNull())
-
-                    signaturePadViewModel.uploadSignature(fullName, body, it.operation.operation_id)
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Вы уверены, что хотите выдать ключ сотруднику?")
+                .setNegativeButton("Отмена") { dialog, which ->
+                    // Respond to negative button press
                 }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
-            //findNavController().navigate(R.id.action_signaturePadFragment_to_bottomNavigationFragment2)
+                .setPositiveButton("Завершить") { dialog, which ->
+                    val operationForm = OperationForm(
+                        key_id = keyId,
+                        employee_id = employeeId,
+                        shift_id = profileViewModel.state.value.shift?.shift_id ?: 0
+                    )
+                    if (operationsViewModel.employee.value) {
+                        signaturePadViewModel.createOperation(operationForm)
+                        createSignature(true)
+                    } else {
+                        signaturePadViewModel.finishOperation(operationId)
+                        createSignature(false)
+                    }
+                    signaturePadViewModel.signature.onEach {
+                        operationsViewModel.reset()
+                        if (it.image_id != -1)
+                            findNavController().navigate(R.id.action_signaturePadFragment_to_bottomNavigationFragment2)
+                    }.launchIn(viewLifecycleOwner.lifecycleScope)
+                }.show()
+
         }
         return binding.root
     }
 
 
-    fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File { // File name like "image.png"
+    private fun createSignature(giveOrReturn: Boolean) {
+        signaturePadViewModel.uiState.onEach {
+            var filename = ""
+            if (it.operation != null) {
+                filename = if (giveOrReturn) {
+                    "signature_give_" + it.operation.operation_id
+                } else {
+                    "signature_take_" + it.operation.operation_id
+                }
+
+            }
+            val f = bitmapToFile(signaturePad.signatureBitmap, filename)
+            val reqFile: RequestBody =
+                f.asRequestBody("image/*".toMediaTypeOrNull())
+            val body: MultipartBody.Part =
+                MultipartBody.Part.createFormData("image", f.name, reqFile)
+            val fullName: RequestBody =
+                "Your Name".toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            signaturePadViewModel.uploadSignature(
+                fullName,
+                body,
+                it.operation?.operation_id ?: 0,
+                giveOrReturn
+            )
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+
+    private fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File {
         val file = File(context?.cacheDir, fileNameToSave)
         return try {
             file.createNewFile()
-            //Convert bitmap to byte array
             val bos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos) // YOU can also save it in JPEG
+            bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
             val bitmapdata = bos.toByteArray()
-
-            //write the bytes in file
             val fos = FileOutputStream(file)
             fos.write(bitmapdata)
             fos.flush()
@@ -129,7 +191,6 @@ class SignaturePadFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
             file
-            // it will return null
         }
     }
 }

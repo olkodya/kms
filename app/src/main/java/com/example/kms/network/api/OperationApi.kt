@@ -6,6 +6,7 @@ import retrofit2.create
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface OperationApi {
@@ -20,6 +21,9 @@ interface OperationApi {
 
     @GET("/api/keys/{id}/operations")
     suspend fun getLastOperation(@Path("id") keyId: Int): Operation
+
+    @PUT("/api/operations/{id}")
+    suspend fun finishOperation(@Path("id") id: Int): Operation
 
 
     companion object {

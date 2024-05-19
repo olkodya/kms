@@ -22,6 +22,7 @@ class AudienceInfoViewModel(
                 _audience.update {
                     it.copy(audience = audience)
                 }
+                val photo = getAudiencePhoto(audience.image?.image_id ?: 0)
             } catch (ex: Exception) {
 
 

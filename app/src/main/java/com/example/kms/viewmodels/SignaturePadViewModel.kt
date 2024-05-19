@@ -49,7 +49,34 @@ class SignaturePadViewModel(
         }
     }
 
-    fun uploadSignature(image: RequestBody, file: MultipartBody.Part, operationId: Int) {
+    fun finishOperation(id: Int) {
+        viewModelScope.launch {
+            try {
+                val operation: Operation = repository.finishOperation(id)
+                _uiState.update {
+                    it.copy(operation = operation)
+                }
+                keyRepository.updateKey(
+                    operation.key.key_id ?: 0,
+                    KeyForm(
+                        audience_id = operation.key.audience.audience_id,
+                        key_state = KeyState.RETURNED,
+                        main = operation.key.main ?: true
+                    )
+                )
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+
+    fun uploadSignature(
+        image: RequestBody,
+        file: MultipartBody.Part,
+        operationId: Int,
+        give: Boolean
+    ) {
         viewModelScope.launch {
             try {
                 val imageSig = imageRepository.upload(imageForm = image, file = file)
@@ -64,7 +91,7 @@ class SignaturePadViewModel(
                     SignatureForm(
                         _signature.value.image_id,
                         operationId,
-                        true,
+                        give,
                     )
                 )
             } catch (e: Exception) {

@@ -44,7 +44,7 @@ class AudienceInfoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentAudienceInfoBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
@@ -57,13 +57,17 @@ class AudienceInfoFragment : Fragment() {
             Log.d("ID", audienceId.toString())
         }
 
-        if (arguments?.containsKey(AUDIENCE_IMAGE_ID) == true) {
-            val audienceId: Int = requireArguments().getInt(AUDIENCE_IMAGE_ID)
-            viewModel.getAudiencePhoto(audienceId)
-            Log.d("ID", audienceId.toString())
-        }
+//        if (arguments?.containsKey(AUDIENCE_IMAGE_ID) == true) {
+//            val audienceId: Int = requireArguments().getInt(AUDIENCE_IMAGE_ID)
+//            viewModel.getAudiencePhoto(audienceId)
+//            Log.d("ID", audienceId.toString())
+//        } else {
+//            viewModel.audience.onEach {
+//                if (it.audience != null)
+//            }.launchIn(viewLifecycleOwner.lifecycleScope)
+//        }
 
-//        viewLifecycleOwner.lifecycleScope.launch {
+//        viewLifecycleOwner.lifecycleScope.launch
 //            viewModel.audience.collect {
 //                if (it.audience != null) {
 //
@@ -77,10 +81,10 @@ class AudienceInfoFragment : Fragment() {
 //        }
         viewModel.audience.onEach {
             if (it.audience != null) {
-                binding.audienceCapacity.text = it.audience?.capacity.toString()
-                binding.audienceNum.text = it.audience?.number.toString()
-                binding.audienceSignalization.text = it.audience?.signalisation.toString()
-                binding.audienceType.text = it.audience?.audienceType.toString()
+                binding.audienceCapacity.text = it.audience.capacity.toString()
+                binding.audienceNum.text = it.audience.number.toString()
+                binding.audienceSignalization.text = it.audience.signalisation.toString()
+                binding.audienceType.text = it.audience.audienceType.toString()
 
             }
             if (it.audiencePhoto != null) {

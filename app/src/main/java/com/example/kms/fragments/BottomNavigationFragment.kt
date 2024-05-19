@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -86,9 +87,38 @@ class BottomNavigationFragment : Fragment() {
             requireNotNull(childFragmentManager.findFragmentById(R.id.container)).findNavController()
         binding.bottomNavigation.setupWithNavController(navController)
         operationsViewModel.scanned.onEach {
-//            if (it) {
-//                findNavController().navigate(R.id.action_bottomNavigationFragment_to_employeeInfoFragment2)
-//            }
+            if (operationsViewModel.scanned.value) {
+                //  if (operationsViewModel.employee.value) {
+                requireParentFragment()
+                findNavController().navigate(
+                    R.id.action_bottomNavigationFragment_to_employeeInfoFragment2,
+                    bundleOf(
+                        EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employee_id,
+                        EmployeeInfoFragment.EMPLOYEE_IMAGE_ID to operationsViewModel.uiState.value.employee?.image?.image_id,
+                        EmployeeInfoFragment.OPERATION to true,
+                        EmployeeInfoFragment.OPERATION_ID to operationsViewModel.uiState.value.operation?.operation_id
+                    )
+                )
+                operationsViewModel.reset()
+//                } else {
+//
+//                }
+
+                // operationsViewModel.unsetScanned()
+//                else {
+//                    if (operationsViewModel.uiState.value.key != null && operationsViewModel.uiState.value.key?.key_state != KeyState.GIVEN_AWAY)
+//                        requireParentFragment().requireParentFragment()
+//                            .findNavController()
+//                            .navigate(R.id.action_scanKeyFragment2_to_signaturePadFragment)
+//                    else if (operationsViewModel.uiState.value.key?.key_state == KeyState.GIVEN_AWAY) {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "Ключ уже был выдан",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                }
+            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         profileViewModel.logout.onEach {

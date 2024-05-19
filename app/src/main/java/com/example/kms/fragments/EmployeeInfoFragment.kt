@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -35,7 +36,10 @@ class EmployeeInfoFragment : Fragment() {
         const val EMPLOYEE_ID = "EMPLOYEE_ID"
         const val EMPLOYEE_IMAGE_ID = "EMPLOYEE_IMAGE_ID"
         const val OPERATION = "OPERATION"
+        const val OPERATION_ID = "OPERATION_ID"
     }
+
+    var operationId: Int = 0
 
     private val viewModel by viewModels<EmployeeInfoViewModel> {
         viewModelFactory {
@@ -52,7 +56,11 @@ class EmployeeInfoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        if (arguments?.containsKey(OPERATION_ID) == true) {
+            val operation: Int = requireArguments().getInt(OPERATION_ID)
+            operationId = operation
+            Log.d("scan", operationId.toString())
+        }
     }
 
     override fun onCreateView(
@@ -66,7 +74,23 @@ class EmployeeInfoFragment : Fragment() {
 
         operationViewModel.unsetScanned()
         binding.continueBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_employeeInfoFragment2_to_scanKeyFragment2)
+            if (operationViewModel.employee.value) {
+                findNavController().navigate(
+                    R.id.action_employeeInfoFragment2_to_scanKeyFragment2,
+                    bundleOf(
+                        ScanKeyFragment.EMPLOYEE_ID to viewModel.employee.value.employee?.employee_id,
+                        ScanKeyFragment.OPERATION to true
+                    )
+                )
+            } else {
+                findNavController().navigate(
+                    R.id.action_employeeInfoFragment2_to_signaturePadFragment,
+                    bundleOf(
+                        ScanKeyFragment.OPERATION to true,
+                        SignaturePadFragment.OPERATION_ID to operationId
+                    )
+                )
+            }
         }
         if (arguments?.containsKey(EMPLOYEE_ID) == true) {
             val employeeId: Int = requireArguments().getInt(EMPLOYEE_ID)
@@ -84,7 +108,7 @@ class EmployeeInfoFragment : Fragment() {
             binding.continueBtn.visibility = View.VISIBLE
         }
 
-        // operationViewModel.reset()
+        operationViewModel.reset()
         viewModel.employee.onEach {
             if (it.employee != null) {
                 binding.employeeName.text =

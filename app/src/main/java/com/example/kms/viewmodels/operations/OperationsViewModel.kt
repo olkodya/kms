@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kms.model.Employee
 import com.example.kms.model.Key
+import com.example.kms.model.Operation
 import com.example.kms.repository.EmployeeRepository
 import com.example.kms.repository.KeyRepository
 import com.example.kms.repository.OperationRepository
@@ -60,6 +61,13 @@ class OperationsViewModel(
                 _uiState.update {
                     it.copy(key = key)
                 }
+                if (!_employee.value) {
+                    val operation: Operation = operationRepository.getLastOperation(key.key_id ?: 0)
+                    _uiState.update {
+                        it.copy(operation = operation, employee = operation.employee)
+                    }
+                }
+
 //                val operation = operationRepository.getLastOperation(key.key_id?:0)
 //                _uiState.update {
 //                    it.copy(employee = operation.employee)
@@ -70,10 +78,11 @@ class OperationsViewModel(
         }
     }
 
+
     fun reset() {
         _uiState.update {
             it.copy(
-                key = null, employee = null
+                key = null, employee = null, operation = null
             )
         }
     }

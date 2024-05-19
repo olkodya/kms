@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +17,6 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.example.kms.R
 import com.example.kms.databinding.FragmentQRScanBinding
-import com.example.kms.model.enums.KeyState
 import com.example.kms.viewmodels.authorization.AuthorizationViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
@@ -44,13 +42,26 @@ class QRScanFragment : Fragment() {
         profileViewModel.getShift(authorizationViewModel.state.value.token?.user_id ?: 0)
         val binding = FragmentQRScanBinding.inflate(layoutInflater, container, false)
         val scannerView = binding.scannerView
-        operationsViewModel.employee.onEach {
-            if (it) {
-                binding.scannerHint.text = getString(R.string.qr_code_hint)
-            } else {
+        val previousFragment =
+            requireParentFragment().findNavController().previousBackStackEntry?.destination?.id
+
+
+        when (previousFragment) {
+            R.id.employeeInfoFragment2 -> {
                 binding.scannerHint.text = getString(R.string.qr_code_hint2)
             }
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+            else -> {
+                operationsViewModel.employee.onEach {
+                    if (it) {
+                        binding.scannerHint.text = getString(R.string.qr_code_hint)
+                    } else {
+                        binding.scannerHint.text = getString(R.string.qr_code_hint2)
+                    }
+                }.launchIn(viewLifecycleOwner.lifecycleScope)
+            }
+        }
+
 
         val activity = requireActivity()
         codeScanner = CodeScanner(activity, scannerView)
@@ -109,39 +120,92 @@ class QRScanFragment : Fragment() {
             decodeCallback = DecodeCallback { result ->
                 releaseResources()
                 activity.runOnUiThread {
-                    if (operationsViewModel.employee.value)
-                        operationsViewModel.getEmployee(result.text)
-                    else {
-                        operationsViewModel.getKey(result.text)
-                    }
-                    operationsViewModel.uiState.onEach {
-                        if (operationsViewModel.uiState.value.isSuccess) {
-                            // operationsViewModel.setScanned()
-                            if (operationsViewModel.employee.value)
-                                requireParentFragment()
-                                    .requireParentFragment()
-                                    .requireParentFragment().findNavController().navigate(
-                                        R.id.action_bottomNavigationFragment_to_employeeInfoFragment2,
-                                        bundleOf(
-                                            EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employee_id,
-                                            EmployeeInfoFragment.EMPLOYEE_IMAGE_ID to operationsViewModel.uiState.value.employee?.image?.image_id,
-                                            EmployeeInfoFragment.OPERATION to true
-                                        )
-                                    )
-                            else {
-                                if (operationsViewModel.uiState.value.key != null && operationsViewModel.uiState.value.key?.key_state != KeyState.GIVEN_AWAY)
-                                    requireParentFragment().requireParentFragment()
-                                        .findNavController()
-                                        .navigate(R.id.action_scanKeyFragment2_to_signaturePadFragment)
-                                else if (operationsViewModel.uiState.value.key?.key_state == KeyState.GIVEN_AWAY) {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Ключ уже был выдан",
-                                        Toast.LENGTH_LONG
-                                    ).show()
+
+                    val previousFragment =
+                        requireParentFragment().findNavController().previousBackStackEntry?.destination?.id
+                    previousFragment.let {
+                        when (previousFragment) {
+                            R.id.employeeInfoFragment2 -> {
+                                //Toast.makeText(requireContext(), "HAHA", Toast.LENGTH_SHORT).show()
+                                operationsViewModel.getKey(result.text)
+                            }
+
+                            else -> {
+                                if (operationsViewModel.employee.value)
+                                    operationsViewModel.getEmployee(result.text)
+                                else {
+                                    operationsViewModel.getKey(result.text)
                                 }
                             }
                         }
+                    }
+
+
+                    operationsViewModel.uiState.onEach {
+
+                        if (operationsViewModel.employee.value) {
+                            if (operationsViewModel.uiState.value.isSuccessEmployee) {
+                                operationsViewModel.setScanned()
+                            }
+
+                            if (operationsViewModel.uiState.value.isSuccessGiveKey) {
+                                operationsViewModel.setScanned()
+                            }
+
+                            if (operationsViewModel.uiState.value.notReturned) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Ключ не был возвращен, невозможно совершить операцию.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                operationsViewModel.reset()
+                            }
+                        } else {
+                            if (operationsViewModel.uiState.value.isSuccessTakeKey) {
+                                operationsViewModel.setScanned()
+                            }
+
+                            if (operationsViewModel.uiState.value.notGivenAway) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Ключ не был выдан",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                operationsViewModel.reset()
+
+                            }
+                        }
+
+//                        if (operationsViewModel.uiState.value.isSuccessTakeKey) {
+//                            operationsViewModel.setScanned()
+//                        }
+
+
+//                            if (operationsViewModel.employee.value)
+//                                requireParentFragment()
+//                                    .requireParentFragment()
+//                                    .requireParentFragment().findNavController().navigate(
+//                                        R.id.action_bottomNavigationFragment_to_employeeInfoFragment2,
+//                                        bundleOf(
+//                                            EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employee_id,
+//                                            EmployeeInfoFragment.EMPLOYEE_IMAGE_ID to operationsViewModel.uiState.value.employee?.image?.image_id,
+//                                            EmployeeInfoFragment.OPERATION to true
+//                                        )
+//                                    )
+//                            else {
+//                                if (operationsViewModel.uiState.value.key != null && operationsViewModel.uiState.value.key?.key_state != KeyState.GIVEN_AWAY)
+//                                    requireParentFragment().requireParentFragment()
+//                                        .findNavController()
+//                                        .navigate(R.id.action_scanKeyFragment2_to_signaturePadFragment)
+//                                else if (operationsViewModel.uiState.value.key?.key_state == KeyState.GIVEN_AWAY) {
+//                                    Toast.makeText(
+//                                        requireContext(),
+//                                        "Ключ уже был выдан",
+//                                        Toast.LENGTH_LONG
+//                                    ).show()
+//                                }
+//                            }
+//                        }
                     }.launchIn(viewLifecycleOwner.lifecycleScope)
                 }
             }
