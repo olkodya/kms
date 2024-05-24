@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -19,7 +18,7 @@ import com.example.kms.databinding.FragmentShiftRegisterBinding
 import com.example.kms.lists.shifts.RegisterAdapter
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
-import com.example.kms.utils.Date
+import com.example.kms.utils.Converter
 import com.example.kms.viewmodels.register.ShiftRegisterViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.launchIn
@@ -56,13 +55,19 @@ class ShiftRegisterFragment : Fragment() {
         }
 
         binding.chipDate.setOnCloseIconClickListener {
-            Toast.makeText(requireContext(), "ppp", Toast.LENGTH_LONG).show()
             viewModel.updateDate("")
             viewModel.filterList(viewModel.query.value, "")
             binding.chipDate.text = "Смена"
             binding.chipDate.isCloseIconVisible = false
             binding.chipDate.isCheckable = true
             binding.chipDate.isChecked = false
+        }
+
+        if (viewModel.date.value != "") {
+            binding.chipDate.isChecked = true
+            binding.chipDate.isCheckable = false
+            binding.chipDate.isCloseIconVisible = true
+            binding.chipDate.text = viewModel.date.value
         }
 
         viewModel.filteredList.onEach {
@@ -117,7 +122,7 @@ class ShiftRegisterFragment : Fragment() {
             .build()
         datePicker.show(childFragmentManager, "DatePicker")
         datePicker.addOnPositiveButtonClickListener {
-            val date = Date.convertTimeToDate(it)
+            val date = Converter.convertTimeToDate(it)
             binding.chipDate.text = date
             viewModel.updateDate(date)
             viewModel.filterList(viewModel.query.value, date)

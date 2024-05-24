@@ -5,7 +5,7 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
-object Date {
+object Converter {
     fun convertTimeToDate(time: Long): String {
         val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         utc.timeInMillis = time

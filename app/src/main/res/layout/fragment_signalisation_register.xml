@@ -34,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:checkable="true"
-        android:text="Смена"
-        app:chipIcon="@drawable/baseline_calendar_month_24"
-        app:closeIconVisible="true" />
+        android:text="Фильтры"
+        app:chipIcon="@drawable/baseline_tune_24"
+        app:closeIconVisible="false" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
