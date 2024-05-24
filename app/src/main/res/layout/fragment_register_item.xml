@@ -48,6 +48,33 @@
             tools:layout_editor_absoluteY="475dp"
             tools:text="20.09.2023 08:25" />
 
+
+        <ImageView
+            android:id="@+id/give_signature"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Give signature"
+            app:layout_constraintEnd_toStartOf="@id/return_signature"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/return_date_title"
+
+            tools:srcCompat="@drawable/user_images" />
+
+        <ImageView
+            android:id="@+id/return_signature"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Give signature"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/give_signature"
+            app:layout_constraintTop_toBottomOf="@id/return_date_title"
+
+            tools:srcCompat="@drawable/user_images" />
+
         <TextView
             android:id="@+id/return_date_title"
             android:layout_width="wrap_content"
@@ -57,18 +84,21 @@
             android:text="Дата возврата"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/give_signature"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/give_date_title" />
 
         <TextView
             android:id="@+id/return_date"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/return_date_title"
             app:layout_constraintTop_toBottomOf="@id/give_date"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="20.09.2023 08:25" />
 
         <TextView
@@ -76,13 +106,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="Сотрудник"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/employeeCard"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/return_date" />
+            app:layout_constraintTop_toBottomOf="@id/give_signature" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/employeeCard"
@@ -106,13 +137,13 @@
 
                 <ImageView
                     android:id="@+id/avatar"
-                    android:layout_width="120dp"
+                    android:layout_width="100dp"
                     android:layout_height="120dp"
                     android:layout_marginStart="16dp"
 
+                    android:contentDescription="@string/avatar_watchman_description"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/spacer"
-                    android:contentDescription="@string/avatar_watchman_description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/user_images" />
@@ -132,9 +163,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:singleLine="false"
                     android:textSize="18sp"
-                    android:layout_marginEnd="16dp"
                     android:textStyle="bold"
 
                     app:layout_constraintBottom_toTopOf="@id/certificate"
@@ -160,7 +191,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="Аудитория"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -192,8 +223,8 @@
 
                 <ImageView
                     android:id="@+id/avatarAudience"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:contentDescription="@string/avatar_watchman_description"

@@ -51,7 +51,6 @@ class ShiftRegisterFragment : Fragment() {
         _binding = FragmentShiftRegisterBinding.inflate(inflater, container, false)
 
         initRcView(binding)
-
         searchView = binding.searchView
         viewModel.load()
         binding.emptyList.text = viewModel.uiState.value.operations.toString()
@@ -64,6 +63,8 @@ class ShiftRegisterFragment : Fragment() {
             adapter.submitList(viewModel.uiState.value.operations)
             binding.chipDate.text = "Смена"
         }
+
+
         viewModel.uiState
             .onEach { state ->
                 adapter.submitList(state.operations)
@@ -96,16 +97,25 @@ class ShiftRegisterFragment : Fragment() {
 
 
     private fun filterList(query: String?) {
-        val filteredList = emptyList<Operation>().toMutableList()
+        val set = emptySet<Operation>().toMutableSet().toMutableSet()
+        var filteredList = emptyList<Operation>().toMutableList()
         if (query != null) {
             for (i in viewModel.uiState.value.operations) {
-                if (i.give_date_time.toString().lowercase(Locale.ROOT)
-                        .contains(query.toString())
+                if ((i.employee?.first_name.toString().lowercase(Locale.ROOT)
+                        .contains(
+                            query.toString().lowercase(Locale.ROOT)
+                        )) || (i.employee?.second_name.toString().lowercase(Locale.ROOT)
+                        .contains(
+                            query.toString().lowercase(Locale.ROOT)
+                        )) || (i.employee?.middle_name.toString().lowercase(Locale.ROOT)
+                        .contains(query.toString().lowercase(Locale.ROOT)))
+                    || (i.key.audience.number.toString().lowercase(Locale.ROOT)
+                        .contains(query.toString().lowercase(Locale.ROOT)))
                 ) {
-                    println("dsdsd1")
-                    filteredList += i
+                    set += i
                 }
             }
+            filteredList = set.toMutableList()
             println(filteredList)
             adapter.submitList(filteredList)
         } else {
@@ -116,10 +126,7 @@ class ShiftRegisterFragment : Fragment() {
 
 
     private fun initRcView(binding: FragmentShiftRegisterBinding) {
-
-
         Log.d("SIZE", childFragmentManager.fragments.toString())
-
         adapter = RegisterAdapter { operationId ->
             requireParentFragment().requireParentFragment().requireParentFragment()
                 .requireParentFragment().findNavController()
@@ -146,7 +153,6 @@ class ShiftRegisterFragment : Fragment() {
                 if (i.give_date_time.toString().lowercase(Locale.ROOT)
                         .contains(date)
                 ) {
-                    println("dsdsd1")
                     filteredList += i
                 }
             }

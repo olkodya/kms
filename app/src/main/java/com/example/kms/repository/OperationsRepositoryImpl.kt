@@ -2,6 +2,7 @@ package com.example.kms.repository
 
 import com.example.kms.model.Operation
 import com.example.kms.model.OperationForm
+import com.example.kms.model.Signature
 import com.example.kms.network.api.OperationApi
 
 class OperationsRepositoryImpl(
@@ -12,6 +13,7 @@ class OperationsRepositoryImpl(
     override suspend fun createOperation(operationForm: OperationForm): Operation =
         api.createOperation(operationForm)
 
+    override suspend fun getSignatures(id: Int): List<Signature> = api.getSignatures(id)
     override suspend fun finishOperation(operationId: Int): Operation =
         api.finishOperation(operationId)
 

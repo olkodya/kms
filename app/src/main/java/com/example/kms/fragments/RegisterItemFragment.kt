@@ -1,10 +1,12 @@
 package com.example.kms.fragments
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,6 +26,7 @@ import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.ImageRepositoryImpl
 import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.viewmodels.register.RegisterItemViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -110,9 +113,57 @@ class RegisterItemFragment : Fragment() {
                     ).fitCenter().circleCrop()
                         .into(binding.avatarAudience)
                 }
+                if (it.giveSignature != null) {
+                    Glide.with(requireContext()).load(it.giveSignature).transition(
+                        DrawableTransitionOptions.withCrossFade()
+                    ).fitCenter()
+                        .into(binding.giveSignature)
+                }
+
+                if (it.returnSignature != null) {
+                    Glide.with(requireContext()).load(it.returnSignature).transition(
+                        DrawableTransitionOptions.withCrossFade()
+                    ).fitCenter()
+                        .into(binding.returnSignature)
+                }
             }
 
         }
+
+        binding.giveSignature.setOnClickListener {
+            val imageView = ImageView(requireContext())
+            val bmp = BitmapFactory.decodeByteArray(
+                viewModel.uiState.value.giveSignature,
+                0,
+                viewModel.uiState.value.giveSignature?.size ?: 0
+            )
+            imageView.setImageBitmap(bmp)
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Подпись сотрудника")
+                .setView(imageView)
+                .setPositiveButton("Ок") { dialog, which ->
+
+                }
+                .show()
+        }
+
+        binding.returnSignature.setOnClickListener {
+            val imageView = ImageView(requireContext())
+            val bmp = BitmapFactory.decodeByteArray(
+                viewModel.uiState.value.returnSignature,
+                0,
+                viewModel.uiState.value.returnSignature?.size ?: 0
+            )
+            imageView.setImageBitmap(bmp)
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Подпись сотрудника")
+                .setView(imageView)
+                .setPositiveButton("Ок") { dialog, which ->
+
+                }
+                .show()
+        }
+
 //        binding.giveDate.text = viewModel.uiState.value.operation?.give_date_time
 //        binding.returnDate.text = viewModel.uiState.value.operation?.return_date_time
         binding.employeeCard.setOnClickListener {

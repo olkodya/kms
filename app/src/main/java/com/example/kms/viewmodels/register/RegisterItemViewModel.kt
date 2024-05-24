@@ -24,6 +24,7 @@ class RegisterItemViewModel(
                 _uiState.update {
                     it.copy(operation = operation)
                 }
+                getSignatures(operation.operation_id)
                 getEmployeePhoto(operation.employee?.image?.image_id ?: 0)
                 getAudiencePhoto(operation.key.audience.image?.image_id ?: 0)
             } catch (ex: Exception) {
@@ -61,6 +62,31 @@ class RegisterItemViewModel(
         }
     }
 
+    fun getSignatures(id: Int) {
+        viewModelScope.launch {
+            try {
+                val signatures = repository.getSignatures(id)
+                _uiState.update {
+                    it.copy(signatures = signatures)
+                }
+                if (signatures.isNotEmpty()) {
+                    val giveSignature = imageRepository.getById(signatures[0].image.image_id)
+                    _uiState.update {
+                        it.copy(giveSignature = giveSignature)
+                    }
+                    if (signatures.size > 1) {
+                        val returnSignature = imageRepository.getById(signatures[1].image.image_id)
+                        _uiState.update {
+                            it.copy(returnSignature = returnSignature)
+                        }
+                    }
+                }
+            } catch (ex: Exception) {
+
+
+            }
+        }
+    }
 
 
 }

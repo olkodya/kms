@@ -114,9 +114,10 @@ class EmployeeInfoFragment : Fragment() {
                 binding.employeeName.text =
                     it.employee?.second_name + " " + it.employee?.first_name + " " + it.employee?.middle_name
                 binding.certificate.text = it.employeeId?.number.toString()
-                binding.division.text = getStringDivisions(it.employee?.divisions)
-                binding.position.text = it.employee?.employee_type
-                binding.permissions.text = getStringPermissions(it.employee?.permissions)
+                binding.division.text = getStringDivisions(it.employee.divisions)
+                binding.position.text = it.employee.employee_type
+                binding.permissions.text =
+                    getStringPermissions(it.employee.permissions, it.employee.divisions)
                 if (it.employeePhoto != null)
                     Glide.with(requireContext()).load(it.employeePhoto).fitCenter().transition(
                         DrawableTransitionOptions.withCrossFade()
@@ -141,11 +142,24 @@ class EmployeeInfoFragment : Fragment() {
         return string
     }
 
-    private fun getStringPermissions(permissions: List<Permission?>?): String {
+    private fun getStringPermissions(
+        permissions: List<Permission?>?,
+        divisions: List<Division>?
+    ): String {
         var string = ""
         if (permissions != null) {
             for (permission in permissions) {
-                string += permission?.name + " "
+                string += permission?.name + "\n"
+            }
+        }
+
+        if (divisions != null) {
+            for (division in divisions) {
+                if (division.permissions != null) {
+                    for (permission in division.permissions) {
+                        string += permission?.name + "\n"
+                    }
+                }
             }
         }
         return string

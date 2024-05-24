@@ -2,6 +2,7 @@ package com.example.kms.repository
 
 import com.example.kms.model.Operation
 import com.example.kms.model.OperationForm
+import com.example.kms.model.Signature
 
 interface OperationRepository {
     suspend fun finishOperation(operationId: Int): Operation
@@ -10,5 +11,7 @@ interface OperationRepository {
 
     suspend fun getLastOperation(id: Int): Operation
     suspend fun createOperation(operationForm: OperationForm): Operation
+
+    suspend fun getSignatures(id: Int): List<Signature>
 
 }

@@ -2,6 +2,7 @@ package com.example.kms.network.api
 
 import com.example.kms.model.Operation
 import com.example.kms.model.OperationForm
+import com.example.kms.model.Signature
 import retrofit2.create
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,6 +26,8 @@ interface OperationApi {
     @PUT("/api/operations/{id}")
     suspend fun finishOperation(@Path("id") id: Int): Operation
 
+    @GET("/api/operations/{operationId}/signatures")
+    suspend fun getSignatures(@Path("operationId") id: Int): List<Signature>
 
     companion object {
         val INSTANCE: OperationApi by lazy {

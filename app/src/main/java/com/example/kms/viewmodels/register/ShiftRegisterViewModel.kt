@@ -47,4 +47,13 @@ class ShiftRegisterViewModel(
         }
     }
 
+    fun search(list: List<Operation>) {
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(operations = list)
+            }
+        }
+
+    }
+
 }
