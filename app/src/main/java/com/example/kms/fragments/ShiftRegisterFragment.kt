@@ -17,7 +17,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentShiftRegisterBinding
 import com.example.kms.lists.shifts.RegisterAdapter
-import com.example.kms.model.Operation
 import com.example.kms.network.api.OperationApi
 import com.example.kms.repository.OperationsRepositoryImpl
 import com.example.kms.utils.Date
@@ -25,7 +24,6 @@ import com.example.kms.viewmodels.register.ShiftRegisterViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.util.Locale
 
 
 class ShiftRegisterFragment : Fragment() {
@@ -49,32 +47,30 @@ class ShiftRegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentShiftRegisterBinding.inflate(inflater, container, false)
-
         initRcView(binding)
         searchView = binding.searchView
-        viewModel.load()
         binding.emptyList.text = viewModel.uiState.value.operations.toString()
         binding.chipDate.setOnClickListener {
+            binding.chipDate.isChecked = false
             setDatePicker()
         }
 
         binding.chipDate.setOnCloseIconClickListener {
             Toast.makeText(requireContext(), "ppp", Toast.LENGTH_LONG).show()
-            adapter.submitList(viewModel.uiState.value.operations)
+            viewModel.updateDate("")
+            viewModel.filterList(viewModel.query.value, "")
             binding.chipDate.text = "Смена"
+            binding.chipDate.isCloseIconVisible = false
+            binding.chipDate.isCheckable = true
+            binding.chipDate.isChecked = false
         }
 
+        viewModel.filteredList.onEach {
+            adapter.submitList(viewModel.filteredList.value)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        viewModel.uiState
-            .onEach { state ->
-                adapter.submitList(state.operations)
-                if (state.operations.isEmpty())
-                    binding.emptyList.visibility = View.VISIBLE
-                else
-                    binding.emptyList.visibility = View.GONE
-            }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
 
+        searchView.setQuery(viewModel.query.value, false)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -86,42 +82,17 @@ class ShiftRegisterFragment : Fragment() {
             }
 
         })
-
-
-
-
-
         return binding.root
 
     }
 
 
     private fun filterList(query: String?) {
-        val set = emptySet<Operation>().toMutableSet().toMutableSet()
-        var filteredList = emptyList<Operation>().toMutableList()
-        if (query != null) {
-            for (i in viewModel.uiState.value.operations) {
-                if ((i.employee?.first_name.toString().lowercase(Locale.ROOT)
-                        .contains(
-                            query.toString().lowercase(Locale.ROOT)
-                        )) || (i.employee?.second_name.toString().lowercase(Locale.ROOT)
-                        .contains(
-                            query.toString().lowercase(Locale.ROOT)
-                        )) || (i.employee?.middle_name.toString().lowercase(Locale.ROOT)
-                        .contains(query.toString().lowercase(Locale.ROOT)))
-                    || (i.key.audience.number.toString().lowercase(Locale.ROOT)
-                        .contains(query.toString().lowercase(Locale.ROOT)))
-                ) {
-                    set += i
-                }
-            }
-            filteredList = set.toMutableList()
-            println(filteredList)
-            adapter.submitList(filteredList)
-        } else {
-            adapter.submitList(filteredList)
-            //adapter.submitList(viewModel.uiState.value.operations)
-        }
+        viewModel.updateQuery(query ?: "")
+        viewModel.filterList(query, viewModel.date.value)
+        viewModel.filteredList.onEach {
+            adapter.submitList(viewModel.filteredList.value)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
 
@@ -148,18 +119,12 @@ class ShiftRegisterFragment : Fragment() {
         datePicker.addOnPositiveButtonClickListener {
             val date = Date.convertTimeToDate(it)
             binding.chipDate.text = date
-            val filteredList = emptyList<Operation>().toMutableList()
-            for (i in viewModel.uiState.value.operations) {
-                if (i.give_date_time.toString().lowercase(Locale.ROOT)
-                        .contains(date)
-                ) {
-                    filteredList += i
-                }
-            }
-            println(filteredList)
-            adapter.submitList(filteredList)
+            viewModel.updateDate(date)
+            viewModel.filterList(viewModel.query.value, date)
+            binding.chipDate.isCloseIconVisible = true
+            binding.chipDate.isChecked = true
+            binding.chipDate.isCheckable = false
         }
-
     }
 
 }

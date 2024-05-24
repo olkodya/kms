@@ -33,10 +33,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:checkable="true"
         android:text="Смена"
+        android:checkable="true"
         app:chipIcon="@drawable/baseline_calendar_month_24"
-        app:closeIconVisible="true" />
+        app:closeIconVisible="false" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"

@@ -12,4 +12,8 @@ object Date {
         val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return format.format(utc.time)
     }
+
+    fun convertDateFormat() {
+
+    }
 }

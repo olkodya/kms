@@ -47,9 +47,9 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:navGraph="@navigation/register_navigation"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
         android:layout_width="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/register_navigation" />
 </LinearLayout>
