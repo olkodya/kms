@@ -17,6 +17,7 @@ import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.example.kms.R
 import com.example.kms.databinding.FragmentQRScanBinding
+import com.example.kms.viewmodels.EmployeeInfoViewModel
 import com.example.kms.viewmodels.authorization.AuthorizationViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import com.example.kms.viewmodels.profile.ProfileViewModel
@@ -34,6 +35,7 @@ class QRScanFragment : Fragment() {
     private val operationsViewModel by activityViewModels<OperationsViewModel>()
     private val profileViewModel by activityViewModels<ProfileViewModel>()
     private val authorizationViewModel by activityViewModels<AuthorizationViewModel>()
+    private val employeeInfoViewModel by activityViewModels<EmployeeInfoViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -127,14 +129,17 @@ class QRScanFragment : Fragment() {
                         when (previousFragment) {
                             R.id.employeeInfoFragment2 -> {
                                 //Toast.makeText(requireContext(), "HAHA", Toast.LENGTH_SHORT).show()
-                                operationsViewModel.getKey(result.text)
+                                operationsViewModel.getKey(
+                                    result.text,
+                                    employeeInfoViewModel.employee.value.employee?.employee_id
+                                )
                             }
 
                             else -> {
                                 if (operationsViewModel.employee.value)
                                     operationsViewModel.getEmployee(result.text)
                                 else {
-                                    operationsViewModel.getKey(result.text)
+                                    operationsViewModel.getKey(result.text, null)
                                 }
                             }
                         }
@@ -142,13 +147,8 @@ class QRScanFragment : Fragment() {
 
 
                     operationsViewModel.uiState.onEach {
-
                         if (operationsViewModel.employee.value) {
                             if (operationsViewModel.uiState.value.isSuccessEmployee) {
-                                operationsViewModel.setScanned()
-                            }
-
-                            if (operationsViewModel.uiState.value.isSuccessGiveKey) {
                                 operationsViewModel.setScanned()
                             }
 
@@ -159,6 +159,19 @@ class QRScanFragment : Fragment() {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 operationsViewModel.reset()
+                            }
+
+                            if (operationsViewModel.uiState.value.isSuccessGiveKey && !operationsViewModel.uiState.value.hasPermission) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "нет разрешения на ключ.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                operationsViewModel.reset()
+                            }
+
+                            if (operationsViewModel.uiState.value.isSuccessGiveKey && operationsViewModel.uiState.value.hasPermission) {
+                                operationsViewModel.setScanned()
                             }
                         } else {
                             if (operationsViewModel.uiState.value.isSuccessTakeKey) {
@@ -207,6 +220,8 @@ class QRScanFragment : Fragment() {
 //                            }
 //                        }
                     }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+
                 }
             }
             errorCallback = ErrorCallback {

@@ -13,6 +13,7 @@ class AuthorizationViewModel(private val repository: UserRepository) : ViewModel
     private val _state = MutableStateFlow(AuthUiState())
     val state = _state.asStateFlow()
 
+
     fun login(username: String, password: String) {
         _state.update { it.copy(status = Status.Loading) }
         viewModelScope.launch {
@@ -33,5 +34,9 @@ class AuthorizationViewModel(private val repository: UserRepository) : ViewModel
         _state.update {
             it.copy(status = Status.Idle, token = null)
         }
+    }
+
+    fun getFromLocal() {
+
     }
 }

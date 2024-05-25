@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:adjustViewBounds="true"
         android:layout_margin="16dp"
-        app:srcCompat="@drawable/avatar_default_symbolic_svgrepo_com"
+        app:srcCompat="@drawable/resource_default"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/audienceToolbar"
         app:layout_constraintStart_toStartOf="parent"

@@ -45,8 +45,10 @@ class ShiftRegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentShiftRegisterBinding.inflate(inflater, container, false)
         initRcView(binding)
+        viewModel.load()
         searchView = binding.searchView
         binding.emptyList.text = viewModel.uiState.value.operations.toString()
         binding.chipDate.setOnClickListener {

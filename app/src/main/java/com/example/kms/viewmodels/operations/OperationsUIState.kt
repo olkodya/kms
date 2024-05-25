@@ -11,6 +11,7 @@ data class OperationsUIState(
     val employee: Employee? = null,
     val key: Key? = null,
     val operation: Operation? = null,
+    val hasPermission: Boolean = true
 ) {
     val isSuccessEmployee: Boolean = status == Status.Idle && (employee != null)
     val isSuccessGiveKey: Boolean =

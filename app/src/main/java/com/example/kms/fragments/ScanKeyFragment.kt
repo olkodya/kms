@@ -20,11 +20,12 @@ import kotlinx.coroutines.flow.onEach
 
 class ScanKeyFragment : Fragment() {
 
-    var employeeId: Int = 0
+
 
     companion object {
         const val EMPLOYEE_ID = "EMPLOYEE_ID"
         const val OPERATION = "OPERATION"
+        var employeeId: Int = 0
     }
 
     private val operationsViewModel by activityViewModels<OperationsViewModel>()
@@ -44,8 +45,6 @@ class ScanKeyFragment : Fragment() {
         val binding = FragmentScanKeyBinding.inflate(inflater, container, false)
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
-
-        // operationsViewModel.checkKey()
         operationsViewModel.scanned.onEach {
             if (it) {
                 if (arguments?.containsKey(EMPLOYEE_ID) == true) {

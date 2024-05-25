@@ -3,6 +3,7 @@ package com.example.kms.lists.shifts
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kms.databinding.ShiftRegisterItemBinding
 import com.example.kms.model.Operation
+import com.example.kms.utils.Converter.convertDateFormat
 
 
 class RegisterViewHolder(
@@ -13,8 +14,13 @@ class RegisterViewHolder(
     fun bind(operation: Operation) = with(binding) {
         audienceNumber.text =
             operation.shift?.watch?.building_number.toString() + "-" + operation.key.audience.number.toString()
-        binding.giveDate.text = operation.give_date_time
-        binding.takeDate.text = operation.return_date_time ?: "Ключ не был возвращен"
+        binding.giveDate.text = convertDateFormat(operation.give_date_time ?: "")
+        if (operation.return_date_time != null)
+            binding.takeDate.text =
+                convertDateFormat(operation.return_date_time)
+        else {
+            binding.takeDate.text = "Ключ не был возвращен"
+        }
         binding.employeeNumber.text =
             operation.employee?.second_name + " " + operation.employee?.first_name + " " + operation.employee?.middle_name
         itemView.setOnClickListener {

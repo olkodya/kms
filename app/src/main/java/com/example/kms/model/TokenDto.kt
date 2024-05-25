@@ -7,6 +7,8 @@ import kotlinx.serialization.Serializable
 data class TokenDto(
     @SerialName("access_token")
     val token: String,
+    @SerialName("refresh_token")
+    val refresh_token: String,
     @SerialName("username")
     val username: String,
     @SerialName("user_id")

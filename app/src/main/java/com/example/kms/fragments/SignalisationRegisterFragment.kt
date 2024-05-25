@@ -1,6 +1,7 @@
 package com.example.kms.fragments
 
 import SignalisationRegisterAdapter
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -43,6 +44,7 @@ class SignalisationRegisterFragment : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,11 +53,12 @@ class SignalisationRegisterFragment : Fragment() {
         searchView = binding.searchView
 
         initRcView(binding)
-
+        viewModel.load()
         binding.chipDate.setOnClickListener {
             binding.chipDate.isChecked = false
             setFilters(binding)
         }
+
 
         binding.chipDate.setOnCloseIconClickListener {
             binding.chipDate.isCheckable = true
@@ -162,56 +165,62 @@ class SignalisationRegisterFragment : Fragment() {
             }
         }
 
-        builder.setView(dialogView)
+        val dialog = builder.setView(dialogView)
             .setTitle("Выберите фильтры")
             .setPositiveButton("Применить") { dialog, which ->
-                val selectedSignalStates = mutableListOf<Int>()
-                for (i in 0 until chipSignalGroup.childCount) {
-                    val chip = chipSignalGroup.getChildAt(i) as Chip
-                    if (chip.isChecked) {
-                        selectedSignalStates.add(i)
-                    }
-                }
-                viewModel.updateSignalState(selectedSignalStates)
-                val selectedAudienceTypes = mutableListOf<Int>()
-                for (i in 0 until chipAudienceGroup.childCount) {
-                    val chip = chipAudienceGroup.getChildAt(i) as Chip
-                    if (chip.isChecked) {
-                        selectedAudienceTypes.add(i)
-                    }
-                }
-
-                if (startCapacity.text.toString() != "" && endCapacity.text.toString() != "")
-                    viewModel.updateCapacity(
-                        startCapacity.text.toString().toInt(),
-                        endCapacity.text.toString().toInt()
-                    )
-
-                viewModel.updateAudienceType(selectedAudienceTypes)
-                Toast.makeText(
-                    requireContext(),
-                    selectedSignalStates.toString() + selectedAudienceTypes.toString(),
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-
-                viewModel.filterList(
-                    viewModel.query.value,
-                    viewModel.signalState.value,
-                    viewModel.audienceType.value,
-                    viewModel.startCapacity.value,
-                    viewModel.endCapacity.value
-                )
-
-                binding.chipDate.isChecked = true
-                binding.chipDate.isCheckable = false
-                binding.chipDate.isCloseIconVisible = true
 
             }
+            .setCancelable(false)
             .setNegativeButton("Отмена") { dialog, which ->
-                dialog.dismiss()
             }
-            .show()
+
+
+        val alertDialog = dialog.create()
+        alertDialog.show()
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+            val selectedSignalStates = mutableListOf<Int>()
+            for (i in 0 until chipSignalGroup.childCount) {
+                val chip = chipSignalGroup.getChildAt(i) as Chip
+                if (chip.isChecked) {
+                    selectedSignalStates.add(i)
+                }
+            }
+            viewModel.updateSignalState(selectedSignalStates)
+            val selectedAudienceTypes = mutableListOf<Int>()
+            for (i in 0 until chipAudienceGroup.childCount) {
+                val chip = chipAudienceGroup.getChildAt(i) as Chip
+                if (chip.isChecked) {
+                    selectedAudienceTypes.add(i)
+                }
+            }
+
+            if (startCapacity.text.toString() != "" && endCapacity.text.toString() != "")
+                viewModel.updateCapacity(
+                    startCapacity.text.toString().toInt(),
+                    endCapacity.text.toString().toInt()
+                )
+
+            viewModel.updateAudienceType(selectedAudienceTypes)
+            Toast.makeText(
+                requireContext(),
+                selectedSignalStates.toString() + selectedAudienceTypes.toString(),
+                Toast.LENGTH_LONG
+            )
+                .show()
+
+            viewModel.filterList(
+                viewModel.query.value,
+                viewModel.signalState.value,
+                viewModel.audienceType.value,
+                viewModel.startCapacity.value,
+                viewModel.endCapacity.value
+            )
+
+            binding.chipDate.isChecked = true
+            binding.chipDate.isCheckable = false
+            binding.chipDate.isCloseIconVisible = true
+            alertDialog.dismiss()
+        };
 
 
     }

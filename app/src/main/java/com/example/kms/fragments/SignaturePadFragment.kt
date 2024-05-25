@@ -18,9 +18,11 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.kms.R
 import com.example.kms.databinding.FragmentSignaturePadBinding
 import com.example.kms.model.OperationForm
+import com.example.kms.network.api.AudienceApi
 import com.example.kms.network.api.ImageApi
 import com.example.kms.network.api.KeyApi
 import com.example.kms.network.api.OperationApi
+import com.example.kms.repository.AudienceRepositoryImpl
 import com.example.kms.repository.ImageRepositoryImpl
 import com.example.kms.repository.KeyRepositoryImpl
 import com.example.kms.repository.OperationsRepositoryImpl
@@ -63,6 +65,7 @@ class SignaturePadFragment : Fragment() {
                     OperationsRepositoryImpl(OperationApi.INSTANCE),
                     KeyRepositoryImpl(KeyApi.INSTANCE),
                     ImageRepositoryImpl(ImageApi.INSTANCE),
+                    AudienceRepositoryImpl(AudienceApi.INSTANCE),
                 )
             }
         }

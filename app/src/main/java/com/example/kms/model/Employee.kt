@@ -1,5 +1,6 @@
 package com.example.kms.model
 
+import com.example.kms.model.enums.EmployeeType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +17,7 @@ data class Employee(
     @SerialName("image")
     val image: Image?,
     @SerialName("employee_type")
-    val employee_type: String?,
+    val employee_type: EmployeeType?,
     @SerialName("employee_status")
     val employee_status: String?,
     @SerialName("divisions")

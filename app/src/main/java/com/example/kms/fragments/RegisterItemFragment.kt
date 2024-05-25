@@ -21,10 +21,15 @@ import com.example.kms.R
 import com.example.kms.databinding.FragmentRegisterItemBinding
 import com.example.kms.fragments.EmployeeInfoFragment.Companion.EMPLOYEE_ID
 import com.example.kms.fragments.EmployeeInfoFragment.Companion.EMPLOYEE_IMAGE_ID
+import com.example.kms.model.enums.AudienceType
+import com.example.kms.network.api.EmployeeApi
 import com.example.kms.network.api.ImageApi
 import com.example.kms.network.api.OperationApi
+import com.example.kms.repository.EmployeeRepositoryImpl
 import com.example.kms.repository.ImageRepositoryImpl
 import com.example.kms.repository.OperationsRepositoryImpl
+import com.example.kms.utils.Converter.convertAudience
+import com.example.kms.utils.Converter.convertDateFormat
 import com.example.kms.viewmodels.register.RegisterItemViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.launchIn
@@ -44,6 +49,7 @@ class RegisterItemFragment : Fragment() {
                 RegisterItemViewModel(
                     OperationsRepositoryImpl(OperationApi.INSTANCE),
                     ImageRepositoryImpl(ImageApi.INSTANCE),
+                    EmployeeRepositoryImpl(EmployeeApi.INSTANCE)
                 )
             }
         }
@@ -71,71 +77,78 @@ class RegisterItemFragment : Fragment() {
         binding.toolbar.setupWithNavController(navController)
         viewModel.uiState.onEach {
             if (it.operation != null) {
-                binding.giveDate.text = it.operation?.give_date_time
+                binding.giveDate.text = convertDateFormat(it.operation.give_date_time ?: "")
                 if (it.operation.return_date_time != null)
-                    binding.returnDate.text = it.operation.return_date_time
+                    binding.returnDate.text = convertDateFormat(it.operation.return_date_time)
                 else {
                     binding.returnDate.text = "Ключ не был возвращен"
                 }
                 binding.audienceNumber.text =
                     it.operation?.shift?.watch?.building_number.toString() + "-" + it.operation?.key?.audience?.number.toString()
-                binding.audienceType.text = it.operation?.key?.audience?.audienceType.toString()
-                binding.certificate.text = "sssd"
+                binding.audienceType.text =
+                    convertAudience(it.operation.key.audience.audienceType ?: AudienceType.STUDY)
+                if (it.employeeId != null) {
+                    binding.certificate.text = it.employeeId.number
+                }
                 binding.employeeName.text =
                     it.operation?.employee?.second_name + "\n" + it.operation?.employee?.first_name + "\n" + it.operation?.employee?.middle_name
-//                viewModel.getEmployeePhoto(
-//                    viewModel.uiState.value.operation?.employee?.image?.image_id ?: 1
-//                )
             }
-
-            if (it.employeePhoto != null) {
-//                val decodedBytes: ByteArray = it.employeePhoto
-//                val decodedBitmap: Bitmap =
-//                    BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size ?: 1)
-//                binding.avatar.setImageBitmap(decodedBitmap)
-
-            }
-
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.uiState.collect {
-
-                if (it.employeePhoto != null) {
-                    Glide.with(requireContext()).load(it.employeePhoto).fitCenter().circleCrop()
+            viewModel.employeePhoto.collect {
+                if (it != null) {
+                    Glide.with(requireContext()).load(it).fitCenter().circleCrop()
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.avatar)
                 }
 
-                if (it.audiencePhoto != null) {
-                    Glide.with(requireContext()).load(it.audiencePhoto).transition(
-                        DrawableTransitionOptions.withCrossFade()
-                    ).fitCenter().circleCrop()
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.audiencePhoto.collect {
+                if (it?.size != 0) {
+                    Glide.with(requireContext()).load(it).fitCenter().circleCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.avatarAudience)
                 }
-                if (it.giveSignature != null) {
-                    Glide.with(requireContext()).load(it.giveSignature).transition(
+
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.giveSignature.collect {
+                if (it?.size != 0) {
+                    Glide.with(requireContext()).load(it).transition(
                         DrawableTransitionOptions.withCrossFade()
                     ).fitCenter()
                         .into(binding.giveSignature)
                 }
+            }
+        }
 
-                if (it.returnSignature != null) {
-                    Glide.with(requireContext()).load(it.returnSignature).transition(
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.returnSignature.collect {
+                if (it?.size != 0) {
+                    Glide.with(requireContext()).load(it).transition(
                         DrawableTransitionOptions.withCrossFade()
                     ).fitCenter()
                         .into(binding.returnSignature)
                 }
             }
-
         }
+
+
+
+
 
         binding.giveSignature.setOnClickListener {
             val imageView = ImageView(requireContext())
             val bmp = BitmapFactory.decodeByteArray(
-                viewModel.uiState.value.giveSignature,
+                viewModel.giveSignature.value,
                 0,
-                viewModel.uiState.value.giveSignature?.size ?: 0
+                viewModel.giveSignature.value?.size ?: 0
             )
             imageView.setImageBitmap(bmp)
             MaterialAlertDialogBuilder(requireContext())
@@ -150,9 +163,9 @@ class RegisterItemFragment : Fragment() {
         binding.returnSignature.setOnClickListener {
             val imageView = ImageView(requireContext())
             val bmp = BitmapFactory.decodeByteArray(
-                viewModel.uiState.value.returnSignature,
+                viewModel.returnSignature.value,
                 0,
-                viewModel.uiState.value.returnSignature?.size ?: 0
+                viewModel.returnSignature.value?.size ?: 0
             )
             imageView.setImageBitmap(bmp)
             MaterialAlertDialogBuilder(requireContext())
@@ -164,8 +177,6 @@ class RegisterItemFragment : Fragment() {
                 .show()
         }
 
-//        binding.giveDate.text = viewModel.uiState.value.operation?.give_date_time
-//        binding.returnDate.text = viewModel.uiState.value.operation?.return_date_time
         binding.employeeCard.setOnClickListener {
             findNavController().navigate(
                 R.id.action_registerItemFragment_to_employeeInfoFragment2,

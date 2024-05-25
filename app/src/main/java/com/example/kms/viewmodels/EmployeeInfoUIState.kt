@@ -6,5 +6,4 @@ import com.example.kms.model.EmployeeId
 data class EmployeeInfoUIState(
     val employee: Employee? = null,
     val employeeId: EmployeeId? = null,
-    val employeePhoto: ByteArray? = null
 )

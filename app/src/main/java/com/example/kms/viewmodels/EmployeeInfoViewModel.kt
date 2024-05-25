@@ -15,6 +15,8 @@ class EmployeeInfoViewModel(
 ) : ViewModel() {
     private val _employee = MutableStateFlow(EmployeeInfoUIState())
     val employee = _employee.asStateFlow()
+    private val _employeePhoto = MutableStateFlow<ByteArray?>(ByteArray(0))
+    val employeePhoto = _employeePhoto.asStateFlow()
 
     fun getByID(id: Int) {
         viewModelScope.launch {
@@ -48,8 +50,8 @@ class EmployeeInfoViewModel(
         viewModelScope.launch {
             try {
                 val employeePhoto = imageRepository.getById(id)
-                _employee.update {
-                    it.copy(employeePhoto = employeePhoto)
+                _employeePhoto.update {
+                    employeePhoto
                 }
             } catch (ex: Exception) {
 

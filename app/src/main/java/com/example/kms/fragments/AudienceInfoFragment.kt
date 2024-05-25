@@ -13,12 +13,16 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.kms.databinding.FragmentAudienceInfoBinding
+import com.example.kms.model.enums.AudienceType
+import com.example.kms.model.enums.SignalisationType
 import com.example.kms.network.api.AudienceApi
 import com.example.kms.network.api.ImageApi
 import com.example.kms.repository.AudienceRepositoryImpl
 import com.example.kms.repository.ImageRepositoryImpl
+import com.example.kms.utils.Converter
 import com.example.kms.viewmodels.AudienceInfoViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -56,44 +60,27 @@ class AudienceInfoFragment : Fragment() {
             viewModel.getByID(audienceId)
             Log.d("ID", audienceId.toString())
         }
-
-//        if (arguments?.containsKey(AUDIENCE_IMAGE_ID) == true) {
-//            val audienceId: Int = requireArguments().getInt(AUDIENCE_IMAGE_ID)
-//            viewModel.getAudiencePhoto(audienceId)
-//            Log.d("ID", audienceId.toString())
-//        } else {
-//            viewModel.audience.onEach {
-//                if (it.audience != null)
-//            }.launchIn(viewLifecycleOwner.lifecycleScope)
-//        }
-
-//        viewLifecycleOwner.lifecycleScope.launch
-//            viewModel.audience.collect {
-//                if (it.audience != null) {
-//
-//                    if (arguments?.containsKey(AUDIENCE_IMAGE_ID) != true) {
-//                        viewModel.getAudiencePhoto(
-//                            viewModel.audience.value.audience?.audience_id ?: 0
-//                        )
-//                    }
-//                }
-//            }
-//        }
         viewModel.audience.onEach {
             if (it.audience != null) {
                 binding.audienceCapacity.text = it.audience.capacity.toString()
                 binding.audienceNum.text = it.audience.number.toString()
-                binding.audienceSignalization.text = it.audience.signalisation.toString()
-                binding.audienceType.text = it.audience.audienceType.toString()
+                binding.audienceSignalization.text = Converter.convertSignalisation(
+                    it.audience.signalisation ?: SignalisationType.NONE
+                )
+                binding.audienceType.text =
+                    Converter.convertAudience(it.audience.audienceType ?: AudienceType.STUDY)
 
-            }
-            if (it.audiencePhoto != null) {
-                Glide.with(requireContext()).load(it.audiencePhoto).fitCenter()
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binding.audiencePhoto)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
+        viewModel.audiencePhoto.onEach {
+            if (it != null && viewModel.audience.value.audience?.image?.image_id != null) {
+                Glide.with(requireContext()).load(it).fitCenter()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .transform(RoundedCorners(32))
+                    .into(binding.audiencePhoto)
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         return binding.root
     }

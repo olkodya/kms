@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.kms.model.Employee
 import com.example.kms.model.Key
 import com.example.kms.model.Operation
+import com.example.kms.model.Permission
 import com.example.kms.repository.EmployeeRepository
 import com.example.kms.repository.KeyRepository
 import com.example.kms.repository.OperationRepository
@@ -54,17 +55,37 @@ class OperationsViewModel(
         }
     }
 
-    fun getKey(QR: String) {
+    fun getKey(QR: String, id: Int?) {
+        var hasPermission: Boolean = false
         viewModelScope.launch {
             try {
                 val key: Key = keyRepository.getByQR(QR)
-                _uiState.update {
-                    it.copy(key = key)
-                }
                 if (!_employee.value) {
                     val operation: Operation = operationRepository.getLastOperation(key.key_id ?: 0)
                     _uiState.update {
                         it.copy(operation = operation, employee = operation.employee)
+                    }
+                } else {
+                    if (id != null) {
+                        val employee: Employee = repository.getById(id)
+                        val employeePerm =
+                            (employee.permissions ?: emptyList<Permission>()).toMutableList()
+                        if (employee.divisions != null) {
+                            for (division in employee.divisions) {
+                                if (division.permissions != null) {
+                                    for (perm in division.permissions) {
+                                        employeePerm += perm
+                                    }
+                                }
+                            }
+                        }
+                        if (employeePerm != emptyList<Permission>() && key.audience.permissions != null) {
+                            for (employeePermission in employeePerm) {
+                                if (key.audience.permissions.contains(employeePermission)) {
+                                    hasPermission = true
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -72,6 +93,10 @@ class OperationsViewModel(
 //                _uiState.update {
 //                    it.copy(employee = operation.employee)
 //                }
+
+                _uiState.update {
+                    it.copy(key = key, hasPermission = hasPermission)
+                }
             } catch (e: Exception) {
 
             }
@@ -82,7 +107,7 @@ class OperationsViewModel(
     fun reset() {
         _uiState.update {
             it.copy(
-                key = null, employee = null, operation = null
+                key = null, employee = null, operation = null, hasPermission = true
             )
         }
     }

@@ -39,7 +39,10 @@ class SignalisationRegisterViewModel(private val repository: AudienceRepository)
     fun load() {
         viewModelScope.launch {
             try {
-                val audiences: List<Audience> = repository.getAudiences()
+                var audiences: List<Audience> = repository.getAudiences()
+                audiences = audiences.sortedBy {
+                    it.number
+                }
                 _uiState.update {
                     it.copy(audiences = audiences)
                 }

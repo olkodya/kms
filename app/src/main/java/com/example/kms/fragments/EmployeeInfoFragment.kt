@@ -8,22 +8,24 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.kms.R
 import com.example.kms.databinding.FragmentEmployeeInfoBinding
 import com.example.kms.model.Division
 import com.example.kms.model.Permission
+import com.example.kms.model.enums.EmployeeType
 import com.example.kms.network.api.EmployeeApi
 import com.example.kms.network.api.ImageApi
 import com.example.kms.repository.EmployeeRepositoryImpl
 import com.example.kms.repository.ImageRepositoryImpl
+import com.example.kms.utils.Converter.convertEmployeeType
 import com.example.kms.viewmodels.EmployeeInfoViewModel
 import com.example.kms.viewmodels.operations.OperationsViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -41,7 +43,7 @@ class EmployeeInfoFragment : Fragment() {
 
     var operationId: Int = 0
 
-    private val viewModel by viewModels<EmployeeInfoViewModel> {
+    private val viewModel by activityViewModels<EmployeeInfoViewModel> {
         viewModelFactory {
             initializer {
                 EmployeeInfoViewModel(
@@ -109,21 +111,31 @@ class EmployeeInfoFragment : Fragment() {
         }
 
         operationViewModel.reset()
+
+
         viewModel.employee.onEach {
             if (it.employee != null) {
                 binding.employeeName.text =
                     it.employee?.second_name + " " + it.employee?.first_name + " " + it.employee?.middle_name
-                binding.certificate.text = it.employeeId?.number.toString()
+                if (it.employeeId != null) {
+                    binding.certificate.text = it.employeeId.number
+                } else {
+                    binding.certificate.text = " "
+                }
                 binding.division.text = getStringDivisions(it.employee.divisions)
-                binding.position.text = it.employee.employee_type
+                binding.position.text =
+                    convertEmployeeType(it.employee.employee_type ?: EmployeeType.TEACHER)
                 binding.permissions.text =
                     getStringPermissions(it.employee.permissions, it.employee.divisions)
-                if (it.employeePhoto != null)
-                    Glide.with(requireContext()).load(it.employeePhoto).fitCenter().transition(
-                        DrawableTransitionOptions.withCrossFade()
-                    )
-                        .into(binding.employeePhoto)
             }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.employeePhoto.onEach {
+            if (it != null && it.size != 0)
+                Glide.with(requireContext()).load(it).fitCenter().transition(
+                    DrawableTransitionOptions.withCrossFade()
+                ).transform(RoundedCorners(32))
+                    .into(binding.employeePhoto)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
         // binding.employeeName.text =
         //   operationViewModel.uiState.value.employee?.first_name + " " + operationViewModel.uiState.value.employee?.second_name + " " + operationViewModel.uiState.value.employee?.middle_name

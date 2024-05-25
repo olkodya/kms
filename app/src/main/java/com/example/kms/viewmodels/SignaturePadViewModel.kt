@@ -7,7 +7,11 @@ import com.example.kms.model.KeyForm
 import com.example.kms.model.Operation
 import com.example.kms.model.OperationForm
 import com.example.kms.model.SignatureForm
+import com.example.kms.model.enums.AudienceForm
+import com.example.kms.model.enums.AudienceType
 import com.example.kms.model.enums.KeyState
+import com.example.kms.model.enums.SignalisationType
+import com.example.kms.repository.AudienceRepository
 import com.example.kms.repository.ImageRepository
 import com.example.kms.repository.KeyRepository
 import com.example.kms.repository.OperationRepository
@@ -21,7 +25,9 @@ import okhttp3.RequestBody
 class SignaturePadViewModel(
     private val repository: OperationRepository,
     private val keyRepository: KeyRepository,
-    private val imageRepository: ImageRepository
+    private val imageRepository: ImageRepository,
+    private val audienceRepository: AudienceRepository
+
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(SignaturePadUIState())
     val uiState = _uiState.asStateFlow()
@@ -42,6 +48,19 @@ class SignaturePadViewModel(
                         main = operation.key.main ?: true
                     )
                 )
+                if (operation.key.audience.signalisation != SignalisationType.NONE) {
+                    audienceRepository.update(
+                        operation.key.audience.audience_id ?: 0, AudienceForm(
+                            number = operation.key.audience.number ?: 0,
+                            capacity = operation.key.audience.capacity ?: 0,
+                            exist = operation.key.audience.exists ?: true,
+                            signalisation = SignalisationType.OFF,
+                            audience_type = operation.key.audience.audienceType
+                                ?: AudienceType.STUDY,
+                            image_id = operation.key.audience.image?.image_id
+                        )
+                    )
+                }
 
             } catch (e: Exception) {
 
@@ -64,6 +83,20 @@ class SignaturePadViewModel(
                         main = operation.key.main ?: true
                     )
                 )
+
+                if (operation.key.audience.signalisation != SignalisationType.NONE) {
+                    audienceRepository.update(
+                        operation.key.audience.audience_id ?: 0, AudienceForm(
+                            number = operation.key.audience.number ?: 0,
+                            capacity = operation.key.audience.capacity ?: 0,
+                            exist = operation.key.audience.exists ?: true,
+                            signalisation = SignalisationType.ON,
+                            audience_type = operation.key.audience.audienceType
+                                ?: AudienceType.STUDY,
+                            image_id = operation.key.audience.image?.image_id
+                        )
+                    )
+                }
             } catch (e: Exception) {
 
             }
