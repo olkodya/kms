@@ -18,6 +18,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.kms.R
 import com.example.kms.databinding.FragmentEmployeeInfoBinding
+import com.example.kms.lists.divisions.DivisionsAdapter
+import com.example.kms.lists.divisions.PermissionsAdapter
 import com.example.kms.model.Division
 import com.example.kms.model.Permission
 import com.example.kms.model.enums.EmployeeType
@@ -42,6 +44,9 @@ class EmployeeInfoFragment : Fragment() {
     }
 
     var operationId: Int = 0
+    lateinit var divAdapter: DivisionsAdapter
+    lateinit var permAdapter: PermissionsAdapter
+
 
     private val viewModel by activityViewModels<EmployeeInfoViewModel> {
         viewModelFactory {
@@ -80,7 +85,7 @@ class EmployeeInfoFragment : Fragment() {
                 findNavController().navigate(
                     R.id.action_employeeInfoFragment2_to_scanKeyFragment2,
                     bundleOf(
-                        ScanKeyFragment.EMPLOYEE_ID to viewModel.employee.value.employee?.employee_id,
+                        ScanKeyFragment.EMPLOYEE_ID to viewModel.employee.value.employee?.employeeId,
                         ScanKeyFragment.OPERATION to true
                     )
                 )
@@ -112,21 +117,29 @@ class EmployeeInfoFragment : Fragment() {
 
         operationViewModel.reset()
 
+        initRcView(binding)
 
         viewModel.employee.onEach {
             if (it.employee != null) {
                 binding.employeeName.text =
-                    it.employee?.second_name + " " + it.employee?.first_name + " " + it.employee?.middle_name
+                    it.employee?.secondName + " " + it.employee?.firstName + " " + it.employee?.middleName
                 if (it.employeeId != null) {
                     binding.certificate.text = it.employeeId.number
                 } else {
                     binding.certificate.text = " "
                 }
-                binding.division.text = getStringDivisions(it.employee.divisions)
+                divAdapter.submitList(it.employee.divisions)
+
+                permAdapter.submitList(
+                    getAllPermissions(
+                        it.employee.permissions,
+                        it.employee.divisions,
+                    )
+                )
+
                 binding.position.text =
-                    convertEmployeeType(it.employee.employee_type ?: EmployeeType.TEACHER)
-                binding.permissions.text =
-                    getStringPermissions(it.employee.permissions, it.employee.divisions)
+                    convertEmployeeType(it.employee.employeeType ?: EmployeeType.TEACHER)
+//
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
@@ -140,28 +153,21 @@ class EmployeeInfoFragment : Fragment() {
         // binding.employeeName.text =
         //   operationViewModel.uiState.value.employee?.first_name + " " + operationViewModel.uiState.value.employee?.second_name + " " + operationViewModel.uiState.value.employee?.middle_name
         binding.employeeToolbar
+
+
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    private fun getStringDivisions(divisions: List<Division?>?): String {
-        var string = ""
-        if (divisions != null) {
-            for (division in divisions) {
-                string += division?.name + " "
-            }
-        }
-        return string
-    }
 
-    private fun getStringPermissions(
+    private fun getAllPermissions(
         permissions: List<Permission?>?,
         divisions: List<Division>?
-    ): String {
-        var string = ""
+    ): List<Permission?> {
+        val list = emptyList<Permission?>().toMutableList()
         if (permissions != null) {
             for (permission in permissions) {
-                string += permission?.name + "\n"
+                list += permission
             }
         }
 
@@ -169,12 +175,23 @@ class EmployeeInfoFragment : Fragment() {
             for (division in divisions) {
                 if (division.permissions != null) {
                     for (permission in division.permissions) {
-                        string += permission?.name + "\n"
+                        list += permission
                     }
                 }
             }
         }
-        return string
+        return list
+    }
+
+
+    private fun initRcView(binding: FragmentEmployeeInfoBinding) {
+        Log.d("SIZE", childFragmentManager.fragments.toString())
+        divAdapter = DivisionsAdapter()
+        binding.divisionRecyclerView.adapter = divAdapter
+        permAdapter = PermissionsAdapter()
+        binding.permissionRecyclerView.adapter = permAdapter
+
+
     }
 
 }

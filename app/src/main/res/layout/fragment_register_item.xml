@@ -48,32 +48,55 @@
             tools:layout_editor_absoluteY="475dp"
             tools:text="20.09.2023 08:25" />
 
-
-        <ImageView
-            android:id="@+id/give_signature"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="16dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/giveCard"
             android:layout_marginTop="16dp"
-            android:contentDescription="Give signature"
-            app:layout_constraintEnd_toStartOf="@id/return_signature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?colorOnPrimary"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toStartOf="@id/returnCard"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/return_date_title"
+            app:layout_constraintTop_toBottomOf="@id/signature_title">
 
-            tools:srcCompat="@drawable/user_images" />
+            <ImageView
+                android:id="@+id/give_signature"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="Give signature"
+                tools:srcCompat="@drawable/user_images" />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:visibility="invisible"
+            android:id="@+id/returnCard"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="?colorOnPrimary"
+            app:cardElevation="2dp"
+            app:layout_constraintStart_toEndOf="@id/giveCard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signature_title">
 
         <ImageView
             android:id="@+id/return_signature"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
             android:contentDescription="Give signature"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/give_signature"
             app:layout_constraintTop_toBottomOf="@id/return_date_title"
-
             tools:srcCompat="@drawable/user_images" />
+        </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/return_date_title"
@@ -84,13 +107,11 @@
             android:text="Дата возврата: "
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/give_signature"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/give_date_title" />
 
         <TextView
             android:id="@+id/return_date"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -100,6 +121,20 @@
             app:layout_constraintTop_toBottomOf="@id/give_date"
             app:layout_constraintVertical_bias="0.0"
             tools:text="20.09.2023 08:25" />
+
+        <TextView
+            android:id="@+id/signature_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Подписи"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/giveCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/return_date_title" />
 
         <TextView
             android:id="@+id/employee_title"
@@ -113,7 +148,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/employeeCard"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/give_signature" />
+            app:layout_constraintTop_toBottomOf="@id/giveCard" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/employeeCard"
@@ -130,9 +165,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
-                android:paddingTop="32dp"
+                android:paddingTop="16dp"
                 android:paddingEnd="0dp"
-                android:paddingBottom="32dp"
+                android:paddingBottom="16dp"
                 tools:context=".activity.MainActivity">
 
                 <ImageView
@@ -216,9 +251,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
-                android:paddingTop="32dp"
+                android:paddingTop="16dp"
                 android:paddingEnd="0dp"
-                android:paddingBottom="32dp"
+                android:paddingBottom="16dp"
                 tools:context=".activity.MainActivity">
 
                 <ImageView

@@ -7,7 +7,7 @@ import com.example.kms.databinding.ShiftRegisterItemBinding
 import com.example.kms.model.Operation
 
 class RegisterAdapter(private val onClick: (Int) -> Unit) :
-    ListAdapter<Operation, RegisterViewHolder>(ItemComporator()) {
+    ListAdapter<Operation, RegisterViewHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegisterViewHolder {
         val inflater = LayoutInflater.from(parent.context)

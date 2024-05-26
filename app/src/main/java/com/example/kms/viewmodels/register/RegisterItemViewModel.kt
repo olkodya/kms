@@ -2,6 +2,7 @@ package com.example.kms.viewmodels.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.kms.model.EmployeeId
 import com.example.kms.repository.EmployeeRepository
 import com.example.kms.repository.ImageRepository
 import com.example.kms.repository.OperationRepository
@@ -18,7 +19,9 @@ class RegisterItemViewModel(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(RegisterItemUiState())
     val uiState = _uiState.asStateFlow()
-    private val _giveSignature = MutableStateFlow<ByteArray?>(ByteArray(0))
+    private val _employeeId = MutableStateFlow(EmployeeId(-1, ""))
+    val employeeId = _employeeId.asStateFlow()
+    private val _giveSignature by lazy { MutableStateFlow<ByteArray?>(ByteArray(0)) }
     val giveSignature = _giveSignature.asStateFlow()
     private val _returnSignature = MutableStateFlow<ByteArray?>(ByteArray(0))
     val returnSignature = _returnSignature.asStateFlow()
@@ -35,10 +38,7 @@ class RegisterItemViewModel(
                 _uiState.update {
                     it.copy(operation = operation)
                 }
-                getSignatures(operation.operation_id)
-                getEmployeePhoto(operation.employee?.image?.image_id ?: 103)
-                getAudiencePhoto(operation.key.audience.image?.image_id ?: 103)
-                getEmployeeID(operation.employee?.employee_id ?: 0)
+
             } catch (ex: Exception) {
 
 
@@ -78,8 +78,8 @@ class RegisterItemViewModel(
         viewModelScope.launch {
             try {
                 val employeeID = employeeRepository.getEmployeeIdByEmployeeId(id)
-                _uiState.update {
-                    it.copy(employeeId = employeeID)
+                _employeeId.update {
+                    employeeID
                 }
             } catch (ex: Exception) {
 
@@ -92,9 +92,6 @@ class RegisterItemViewModel(
         viewModelScope.launch {
             try {
                 val signatures = repository.getSignatures(id)
-                _uiState.update {
-                    it.copy(signatures = signatures)
-                }
                 if (signatures.isNotEmpty()) {
                     val giveSignature = imageRepository.getById(signatures[0].image.image_id)
                     _giveSignature.update {

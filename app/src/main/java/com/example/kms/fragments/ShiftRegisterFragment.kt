@@ -50,7 +50,6 @@ class ShiftRegisterFragment : Fragment() {
         initRcView(binding)
         viewModel.load()
         searchView = binding.searchView
-        binding.emptyList.text = viewModel.uiState.value.operations.toString()
         binding.chipDate.setOnClickListener {
             binding.chipDate.isChecked = false
             setDatePicker()
@@ -73,7 +72,12 @@ class ShiftRegisterFragment : Fragment() {
         }
 
         viewModel.filteredList.onEach {
-            adapter.submitList(viewModel.filteredList.value)
+            if (viewModel.filteredList.value.isNotEmpty()) {
+                adapter.submitList(viewModel.filteredList.value)
+                binding.emptyList.visibility = View.GONE
+            } else {
+                binding.emptyList.visibility = View.VISIBLE
+            }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
 

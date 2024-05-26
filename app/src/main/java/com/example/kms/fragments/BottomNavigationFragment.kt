@@ -93,7 +93,7 @@ class BottomNavigationFragment : Fragment() {
                 findNavController().navigate(
                     R.id.action_bottomNavigationFragment_to_employeeInfoFragment2,
                     bundleOf(
-                        EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employee_id,
+                        EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employeeId,
                         EmployeeInfoFragment.EMPLOYEE_IMAGE_ID to operationsViewModel.uiState.value.employee?.image?.image_id,
                         EmployeeInfoFragment.OPERATION to true,
                         EmployeeInfoFragment.OPERATION_ID to operationsViewModel.uiState.value.operation?.operation_id

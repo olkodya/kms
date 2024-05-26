@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="new_primary_color">#FF8A65</color>
+    <color name="new_color_primary_variant">#FF8A65</color>
+    <color name="new_color_secondary">#FFCCBC</color>
+    <color name="new_color_secondary_variant">#FF8A65</color>
+    <color name="new_status_bar_color">#FFCCBC</color>
+
 </resources>

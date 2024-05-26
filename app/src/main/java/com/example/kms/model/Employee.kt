@@ -6,20 +6,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Employee(
-    @SerialName("employee_id")
-    val employee_id: Int,
-    @SerialName("first_name")
-    val first_name: String,
-    @SerialName("second_name")
-    val second_name: String,
-    @SerialName("middle_name")
-    val middle_name: String,
+    @SerialName("employeeId")
+    val employeeId: Int,
+    @SerialName("firstName")
+    val firstName: String,
+    @SerialName("secondName")
+    val secondName: String,
+    @SerialName("middleName")
+    val middleName: String,
     @SerialName("image")
     val image: Image?,
-    @SerialName("employee_type")
-    val employee_type: EmployeeType?,
-    @SerialName("employee_status")
-    val employee_status: String?,
+    @SerialName("employeeType")
+    val employeeType: EmployeeType?,
+    @SerialName("employeeStatus")
+    val employeeStatus: String?,
     @SerialName("divisions")
     val divisions: List<Division>?,
     @SerialName("permissions")

@@ -1,210 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<ScrollView
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".fragments.AudienceInfoFragment"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:layout_width="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/employeeToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Сотрудник" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            tools:context=".fragments.AudienceInfoFragment">
 
-    <ImageView
-        android:id="@+id/employeePhoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/employeeavatarContentDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/employeeToolbar"
-        app:srcCompat="@drawable/resource_default"
-        tools:srcCompat="@tools:sample/avatars[]" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/employeeToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="Сотрудник" />
 
-    <TextView
-        app:layout_constraintBottom_toTopOf="@id/certificate"
+            <ImageView
+                android:id="@+id/employeePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/employeeavatarContentDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/employeeToolbar"
+                app:srcCompat="@drawable/resource_default"
+                tools:srcCompat="@tools:sample/avatars[]" />
 
-        android:id="@+id/employeeNameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/employee_name_title"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/employeePhoto" />
+            <TextView
+                android:id="@+id/employeeNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/employee_name_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/certificate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/employeePhoto" />
 
-    <TextView
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/certificate"
+            <TextView
+                android:id="@+id/employeeName"
+                android:layout_width="wrap_content"
 
-        android:id="@+id/employeeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@id/employeeNameTitle"
-        app:layout_constraintTop_toBottomOf="@id/employeePhoto"
-        tools:text="Иванов Иван Иванович" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/employeeNameTitle"
+                app:layout_constraintStart_toEndOf="@id/employeeNameTitle"
+                app:layout_constraintTop_toBottomOf="@id/employeePhoto"
+                tools:text="Иванов Иван Иванович" />
 
-    <TextView
-        app:layout_constraintBottom_toTopOf="@id/position"
-        android:textSize="16sp"
-        android:id="@+id/certificate_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/certificate_title"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/employeeNameTitle" />
+            <TextView
+                android:id="@+id/certificate_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
 
-    <TextView
-        app:layout_constraintBottom_toTopOf="@id/position"
+                android:text="@string/certificate_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/position"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/employeeNameTitle" />
 
-        android:textSize="16sp"
-        android:id="@+id/certificate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/certificate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/certificate_title"
+                app:layout_constraintStart_toEndOf="@id/certificate_title"
+                app:layout_constraintTop_toBottomOf="@id/employeeNameTitle"
+                tools:text="111111111" />
 
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@id/certificate_title"
-        app:layout_constraintTop_toBottomOf="@id/employeeNameTitle"
-        tools:text="111111111" />
+            <TextView
+                android:id="@+id/position_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/position_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/divisions_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/certificate_title" />
 
-    <TextView
-        app:layout_constraintBottom_toTopOf="@id/division"
-        android:textSize="16sp"
-        android:id="@+id/position_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/position_title"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/certificate_title" />
-
-    <TextView
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/division"
-        android:id="@+id/position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toEndOf="@id/position_title"
-        app:layout_constraintTop_toBottomOf="@id/certificate_title"
-        tools:text="Преподаватель" />
+            <TextView
+                android:id="@+id/position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/position_title"
+                app:layout_constraintStart_toEndOf="@id/position_title"
+                app:layout_constraintTop_toBottomOf="@id/certificate_title"
+                tools:text="Преподаватель" />
 
 
-    <TextView
-        android:textSize="16sp"
+            <!--    <TextView-->
+            <!--        android:textSize="16sp"-->
 
-        android:id="@+id/divisions_title"
-        style="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/division_title"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/permissions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/position_title" />
+            <!--        android:id="@+id/division"-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_marginStart="16dp"-->
+            <!--        app:layout_constraintBottom_toTopOf="@id/permissions"-->
+            <!--        app:layout_constraintStart_toEndOf="@id/divisions_title"-->
+            <!--        app:layout_constraintTop_toBottomOf="@id/position_title"-->
+            <!--        tools:text="Кафедра ВТ" />-->
 
-    <TextView
-        android:textSize="16sp"
 
-        android:id="@+id/division"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toTopOf="@id/permissions"
-        app:layout_constraintStart_toEndOf="@id/divisions_title"
-        app:layout_constraintTop_toBottomOf="@id/position_title"
-        tools:text="Кафедра ВТ" />
+            <!--    <TextView-->
+            <!--        android:textSize="16sp"-->
 
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/permissions_title"
-        style="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/permissions_title"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/keys"
+            <!--        android:id="@+id/permissions"-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_marginStart="16dp"-->
+            <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--        app:layout_constraintStart_toEndOf="@id/position_title"-->
+            <!--        app:layout_constraintTop_toBottomOf="@id/divisions_title"-->
+            <!--        tools:text="Кафедра ВТ" />-->
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divisions_title" />
+            <TextView
+                android:id="@+id/divisions_title"
+                style="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/division_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/divisionRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/position_title" />
 
-    <TextView
-        android:textSize="16sp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/divisionRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/permissions_title"
+                app:layout_constraintTop_toBottomOf="@id/divisions_title"
+                tools:listitem="@layout/division_item" />
 
-        android:id="@+id/permissions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toTopOf="@id/keys"
-        app:layout_constraintStart_toEndOf="@id/position_title"
-        app:layout_constraintTop_toBottomOf="@id/divisions_title"
-        tools:text="Кафедра ВТ" />
+            <TextView
+                android:id="@+id/permissions_title"
+                style="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/permissions_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/permissionRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divisionRecyclerView" />
 
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/keys_title"
-        style="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/keys_title"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/continueBtn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/permissions_title" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/permissionRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/permissions_title"
+                tools:listitem="@layout/permission_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/keys"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toTopOf="@id/continueBtn"
-        app:layout_constraintStart_toEndOf="@id/keys_title"
-        app:layout_constraintTop_toBottomOf="@id/permissions_title"
-        tools:text="7-210, 7-203, 7-210, ..." />
+    </ScrollView>
 
-    <Button
-        android:textSize="16sp"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/continueBtn"
-        android:visibility="invisible"
-        style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/continue_button"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="TODO"
+        android:text="Продолжить"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <!--    -->
-    <!--    <TextView-->
-    <!--        android:layout_width=""-->
-    <!--        android:layout_height=""-->
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>

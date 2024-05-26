@@ -87,13 +87,13 @@ class ShiftRegisterViewModel(
     fun filterByQuery(query: String) {
         val set = emptySet<Operation>().toMutableSet().toMutableSet()
         for (i in uiState.value.operations) {
-            if ((i.employee?.first_name.toString().lowercase(Locale.ROOT)
+            if ((i.employee?.firstName.toString().lowercase(Locale.ROOT)
                     .contains(
                         query.toString().lowercase(Locale.ROOT)
-                    )) || (i.employee?.second_name.toString().lowercase(Locale.ROOT)
+                    )) || (i.employee?.secondName.toString().lowercase(Locale.ROOT)
                     .contains(
                         query.toString().lowercase(Locale.ROOT)
-                    )) || (i.employee?.middle_name.toString().lowercase(Locale.ROOT)
+                    )) || (i.employee?.middleName.toString().lowercase(Locale.ROOT)
                     .contains(query.toString().lowercase(Locale.ROOT)))
                 || (i.key.audience.number.toString().lowercase(Locale.ROOT)
                     .contains(query.toString().lowercase(Locale.ROOT)))

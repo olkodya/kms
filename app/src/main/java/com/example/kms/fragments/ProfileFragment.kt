@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
 
         binding.loginName.text = viewModel.state.value.token?.username
         binding.name.text =
-            "${employee?.first_name} ${employee?.second_name} ${employee?.middle_name}"
+            "${employee?.firstName} ${employee?.secondName} ${employee?.middleName}"
 
         val checkedItem = 0
         var id = 0
@@ -58,7 +58,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.state.onEach { state ->
             if (state.watches.isNotEmpty()) {
-                singleItems = state.watches.map { it.building_number.toString() }.toTypedArray()
+                singleItems = state.watches.map { it.buildingNumber.toString() }.toTypedArray()
             }
             val image = state.image
             if (image != null) {
@@ -90,7 +90,7 @@ class ProfileFragment : Fragment() {
                     viewModel.state.value.token?.user_id?.let { it1 ->
                         profileViewModel.startShift(
                             it1,
-                            profileViewModel.state.value.watches[id].watch_id
+                            profileViewModel.state.value.watches[id].watchId
                         )
                     }
                 }
@@ -152,7 +152,7 @@ class ProfileFragment : Fragment() {
                 binding.shiftDate.visibility = View.VISIBLE
                 binding.watchNumber.visibility = View.VISIBLE
                 binding.watchNumber.text =
-                    profileViewModel.state.value.shift?.watch?.building_number.toString()
+                    profileViewModel.state.value.shift?.watch?.buildingNumber.toString()
 
                 val time = profileViewModel.state.value.shift?.start_date_time
                 val localDateTime = formatter.parse(time)

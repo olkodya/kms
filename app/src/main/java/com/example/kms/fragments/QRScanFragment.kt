@@ -128,10 +128,9 @@ class QRScanFragment : Fragment() {
                     previousFragment.let {
                         when (previousFragment) {
                             R.id.employeeInfoFragment2 -> {
-                                //Toast.makeText(requireContext(), "HAHA", Toast.LENGTH_SHORT).show()
                                 operationsViewModel.getKey(
                                     result.text,
-                                    employeeInfoViewModel.employee.value.employee?.employee_id
+                                    employeeInfoViewModel.employee.value.employee?.employeeId
                                 )
                             }
 
@@ -188,37 +187,6 @@ class QRScanFragment : Fragment() {
 
                             }
                         }
-
-//                        if (operationsViewModel.uiState.value.isSuccessTakeKey) {
-//                            operationsViewModel.setScanned()
-//                        }
-
-
-//                            if (operationsViewModel.employee.value)
-//                                requireParentFragment()
-//                                    .requireParentFragment()
-//                                    .requireParentFragment().findNavController().navigate(
-//                                        R.id.action_bottomNavigationFragment_to_employeeInfoFragment2,
-//                                        bundleOf(
-//                                            EmployeeInfoFragment.EMPLOYEE_ID to operationsViewModel.uiState.value.employee?.employee_id,
-//                                            EmployeeInfoFragment.EMPLOYEE_IMAGE_ID to operationsViewModel.uiState.value.employee?.image?.image_id,
-//                                            EmployeeInfoFragment.OPERATION to true
-//                                        )
-//                                    )
-//                            else {
-//                                if (operationsViewModel.uiState.value.key != null && operationsViewModel.uiState.value.key?.key_state != KeyState.GIVEN_AWAY)
-//                                    requireParentFragment().requireParentFragment()
-//                                        .findNavController()
-//                                        .navigate(R.id.action_scanKeyFragment2_to_signaturePadFragment)
-//                                else if (operationsViewModel.uiState.value.key?.key_state == KeyState.GIVEN_AWAY) {
-//                                    Toast.makeText(
-//                                        requireContext(),
-//                                        "Ключ уже был выдан",
-//                                        Toast.LENGTH_LONG
-//                                    ).show()
-//                                }
-//                            }
-//                        }
                     }.launchIn(viewLifecycleOwner.lifecycleScope)
 
 
@@ -227,7 +195,6 @@ class QRScanFragment : Fragment() {
             errorCallback = ErrorCallback {
                 releaseResources()
                 activity.runOnUiThread {
-                    //  Toast.makeText(activity, it.message , Toast.LENGTH_LONG).show()
                 }
             }
         }

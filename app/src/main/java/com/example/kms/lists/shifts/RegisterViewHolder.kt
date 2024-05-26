@@ -13,7 +13,7 @@ class RegisterViewHolder(
     RecyclerView.ViewHolder(binding.root) {
     fun bind(operation: Operation) = with(binding) {
         audienceNumber.text =
-            operation.shift?.watch?.building_number.toString() + "-" + operation.key.audience.number.toString()
+            operation.shift?.watch?.buildingNumber.toString() + "-" + operation.key.audience.number.toString()
         binding.giveDate.text = convertDateFormat(operation.give_date_time ?: "")
         if (operation.return_date_time != null)
             binding.takeDate.text =
@@ -22,7 +22,7 @@ class RegisterViewHolder(
             binding.takeDate.text = "Ключ не был возвращен"
         }
         binding.employeeNumber.text =
-            operation.employee?.second_name + " " + operation.employee?.first_name + " " + operation.employee?.middle_name
+            operation.employee?.secondName + " " + operation.employee?.firstName + " " + operation.employee?.middleName
         itemView.setOnClickListener {
             onClick.invoke(operation.operation_id)
         }

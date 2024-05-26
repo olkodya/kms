@@ -58,12 +58,6 @@ class RegisterItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments?.containsKey(OPERATION_ID_KEY) == true) {
-            val operationId: Int = requireArguments().getInt(OPERATION_ID_KEY)
-            viewModel.getOperation(operationId)
-            Log.d("ID", operationId.toString())
-        }
-
 
     }
 
@@ -75,6 +69,12 @@ class RegisterItemFragment : Fragment() {
         val binding = FragmentRegisterItemBinding.inflate(inflater, container, false)
         val navController = findNavController()
         binding.toolbar.setupWithNavController(navController)
+
+        if (arguments?.containsKey(OPERATION_ID_KEY) == true) {
+            val operationId: Int = requireArguments().getInt(OPERATION_ID_KEY)
+            viewModel.getOperation(operationId)
+            Log.d("ID", operationId.toString())
+        }
         viewModel.uiState.onEach {
             if (it.operation != null) {
                 binding.giveDate.text = convertDateFormat(it.operation.give_date_time ?: "")
@@ -84,14 +84,18 @@ class RegisterItemFragment : Fragment() {
                     binding.returnDate.text = "Ключ не был возвращен"
                 }
                 binding.audienceNumber.text =
-                    it.operation?.shift?.watch?.building_number.toString() + "-" + it.operation?.key?.audience?.number.toString()
+                    it.operation?.shift?.watch?.buildingNumber.toString() + "-" + it.operation?.key?.audience?.number.toString()
                 binding.audienceType.text =
                     convertAudience(it.operation.key.audience.audienceType ?: AudienceType.STUDY)
-                if (it.employeeId != null) {
-                    binding.certificate.text = it.employeeId.number
-                }
+                if (viewModel.employeeId.value.id != -1)
+                    binding.certificate.text = viewModel.employeeId.value.number
+//
                 binding.employeeName.text =
-                    it.operation?.employee?.second_name + "\n" + it.operation?.employee?.first_name + "\n" + it.operation?.employee?.middle_name
+                    it.operation?.employee?.secondName + "\n" + it.operation?.employee?.firstName + "\n" + it.operation?.employee?.middleName
+                viewModel.getSignatures(it.operation?.employee?.image?.image_id ?: 103)
+                viewModel.getEmployeePhoto(it.operation?.employee?.image?.image_id ?: 103)
+                viewModel.getAudiencePhoto(it.operation?.employee?.image?.image_id ?: 103)
+                viewModel.getEmployeeID(it.operation.employee?.image?.image_id ?: 103)
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
@@ -130,7 +134,8 @@ class RegisterItemFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.returnSignature.collect {
-                if (it?.size != 0) {
+                if (it != null && it.isNotEmpty()) {
+                    binding.returnCard.visibility = View.VISIBLE
                     Glide.with(requireContext()).load(it).transition(
                         DrawableTransitionOptions.withCrossFade()
                     ).fitCenter()
@@ -181,7 +186,7 @@ class RegisterItemFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_registerItemFragment_to_employeeInfoFragment2,
                 bundleOf(
-                    EMPLOYEE_ID to viewModel.uiState.value.operation?.employee?.employee_id,
+                    EMPLOYEE_ID to viewModel.uiState.value.operation?.employee?.employeeId,
                     EMPLOYEE_IMAGE_ID to viewModel.uiState.value.operation?.employee?.image?.image_id
                 )
             )
