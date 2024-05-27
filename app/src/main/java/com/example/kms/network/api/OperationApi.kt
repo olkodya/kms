@@ -1,8 +1,9 @@
 package com.example.kms.network.api
 
-import com.example.kms.model.Operation
-import com.example.kms.model.OperationForm
-import com.example.kms.model.Signature
+import com.example.kms.model.DTO.Operation
+import com.example.kms.model.DTO.OperationForm
+import com.example.kms.model.DTO.Signature
+import com.example.kms.network.factories.RetrofitFactory
 import retrofit2.create
 import retrofit2.http.Body
 import retrofit2.http.GET

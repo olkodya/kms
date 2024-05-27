@@ -1,7 +1,8 @@
 package com.example.kms.network.api
 
-import com.example.kms.model.Audience
+import com.example.kms.model.DTO.Audience
 import com.example.kms.model.enums.AudienceForm
+import com.example.kms.network.factories.RetrofitFactory
 import retrofit2.create
 import retrofit2.http.Body
 import retrofit2.http.GET

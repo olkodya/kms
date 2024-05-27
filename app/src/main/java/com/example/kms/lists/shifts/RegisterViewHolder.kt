@@ -2,7 +2,7 @@ package com.example.kms.lists.shifts
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kms.databinding.ShiftRegisterItemBinding
-import com.example.kms.model.Operation
+import com.example.kms.model.DTO.Operation
 import com.example.kms.utils.Converter.convertDateFormat
 
 

@@ -1,7 +1,7 @@
 package com.example.kms.lists.shifts
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.kms.model.Operation
+import com.example.kms.model.DTO.Operation
 
 class ItemComparator : DiffUtil.ItemCallback<Operation>() {
     override fun areItemsTheSame(oldItem: Operation, newItem: Operation): Boolean {

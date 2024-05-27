@@ -3,11 +3,11 @@ package com.example.kms.viewmodels.profile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.mapper.ShiftUiModelMapper
-import com.example.kms.repository.ImageRepository
-import com.example.kms.repository.ShiftRepository
-import com.example.kms.repository.Status
-import com.example.kms.repository.WatchRepository
+import com.example.kms.model.DTO.ShiftUiModelMapper
+import com.example.kms.repository.repos.ImageRepository
+import com.example.kms.repository.repos.ShiftRepository
+import com.example.kms.repository.repos.WatchRepository
+import com.example.kms.utils.Status
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

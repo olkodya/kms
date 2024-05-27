@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.kms.databinding.DivisionItemBinding
-import com.example.kms.model.Division
+import com.example.kms.model.DTO.Division
 
 class DivisionsAdapter() :
     ListAdapter<Division, DivisionsViewHolder>(DivisionsItemComparator()) {

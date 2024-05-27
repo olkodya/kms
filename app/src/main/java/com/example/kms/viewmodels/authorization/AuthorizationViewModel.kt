@@ -2,8 +2,8 @@ package com.example.kms.viewmodels.authorization
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.repository.Status
-import com.example.kms.repository.UserRepository
+import com.example.kms.repository.repos.UserRepository
+import com.example.kms.utils.Status
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

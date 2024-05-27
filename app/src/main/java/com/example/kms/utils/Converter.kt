@@ -50,5 +50,16 @@ object Converter {
             EmployeeType.WATCHMAN -> "Вахтер"
         }
 
+    fun intToAudienceType(int: Int): AudienceType =
+        when (int) {
+            0 -> AudienceType.STUDY
+            1 -> AudienceType.MULTIMEDIA
+            2 -> AudienceType.LAB
+            3 -> AudienceType.ADMINISTRATION
+            else -> AudienceType.STUDY
+        }
+
+
+
 
 }

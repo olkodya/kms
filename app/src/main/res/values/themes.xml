@@ -1,15 +1,15 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.KMS" parent="Theme.Material3.DayNight.NoActionBar">
-        <!--        <item name="colorPrimary">@color/new_primary_color</item>-->
+        <item name="colorPrimary">@color/new_primary_color</item>
         <!--        <item name="colorPrimaryVariant">@color/new_color_primary_variant</item>-->
-        <!--        <item name="colorSecondary">@color/new_color_secondary</item>-->
-        <!--        <item name="colorPrimaryFixed">@color/new_color_secondary</item>-->
+        <item name="colorSecondary">@color/new_color_secondary</item>
+        <item name="colorPrimaryFixed">@color/new_color_secondary</item>
+        <item name="colorPrimaryContainer">@color/new_color_secondary</item>
         <!--        <item name="colorPrimaryFixedDim">@color/new_color_secondary</item>-->
-        <!--        <item name="colorSecondaryContainer">@color/new_color_secondary</item>-->
-        <!--        <item name="colorSecondaryVariant">@color/new_color_secondary_variant</item>-->
+        <item name="colorSecondaryContainer">@color/new_color_secondary</item>
+        <item name="colorSecondaryVariant">@color/new_color_secondary</item>
         <!--        <item name="android:statusBarColor">@color/new_status_bar_color</item>-->
-
 
         <!--       <item name="android:statusBarColor">@color/black</item>-->
         <!-- Customize your light theme here. -->
@@ -24,7 +24,11 @@
         <item name="colorSecondaryVariant">@color/new_color_secondary_variant</item>
         <item name="android:statusBarColor">@color/new_status_bar_color</item>
         <item name="elevation">4dp</item>
-
     </style>
     <style name="Theme.KMS" parent="Base.Theme.KMS" />
+
+    <style name="green" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/my_green</item>
+    </style>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.example.kms.network.api
 
-import com.example.kms.model.Watch
+import com.example.kms.model.DTO.Watch
+import com.example.kms.network.factories.RetrofitFactory
 import retrofit2.create
 import retrofit2.http.GET
 

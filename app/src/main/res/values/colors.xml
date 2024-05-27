@@ -2,10 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="new_primary_color">#FF8A65</color>
+    <color name="new_primary_color">#000000</color>
     <color name="new_color_primary_variant">#FF8A65</color>
-    <color name="new_color_secondary">#FFCCBC</color>
+    <color name="new_color_secondary">#C5CAE9</color>
     <color name="new_color_secondary_variant">#FF8A65</color>
     <color name="new_status_bar_color">#FFCCBC</color>
+    <color name="my_green">#C8E6C9</color>
+    <color name="my_yellow">#FFE0B2</color>
+    <color name="my_red">#FFCDD2</color>
 
 </resources>

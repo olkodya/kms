@@ -1,10 +1,10 @@
 package com.example.kms.viewmodels.operations
 
-import com.example.kms.model.Employee
-import com.example.kms.model.Key
-import com.example.kms.model.Operation
+import com.example.kms.model.DTO.Employee
+import com.example.kms.model.DTO.Key
+import com.example.kms.model.DTO.Operation
 import com.example.kms.model.enums.KeyState
-import com.example.kms.repository.Status
+import com.example.kms.utils.Status
 
 data class OperationsUIState(
     val status: Status = Status.Idle,

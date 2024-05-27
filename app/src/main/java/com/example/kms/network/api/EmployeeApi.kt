@@ -1,7 +1,8 @@
 package com.example.kms.network.api
 
-import com.example.kms.model.Employee
-import com.example.kms.model.EmployeeId
+import com.example.kms.model.DTO.Employee
+import com.example.kms.model.DTO.EmployeeId
+import com.example.kms.network.factories.RetrofitFactory
 import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -2,13 +2,13 @@ package com.example.kms.viewmodels.operations
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.model.Employee
-import com.example.kms.model.Key
-import com.example.kms.model.Operation
-import com.example.kms.model.Permission
-import com.example.kms.repository.EmployeeRepository
-import com.example.kms.repository.KeyRepository
-import com.example.kms.repository.OperationRepository
+import com.example.kms.model.DTO.Employee
+import com.example.kms.model.DTO.Key
+import com.example.kms.model.DTO.Operation
+import com.example.kms.model.DTO.Permission
+import com.example.kms.repository.repos.EmployeeRepository
+import com.example.kms.repository.repos.KeyRepository
+import com.example.kms.repository.repos.OperationRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

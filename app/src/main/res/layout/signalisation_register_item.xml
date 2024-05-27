@@ -2,74 +2,87 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="8dp"
-    app:cardElevation="2dp"
-    android:backgroundTint="?colorOnPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:backgroundTint="?colorOnPrimary"
+    app:cardElevation="2dp">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingTop="12dp"
+        android:paddingStart="16dp"
         android:paddingEnd="0dp"
-        android:paddingBottom="8dp"
+        android:paddingBottom="16dp"
         tools:context=".activity.MainActivity">
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/on"
+            style="@style/Widget.Material3.Chip.Suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:checked="true"
+            android:clickable="false"
+            android:text="Включена"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
+            android:layout_marginTop="16dp"
             android:id="@+id/audience"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Аудитория: "
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:layout_marginTop="16dp"
             android:id="@+id/audienceNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="7-210"
+            app:layout_constraintStart_toEndOf="@id/audience"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/audience" />
+            tools:text="7-210" />
 
         <TextView
             android:id="@+id/type"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Тип: "
-            app:layout_constraintTop_toBottomOf="@id/audience"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/audience" />
 
         <TextView
             android:id="@+id/typeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="учебная"
+            app:layout_constraintStart_toEndOf="@id/type"
             app:layout_constraintTop_toBottomOf="@id/audience"
-            app:layout_constraintStart_toEndOf="@id/type" />
+            tools:text="учебная" />
 
         <TextView
             android:id="@+id/signalisationState"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сигнализация: "
-            app:layout_constraintTop_toBottomOf="@id/type"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="Вместимость: "
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type" />
 
         <TextView
             android:id="@+id/signalisationStateName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Включена: "
+            app:layout_constraintStart_toEndOf="@id/signalisationState"
             app:layout_constraintTop_toBottomOf="@id/typeName"
-            app:layout_constraintStart_toEndOf="@id/signalisationState" />
+            tools:text="10: " />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

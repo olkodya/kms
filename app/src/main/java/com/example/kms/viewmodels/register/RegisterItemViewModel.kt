@@ -2,11 +2,10 @@ package com.example.kms.viewmodels.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.model.EmployeeId
-import com.example.kms.repository.EmployeeRepository
-import com.example.kms.repository.ImageRepository
-import com.example.kms.repository.OperationRepository
-import com.example.kms.viewmodels.profile.RegisterItemUiState
+import com.example.kms.model.DTO.EmployeeId
+import com.example.kms.repository.repos.EmployeeRepository
+import com.example.kms.repository.repos.ImageRepository
+import com.example.kms.repository.repos.OperationRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

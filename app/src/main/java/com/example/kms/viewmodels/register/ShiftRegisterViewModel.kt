@@ -2,8 +2,8 @@ package com.example.kms.viewmodels.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.model.Operation
-import com.example.kms.repository.OperationRepository
+import com.example.kms.model.DTO.Operation
+import com.example.kms.repository.repos.OperationRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.ShiftRegisterFragment">
+    tools:context=".fragments.register.ShiftRegisterFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -26,17 +26,91 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chipDate"
-        style="@style/Widget.Material3.Chip.Assist"
+    <TextView
+        android:id="@+id/signalisation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:checkable="true"
-        android:text="Фильтры"
-        app:chipIcon="@drawable/baseline_tune_24"
-        app:closeIconVisible="false" />
+        android:text="Сигнализация"
+        android:textStyle="bold" />
+
+    <HorizontalScrollView
+        android:id="@+id/hor_scroll_signalisation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/signalisation_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/on"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:checkable="true"
+                android:text="Включена"
+                app:checkedIcon="@drawable/baseline_check_24"
+                app:checkedIconVisible="true"
+                app:closeIconVisible="false"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/off"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:checkable="true"
+                android:text="Выключена"
+                app:checkedIcon="@drawable/baseline_check_24"
+                app:checkedIconVisible="true"
+                app:closeIconVisible="false" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/none"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:checkable="true"
+                android:text="Отсутствует"
+                app:checkedIcon="@drawable/baseline_check_24"
+                app:checkedIconVisible="true"
+                app:closeIconVisible="false" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/hor_scroll_filters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:scrollbars="none"
+
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipDate"
+            style="@style/Widget.Material3.Chip.Assist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:checkable="true"
+            android:text="Фильтры"
+            app:chipIcon="@drawable/baseline_tune_24"
+            app:closeIconVisible="false" />
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"

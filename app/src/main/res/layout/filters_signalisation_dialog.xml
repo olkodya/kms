@@ -6,79 +6,6 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/signalisationTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:text="Сигнализация: "
-        android:textSize="18sp"
-        android:textStyle="bold"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <HorizontalScrollView
-        android:id="@+id/hor_scroll_signalisation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signalisationTitle">
-        >
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/signalisation_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signalisationTitle">
-
-            <com.google.android.material.chip.Chip
-                app:checkedIconVisible="true"
-                android:id="@+id/on"
-                style="@style/Widget.Material3.Chip.Assist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                app:checkedIcon="@drawable/baseline_check_24"
-                android:layout_marginTop="16dp"
-                android:checkable="true"
-                android:text="Включена"
-                app:closeIconVisible="false"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signalisationTitle" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/off"
-                style="@style/Widget.Material3.Chip.Assist"
-                app:checkedIcon="@drawable/baseline_check_24"
-                app:checkedIconVisible="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:checkable="true"
-                android:text="Выключена"
-                app:closeIconVisible="false" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/none"
-                app:checkedIcon="@drawable/baseline_check_24"
-                style="@style/Widget.Material3.Chip.Assist"
-                app:checkedIconVisible="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="24dp"
-                android:checkable="true"
-                android:text="Отсутствует"
-                app:closeIconVisible="false" />
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
-    <TextView
         android:id="@+id/audience_type_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,7 +15,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hor_scroll_signalisation" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
         android:id="@+id/hor_scroll_aud_type"
@@ -119,7 +46,7 @@
                 android:text="Учебная"
                 app:closeIconVisible="false"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/signalisationTitle" />
+                app:layout_constraintTop_toBottomOf="@id/audience_type_title" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/multimedia"
@@ -200,4 +127,16 @@
         android:hint="До"
         android:autofillHints="До" />
 
+    <TextView
+        android:id="@+id/error"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/startCapacity"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:singleLine="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Первое число должно быть больше второго" />
 </androidx.constraintlayout.widget.ConstraintLayout>

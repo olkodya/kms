@@ -1,8 +1,9 @@
 package com.example.kms.network.api
 
-import com.example.kms.model.Image
-import com.example.kms.model.Signature
-import com.example.kms.model.SignatureForm
+import com.example.kms.model.DTO.Image
+import com.example.kms.model.DTO.Signature
+import com.example.kms.model.DTO.SignatureForm
+import com.example.kms.network.factories.RetrofitFactory
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody

@@ -1,7 +1,7 @@
 package com.example.kms.viewmodels.authorization
 
-import com.example.kms.model.TokenDto
-import com.example.kms.repository.Status
+import com.example.kms.model.DTO.TokenDto
+import com.example.kms.utils.Status
 
 data class AuthUiState(
     val status: Status = Status.Idle,

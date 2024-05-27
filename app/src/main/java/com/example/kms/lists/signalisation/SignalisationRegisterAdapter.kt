@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.kms.databinding.SignalisationRegisterItemBinding
 import com.example.kms.lists.signalisation.SignalisationItemComparator
 import com.example.kms.lists.signalisation.SignalisationRegisterViewHolder
-import com.example.kms.model.Audience
+import com.example.kms.model.DTO.Audience
 
 class SignalisationRegisterAdapter(private val onClick: (Int) -> Unit) :
     ListAdapter<Audience, SignalisationRegisterViewHolder>(SignalisationItemComparator()) {

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.kms.databinding.PermissionItemBinding
 import com.example.kms.lists.permissions.PermissionsItemComparator
 import com.example.kms.lists.permissions.PermissionsViewHolder
-import com.example.kms.model.Permission
+import com.example.kms.model.DTO.Permission
 
 class PermissionsAdapter() :
     ListAdapter<Permission, PermissionsViewHolder>(PermissionsItemComparator()) {

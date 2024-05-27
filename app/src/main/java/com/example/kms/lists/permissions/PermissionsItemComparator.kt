@@ -1,7 +1,7 @@
 package com.example.kms.lists.permissions
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.kms.model.Permission
+import com.example.kms.model.DTO.Permission
 
 
 class PermissionsItemComparator : DiffUtil.ItemCallback<Permission>() {

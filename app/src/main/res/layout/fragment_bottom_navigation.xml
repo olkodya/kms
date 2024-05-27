@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/bottomNavFragment"
     android:layout_height="match_parent"
-    tools:context=".fragments.BottomNavigationFragment">
+    tools:context=".fragments.shared.BottomNavigationFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"

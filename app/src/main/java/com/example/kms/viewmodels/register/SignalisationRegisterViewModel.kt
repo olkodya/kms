@@ -2,10 +2,10 @@ package com.example.kms.viewmodels.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.kms.model.Audience
+import com.example.kms.model.DTO.Audience
 import com.example.kms.model.enums.AudienceType
 import com.example.kms.model.enums.SignalisationType
-import com.example.kms.repository.AudienceRepository
+import com.example.kms.repository.repos.AudienceRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

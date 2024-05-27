@@ -2,7 +2,7 @@ package com.example.kms.lists.permissions
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kms.databinding.PermissionItemBinding
-import com.example.kms.model.Permission
+import com.example.kms.model.DTO.Permission
 
 class PermissionsViewHolder(
     private val binding: PermissionItemBinding

@@ -6,17 +6,17 @@
     app:startDestination="@id/registerFragment">
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.kms.fragments.RegisterFragment"
+        android:name="com.example.kms.fragments.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/operationsFragment"
-        android:name="com.example.kms.fragments.OperationsFragment"
+        android:name="com.example.kms.fragments.operations.OperationsFragment"
         android:label="fragment_operations"
         tools:layout="@layout/fragment_operations" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.kms.fragments.ProfileFragment"
+        android:name="com.example.kms.fragments.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

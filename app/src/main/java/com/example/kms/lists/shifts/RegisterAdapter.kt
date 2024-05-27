@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.kms.databinding.ShiftRegisterItemBinding
-import com.example.kms.model.Operation
+import com.example.kms.model.DTO.Operation
 
 class RegisterAdapter(private val onClick: (Int) -> Unit) :
     ListAdapter<Operation, RegisterViewHolder>(ItemComparator()) {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.OperationsFragment"
+    tools:context=".fragments.operations.OperationsFragment"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,7 +21,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
-        android:name="com.example.kms.fragments.QRScanFragment"
+        android:name="com.example.kms.fragments.operations.QRScanFragment"
         android:layout_height="0dp"
         android:layout_width="match_parent"
         android:layout_weight="1"/>

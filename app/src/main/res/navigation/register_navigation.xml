@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/shiftRegisterFragment"
-        android:name="com.example.kms.fragments.ShiftRegisterFragment"
+        android:name="com.example.kms.fragments.register.ShiftRegisterFragment"
         android:label="fragment_shift_register"
         tools:layout="@layout/fragment_shift_register">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/signalisationRegisterFragment"
-        android:name="com.example.kms.fragments.SignalisationRegisterFragment"
+        android:name="com.example.kms.fragments.register.SignalisationRegisterFragment"
         android:label="fragment_signalisation_register"
         tools:layout="@layout/fragment_signalisation_register">
         <action

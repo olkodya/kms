@@ -6,7 +6,7 @@
     app:startDestination="@id/authorizationFragment">
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="com.example.kms.fragments.AuthorizationFragment"
+        android:name="com.example.kms.fragments.authorization.AuthorizationFragment"
         android:label="AuthorizationFragment" >
         <action
             android:id="@+id/action_authorizationFragment_to_bottomNavigationFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/bottomNavigationFragment"
-        android:name="com.example.kms.fragments.BottomNavigationFragment"
+        android:name="com.example.kms.fragments.shared.BottomNavigationFragment"
         android:label=""
         tools:layout="@layout/fragment_bottom_navigation" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/employeeInfoFragment2"
-        android:name="com.example.kms.fragments.EmployeeInfoFragment"
+        android:name="com.example.kms.fragments.shared.EmployeeInfoFragment"
         android:label="Сотрудник"
         tools:layout="@layout/fragment_employee_info" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/signaturePadFragment"
-        android:name="com.example.kms.fragments.SignaturePadFragment"
+        android:name="com.example.kms.fragments.operations.SignaturePadFragment"
         android:label="Подпись сотрудника"
         tools:layout="@layout/fragment_signature_pad" >
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/scanKeyFragment2"
-        android:name="com.example.kms.fragments.ScanKeyFragment"
+        android:name="com.example.kms.fragments.register.ScanKeyFragment"
         android:label="QR-код ключа" >
         <action
             android:id="@+id/action_scanKeyFragment2_to_signaturePadFragment"
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerItemFragment"
-        android:name="com.example.kms.fragments.RegisterItemFragment"
+        android:name="com.example.kms.fragments.register.RegisterItemFragment"
         android:label="Операция">
         <action
             android:id="@+id/action_registerItemFragment_to_employeeInfoFragment2"
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/audienceInfoFragment"
-        android:name="com.example.kms.fragments.AudienceInfoFragment"
+        android:name="com.example.kms.fragments.shared.AudienceInfoFragment"
         android:label="Аудитория"
         tools:layout="@layout/fragment_audience_info" />
 </navigation>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".fragments.AudienceInfoFragment">
+    tools:context=".fragments.shared.AudienceInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -54,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="?colorOnPrimary"
-            app:cardElevation="2dp"
             app:layout_constraintEnd_toStartOf="@id/returnCard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signature_title">
@@ -62,7 +61,7 @@
             <ImageView
                 android:id="@+id/give_signature"
                 android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
@@ -79,7 +78,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="?colorOnPrimary"
-            app:cardElevation="2dp"
             app:layout_constraintStart_toEndOf="@id/giveCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signature_title">
@@ -87,7 +85,7 @@
         <ImageView
             android:id="@+id/return_signature"
             android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -173,7 +171,7 @@
                 <ImageView
                     android:id="@+id/avatar"
                     android:layout_width="100dp"
-                    android:layout_height="120dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="16dp"
 
                     android:contentDescription="@string/avatar_watchman_description"
@@ -181,7 +179,7 @@
                     app:layout_constraintEnd_toStartOf="@id/spacer"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/user_images" />
+                    app:srcCompat="@drawable/resource_default" />
 
                 <Space
                     android:id="@+id/spacer"
@@ -259,13 +257,13 @@
                 <ImageView
                     android:id="@+id/avatarAudience"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:contentDescription="@string/avatar_watchman_description"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/style_monogram" />
+                    app:srcCompat="@drawable/resource_default" />
 
                 <Space
                     android:id="@+id/spacer2"

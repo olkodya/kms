@@ -1,8 +1,8 @@
 package com.example.kms.viewmodels.profile
 
-import com.example.kms.model.ShiftUIModel
-import com.example.kms.model.Watch
-import com.example.kms.repository.Status
+import com.example.kms.model.DTO.ShiftUIModel
+import com.example.kms.model.DTO.Watch
+import com.example.kms.utils.Status
 
 data class ProfileUiState (
     val shift: ShiftUIModel? = null,

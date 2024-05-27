@@ -2,7 +2,7 @@ package com.example.kms.lists.divisions
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kms.databinding.DivisionItemBinding
-import com.example.kms.model.Division
+import com.example.kms.model.DTO.Division
 
 class DivisionsViewHolder(
     private val binding: DivisionItemBinding,

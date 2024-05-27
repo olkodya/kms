@@ -1,7 +1,8 @@
 package com.example.kms.network.api
 
-import com.example.kms.model.LoginDto
-import com.example.kms.model.TokenDto
+import com.example.kms.model.DTO.LoginDto
+import com.example.kms.model.DTO.TokenDto
+import com.example.kms.network.factories.RetrofitFactory
 import retrofit2.create
 import retrofit2.http.Body
 import retrofit2.http.POST
